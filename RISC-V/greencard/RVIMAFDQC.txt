@@ -1,0 +1,207 @@
+RV32I: RISC-V Integer Instructions
+
+opcode			funct3	funct7		Type	Instruction				Description						Operation
+0000011 (003)	000		–––––––		I		lb rd, imm(rs1)			load byte						rd = SignExt([Address]7:0)
+0000011 (003)	001		–––––––		I		lh rd, imm(rs1)			load half						rd = SignExt([Address]15:0)
+0000011 (003)	010		–––––––		I		lw rd, imm(rs1)			load word						rd = [Address]31:0
+0000011 (003)	100		–––––––		I		lbu rd, imm(rs1)		load byte unsigned				rd = ZeroExt([Address]7:0)
+0000011 (003)	101		–––––––		I		lhu rd, imm(rs1)		load half unsigned				rd = ZeroExt([Address]15:0)
+0010011 (019)	000		–––––––		I		addi rd, rs1, imm		add immediate					rd = rs1 + SignExt(imm)
+0010011 (019)	001		0000000*	I		slli rd, rs1, uimm		shift left logical immediate	rd = rs1 << uimm
+0010011 (019)	010		–––––––		I		slti rd, rs1, imm		set less than immediate			rd = (rs1 < SignExt(imm))
+0010011 (019)	011		–––––––		I		sltiu rd, rs1, imm		set less than imm. unsigned		rd = (rs1 < SignExt(imm))
+0010011 (019)	100		–––––––		I		xori rd, rs1, imm		xor immediate					rd = rs1 ^ SignExt(imm)
+0010011 (019)	101		0000000*	I		srli rd, rs1, uimm		shift right logical immediate	rd = rs1 >> uimm
+0010011 (019)	101		0100000*	I		srai rd, rs1, uimm		shift right arithmetic imm.		rd = rs1 >>> uimm
+0010011 (019)	110		–––––––		I		ori rd, rs1, imm		or immediate					rd = rs1 | SignExt(imm)
+0010011 (019)	111		–––––––		I		andi rd, rs1, imm		and immediate					rd = rs1 & SignExt(imm)
+0010111 (023)	–––		–––––––		U		auipc rd, upimm			add upper immediate to PC		rd = {upimm, 12'b0} + PC
+0100011 (035)	000		–––––––		S		sb rs2, imm(rs1)		store byte						[Address]7:0 = rs27:0
+0100011 (035)	001		–––––––		S		sh rs2, imm(rs1)		store half						[Address]15:0 = rs215:0
+0100011 (035)	010		–––––––		S		sw rs2, imm(rs1)		store word						[Address]31:0 = rs2
+0110011 (051)	000		0000000		R		add rd, rs1, rs2		add								rd = rs1 + rs2
+0110011 (051)	000		0100000		R		sub rd, rs1, rs2		sub								rd = rs1 — rs2
+0110011 (051)	001		0000000		R		sll rd, rs1, rs2		shift left logical				rd = rs1 << rs24:0
+0110011 (051)	010		0000000		R		slt rd, rs1, rs2		set less than					rd = (rs1 < rs2)
+0110011 (051)	011		0000000		R		sltu rd, rs1, rs2		set less than unsigned			rd = (rs1 < rs2)
+0110011 (051)	100		0000000		R		xor rd, rs1, rs2		xor								rd = rs1 ^ rs2
+0110011 (051)	101		0000000		R		srl rd, rs1, rs2		shift right logical				rd = rs1 >> rs24:0
+0110011 (051)	101		0100000		R		sra rd, rs1, rs2		shift right arithmetic			rd = rs1 >>> rs24:0
+0110011 (051)	110		0000000		R		or rd, rs1, rs2			or								rd = rs1 | rs2
+0110011 (051)	111		0000000		R		and rd, rs1, rs2		and								rd = rs1 & rs2
+0110111 (055)	–––		–––––––		U		lui rd, upimm			load upper immediate			rd = {upimm, 12'b0}
+1100011 (099)	000		–––––––		B		beq rs1, rs2, label		branch if =						if (rs1 == rs2) PC = BTA
+1100011 (099)	001		–––––––		B		bne rs1, rs2, label		branch if ≠						if (rs1 ≠ rs2) PC = BTA
+1100011 (099)	100		–––––––		B		blt rs1, rs2, label		branch if <						if (rs1 < rs2) PC = BTA
+1100011 (099)	101		–––––––		B		bge rs1, rs2, label		branch if ≥						if (rs1 ≥ rs2) PC = BTA
+1100011 (099)	110		–––––––		B		bltu rs1, rs2, label	branch if < unsigned			if (rs1 < rs2) PC = BTA
+1100011 (099)	111		–––––––		B		bgeu rs1, rs2, label	branch if ≥ unsigned			if (rs1 ≥ rs2) PC = BTA
+1100111 (103)	000		–––––––		I		jalr rd, rs1, imm		jump and link register			PC = rs1 + SignExt(imm), rd = PC + 4
+1101111 (111)	–––		–––––––		J		jal rd, label			jump and link					PC = JTA, rd = PC + 4
+
+RV64I: RISC-V Integer Instructions
+
+opcode			funct3	funct7	Type	Instruction			Description							Operation
+0000011 (03)	011		–––––––	I		ld rd, imm(rs1)		load double word					rd = [Address]63:0
+0000011 (03)	110		–––––––	I		lwu rd, imm(rs1)	load word unsigned					rd = ZeroExt([Address]31:0)
+0011011 (27)	000		–––––––	I		addiw rd, rs1, imm	add immediate word					rd = SignExt((rs1 + SignExt(imm))31:0)
+0011011 (27)	001		0000000	I		slliw rd, rs1, uimm	shift left logical immediate word	rd = SignExt((rs131:0 << uimm)31:0)
+0011011 (27)	101		0000000	I		srliw rd, rs1, uimm	shift right logical immediate word	rd = SignExt((rs131:0 >> uimm)31:0)
+0011011 (27)	101		0100000	I		sraiw rd, rs1, uimm	shift right arith. immediate word	rd = SignExt((rs131:0 >>> uimm)31:0)
+0100011 (35)	011		–––––––	S		sd rs2, imm(rs1)	store double word					[Address]63:0 = rs2
+0111011 (59)	000		0000000	R		addw rd, rs1, rs2	add word							rd = SignExt((rs1 + rs2)31:0)
+0111011 (59)	000		0100000	R		subw rd, rs1, rs2	subtract word						rd = SignExt((rs1 — rs2)31:0)
+0111011 (59)	001		0000000	R		sllw rd, rs1, rs2	shift left logical word				rd = SignExt((rs131:0 << rs24:0)31:0)
+0111011 (59)	101		0000000	R		srlw rd, rs1, rs2	shift right logical word			rd = SignExt((rs131:0 >> rs24:0)31:0)
+0111011 (59)	101		0100000	R		sraw rd, rs1, rs2	shift right arithmetic word			rd = SignExt((rs131:0 >>> rs24:0)31:0)
+
+RVFD: RISC-V Single-Precision and Double-Precision Floating-Point Instructions
+
+opcode			funct3	funct7		rs2		Type	Instruction				Description					Operation
+1000011 (67)	rm		fs3,   fmt	–––––	R4		fmadd fd,fs1,fs2,fs3	multiply-add				fd = fs1 * fs2 + fs3
+1000111 (71)	rm		fs3,   fmt	–––––	R4		fmsub fd,fs1,fs2,fs3	multiply-subtract			fd = fs1 * fs2 — fs3
+1001011 (75)	rm		fs3,   fmt	–––––	R4		fnmsub fd,fs1,fs2,fs3	negate multiply-add			fd = —(fs1 * fs2 + fs3)
+1001111 (79)	rm		fs3,   fmt	–––––	R4		fnmadd fd,fs1,fs2,fs3	negate multiply-subtract	fd = —(fs1 * fs2 – fs3)
+1010011 (83)	rm		00000, fmt	–––––	R		fadd fd,fs1,fs2			add							fd = fs1 + fs2
+1010011 (83)	rm		00001, fmt	–––––	R		fsub fd,fs1,fs2			subtract					fd = fs1 — fs2
+1010011 (83)	rm		00010, fmt	–––––	R		fmul fd,fs1,fs2			multiply					fd = fs1 * fs2
+1010011 (83)	rm		00011, fmt	–––––	R		fdiv fd,fs1,fs2			divide						fd = fs1 / fs2
+1010011 (83)	rm		01011, fmt	00000	R		fsqrt fd,fs1			square root					fd = sqrt(fs1)
+1010011 (83)	000		00100, fmt	–––––	R		fsgnj fd,fs1,fs2		sign injection				fd = fs1, sign = sign(fs2)
+1010011 (83)	001		00100, fmt	–––––	R		fsgnjn fd,fs1,fs2		negate sign injection		fd = fs1, sign = —sign(fs2)
+1010011 (83)	010		00100, fmt	–––––	R		fsgnjx fd,fs1,fs2		xor sign injection			fd = fs1, sign = sign(fs2) ^ sign(fs1)
+1010011 (83)	000		00101, fmt	–––––	R		fmin fd,fs1,fs2			min							fd = min(fs1, fs2)
+1010011 (83)	001		00101, fmt	–––––	R		fmax fd,fs1,fs2			max							fd = max(fs1, fs2)
+1010011 (83)	010		10100, fmt	–––––	R		feq rd,fs1,fs2			compare =					rd = (fs1 == fs2)
+1010011 (83)	001		10100, fmt	–––––	R		flt rd,fs1,fs2			compare <					rd = (fs1 < fs2)
+1010011 (83)	000		10100, fmt	–––––	R		fle rd,fs1,fs2			compare ≤					rd = (fs1 ≤ fs2)
+1010011 (83)	001		11100, fmt	00000	R		fclass rd,fs1			classify					rd = classification of fs1
+
+RVF: RISC-V Single-Precision Floating-Point Instructions
+
+0000111 (07)	010	–––––––	–––––	I	flw fd, imm(rs1)	load float					fd = [Address]31:0
+0100111 (39)	010	–––––––	–––––	S	fsw fs2,imm(rs1)	store float					[Address]31:0 = fd
+1010011 (83)	rm	1100000	00000	R	fcvt.w.s rd, fs1	convert to integer			rd = integer(fs1)
+1010011 (83)	rm	1100000	00001	R	fcvt.wu.s rd, fs1	convert to unsigned integer	rd = unsigned(fs1)
+1010011 (83)	rm	1101000	00000	R	fcvt.s.w fd, rs1	convert int to float		fd = float(rs1)
+1010011 (83)	rm	1101000	00001	R	fcvt.s.wu fd, rs1	convert unsigned to float	fd = float(rs1)
+1010011 (83)	000	1110000	00000	R	fmv.x.w rd, fs1		move to integer register	rd = fs1
+1010011 (83)	000	1111000	00000	R	fmv.w.x fd, rs1		move to f.p. register		fd = rs1
+
+RVD: RISC-V Double-Precision Floating-Point Instructions
+
+0000111 (07)	011	–––––––	–––––	I	fld fd, imm(rs1)	load double					fd = [Address]63:0
+0100111 (39)	011	–––––––	–––––	S	fsd fs2,imm(rs1)	store double				[Address]63:0 = fd
+1010011 (83)	rm	1100001	00000	R	fcvt.w.d rd, fs1	convert to integer			rd = integer(fs1)
+1010011 (83)	rm	1100001	00001	R	fcvt.wu.d rd, fs1	convert to unsigned integer	rd = unsigned(fs1)
+1010011 (83)	rm	1101001	00000	R	fcvt.d.w fd, rs1	convert int to double		fd = double(rs1)
+1010011 (83)	rm	1101001	00001	R	fcvt.d.wu fd, rs1	convert unsigned to double	fd = double(rs1)
+1010011 (83)	rm	0100000	00001	R	fcvt.s.d fd, fs1	convert double to float		fd = float(fs1)
+1010011 (83)	rm	0100001	00000	R	fcvt.d.s fd, fs1	convert float to double		fd = double(fs1)
+
+RVM: RISC-V Multiply And Divide Instructions
+
+opcode			funct3	funct7	Type	Instruction			Description						Operation
+0110011 (51)	000		0000001	R		mul    rd, rs1, rs2	multiply						rd = (rs1 * rs2)31:0
+0110011 (51)	001		0000001	R		mulh   rd, rs1, rs2	multiply high signed signed		rd = (rs1 * rs2)63:32
+0110011 (51)	010		0000001	R		mulhsu rd, rs1, rs2	multiply high signed unsigned	rd = (rs1 * rs2)63:32
+0110011 (51)	011		0000001	R		mulhu  rd, rs1, rs2	multiply high unsigned unsigned	rd = (rs1 * rs2)63:32
+0110011 (51)	100		0000001	R		div    rd, rs1, rs2	divide (signed)					rd = rs1 / rs2
+0110011 (51)	101		0000001	R		divu   rd, rs1, rs2	divide unsigned					rd = rs1 / rs2
+0110011 (51)	110		0000001	R		rem    rd, rs1, rs2	remainder (signed)				rd = rs1 % rs2
+0110011 (51)	111		0000001	R		remu   rd, rs1, rs2	remainder unsigned				rd = rs1 % rs2
+
+RVC: RISC-V Compressed (16-Bit) Instructions
+
+opcode	instr15:10	funct2	Type	RVC Instruction					32-Bit Equivalent
+00 (0)	000–––		––		CIW		c.addi4spn rd', sp, imm			addi rd', sp, ZeroExt(imm)*4
+00 (0)	001–––		––		CL		c.fld fd', imm(rs1')			fld fd', (ZeroExt(imm)*8)(rs1')
+00 (0)	010–––		––		CL		c.lw rd', imm(rs1')				lw rd', (ZeroExt(imm)*4)(rs1')
+00 (0)	011–––		––		CL		c.flw fd', imm(rs1')			flw fd', (ZeroExt(imm)*4)(rs1')
+00 (0)	101–––		––		CS		c.fsd fs2', imm(rs1')			fsd fs2', (ZeroExt(imm)*8)(rs1')
+00 (0)	110–––		––		CS		c.sw rs2', imm(rs1')			sw rs2', (ZeroExt(imm)*4)(rs1')
+00 (0)	111–––		––		CS		c.fsw fs2', imm(rs1')			fsw fs2', (ZeroExt(imm)*4)(rs1')
+01 (1)	000000		––		CI		c.nop (rs1=0,imm=0)				nop
+01 (1)	000–––		––		CI		c.addi rd, imm					addi rd, rd, SignExt(imm)
+01 (1)	001–––		––		CJ		c.jal label						jal ra, label
+01 (1)	010–––		––		CI		c.li rd, imm					addi rd, x0, SignExt(imm)
+01 (1)	011–––		––		CI		c.lui rd, imm					lui rd, {14{imm5}, imm}
+01 (1)	011–––		––		CI		c.addi16sp sp, imm				addi sp, sp, SignExt(imm)*16
+01 (1)	100–00		––		CB'		c.srli rd', imm					srli rd', rd', imm
+01 (1)	100–01		––		CB'		c.srai rd', imm					srai rd', rd', imm
+01 (1)	100–10		––		CB'		c.andi rd', imm					andi rd', rd', SignExt(imm)
+01 (1)	100011		00		CS'		c.sub rd', rs2'					sub rd', rd', rs2'
+01 (1)	100011		01		CS'		c.xor rd', rs2'					xor rd', rd', rs2'
+01 (1)	100011		10		CS'		c.or rd', rs2'					or rd', rd', rs2'
+01 (1)	100011		11		CS'		c.and rd', rs2'					and rd', rd', rs2'
+01 (1)	101–––		––		CJ		c.j label						jal x0, label
+01 (1)	110–––		––		CB		c.beqz rs1', label				beq rs1', x0, label
+01 (1)	111–––		––		CB		c.bnez rs1', label				bne rs1', x0, label
+10 (2)	000–––		––		CI		c.slli rd, imm					slli rd, rd, imm
+10 (2)	001–––		––		CI		c.fldsp fd, imm					fld fd, (ZeroExt(imm)*8)(sp)
+10 (2)	010–––		––		CI		c.lwsp rd, imm					lw rd, (ZeroExt(imm)*4)(sp)
+10 (2)	011–––		––		CI		c.flwsp fd, imm					flw fd, (ZeroExt(imm)*4)(sp)
+10 (2)	1000––		––		CR		c.jr rs1 (rs1≠0,rs2=0)			jalr x0, rs1, 0
+10 (2)	1000––		––		CR		c.mv rd, rs2 (rd ≠0,rs2≠0)		add rd, x0, rs2
+10 (2)	1001––		––		CR		c.ebreak (rs1=0,rs2=0)			ebreak
+10 (2)	1001––		––		CR		c.jalr rs1 (rs1≠0,rs2=0)		jalr ra, rs1, 0
+10 (2)	1001––		––		CR		c.add rd, rs2 (rs1≠0,rs2≠0)		add rd, rd, rs2
+10 (2)	101–––		––		CSS		c.fsdsp fs2, imm				fsd fs2, (ZeroExt(imm)*8)(sp)
+10 (2)	110–––		––		CSS		c.swsp rs2, imm					sw rs2, (ZeroExt(imm)*4)(sp)
+10 (2)	111–––		––		CSS		c.fswsp fs2, imm				fsw fs2, (ZeroExt(imm)*4)(sp)
+
+RISC-V Pseudo-Instructions
+
+Pseudoinstruction			RISC-V Instructions				Description							Operation
+nop							addi x0, x0, 0					no operation
+li rd, imm11:0				addi rd, x0, imm11:0			load 12-bit immediate				rd = SignExtend(imm11:0)
+li rd, imm31:0				lui rd, imm31:12*				load 32-bit immediate				rd = imm31:0
+							addi rd, rd, imm11:0
+mv rd, rs1					addi rd, rs1, 0					move (also called "register copy")	rd = rs1
+not rd, rs1					xori rd, rs1, —1				one's complement					rd = ~rs1
+neg rd, rs1					sub rd, x0, rs1					two's complement					rd = —rs1
+seqz rd, rs1				sltiu rd, rs1, 1				set if = 0							rd = (rs1 == 0)
+snez rd, rs1				sltu rd, x0, rs1				set if ≠ 0							rd = (rs1 ≠ 0)
+sltz rd, rs1				slt rd, rs1, x0					set if < 0							rd = (rs1 < 0)
+sgtz rd, rs1				slt rd, x0, rs1					set if > 0							rd = (rs1 > 0)
+beqz rs1, label				beq rs1, x0, label				branch if = 0						if (rs1 == 0) PC = label
+bnez rs1, label				bne rs1, x0, label				branch if ≠ 0						if (rs1 ≠ 0) PC = label
+blez rs1, label				bge x0, rs1, label				branch if ≤ 0						if (rs1 ≤ 0) PC = label
+bgez rs1, label				bge rs1, x0, label				branch if ≥ 0						if (rs1 ≥ 0) PC = label
+bltz rs1, label				blt rs1, x0, label				branch if < 0						if (rs1 < 0) PC = label
+bgtz rs1, label				blt x0, rs1, label				branch if > 0						if (rs1 > 0) PC = label
+ble rs1, rs2, label			bge rs2, rs1, label				branch if ≤							if (rs1 ≤ rs2) PC = label
+bgt rs1, rs2, label			blt rs2, rs1, label				branch if >							if (rs1 > rs2) PC = label
+bleu rs1, rs2, label		bgeu rs2, rs1, label			branch if ≤ (unsigned)				if (rs1 ≤ rs2) PC = label
+bgtu rs1, rs2, label		bltu rs2, rs1, offset			branch if > (unsigned)				if (rs1 > rs2) PC = label
+j label						jal x0, label					jump								PC = label
+jal label					jal ra, label					jump and link						PC = label, ra = PC + 4
+jr rs1						jalr x0, rs1, 0					jump register						PC = rs1
+jalr rs1					jalr ra, rs1, 0					jump and link register				PC = rs1, ra = PC + 4
+ret							jalr x0, ra, 0					return from function				PC = ra
+call label					jal ra, label					call nearby function				PC = label, ra = PC + 4
+call label					auipc ra, offset31:12*
+							jalr ra, ra, offset11:0			call far away function				PC = PC + offset, ra = PC + 4
+la rd, symbol				auipc rd, symbol31:12*
+							addi rd, rd, symbol11:0			load address of global variable		rd = PC + symbol
+l{b|h|w} rd, symbol			auipc rd, symbol31:12*
+							l{b|h|w} rd, symbol11:0(rd)		load global variable				rd = [PC + symbol]
+s{b|h|w} rs2, symbol, rs1	auipc rs1, symbol31:12*
+							s{b|h|w} rs2, symbol11:0(rs1)	store global variable				[PC + symbol] = rs2
+csrr rd, csr				csrrs rd, csr, x0				read CSR							rd = csr
+csrw csr, rs1				csrrw x0, csr, rs1				write CSR							csr = rs1
+
+RISC-V Privileged / CSR Instructions
+
+opcode			funct3	Type	Instruction			Description												Operation
+1110011 (115)	000		I		ecall				transfer control to OS (imm=0)
+1110011 (115)	000		I		ebreak				transfer control to debugger (imm=1)
+1110011 (115)	000		I		uret				return from user exception (rs1=0,rd=0,imm=2)			PC = uepc
+1110011 (115)	000		I		sret				return from supervisor exception (rs1=0,rd=0,imm=258)	PC = sepc
+1110011 (115)	000		I		mret				return from machine exception (rs1=0,rd=0,imm=770)		PC = mepc
+1110011 (115)	001		I		csrrw rd,csr,rs1	CSR read/write (imm=CSR number)							rd = csr,csr = rs1
+1110011 (115)	010		I		csrrs rd,csr,rs1	CSR read/set (imm=CSR number)							rd = csr,csr = csr | rs1
+1110011 (115)	011		I		csrrc rd,csr,rs1	CSR read/clear (imm=CSR number)							rd = csr,csr = csr & ~rs1
+1110011 (115)	101		I		csrrwi rd,csr,uimm	CSR read/write immediate (imm=CSR number)				rd = csr,csr = ZeroExt(uimm)
+1110011 (115)	110		I		csrrsi rd,csr,uimm	CSR read/set immediate (imm=CSR number)					rd = csr,csr = csr | ZeroExt(uimm)
+1110011 (115)	111		I		csrrci rd,csr,uimm	CSR read/clear immediate (imm=CSR number)				rd = csr,csr = csr & ~ZeroExt(uimm)
