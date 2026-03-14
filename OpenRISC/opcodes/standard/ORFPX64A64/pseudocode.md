@@ -37,4 +37,4 @@ Format of a line in the table:
 | `lf.sub.d rD,rA,rB`    | `N/A`                                                                                   |
 | `lf.sub.s rD,rA,rB`    | `rD[31:0] <- rA[31:0] - rB[31:0]`                                                       |
 
-:OpenRISC 32-Bit - "OpenRISC 32-Bit Base Integer Instruction Set"
+:OpenRISC 64-Bit - "OpenRISC 64-Bit Base Integer Instruction Set"

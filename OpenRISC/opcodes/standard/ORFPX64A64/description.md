@@ -75,4 +75,4 @@ Format of a line in the table:
 | `lf.sub.s rD,rA,rB`    | `The contents of general-purpose register rB are subtracted from the contents of general-purpose register rA to form the result`                                                                                                                                                                          |
 |                        | `The result is placed into general-purpose register rD.`                                                                                                                                                                                                                                                  |
 
-:OpenRISC - "OpenRISC Base Integer Instruction Set"
+:OpenRISC 64-Bit - "OpenRISC 64-Bit Base Integer Instruction Set"

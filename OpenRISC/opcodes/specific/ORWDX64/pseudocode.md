@@ -51,4 +51,4 @@ Format of a line in the table:
 | `lv.unpack.h rD,rA,rB` | `N/A`                                                                                   |
 | `lv.xor rD,rA,rB`      | `N/A`                                                                                   |
 
-:OpenRISC 32-Bit - "OpenRISC 32-Bit Base Integer Instruction Set"
+:OpenRISC 64-Bit - "OpenRISC 64-Bit Base Integer Instruction Set"

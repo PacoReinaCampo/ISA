@@ -309,4 +309,4 @@ Format of a line in the table:
 | `l.xori rD,rA,I`       | `The immediate value is sign-extended and combined with the contents of general-purpose register rA in a bit-wise logical XOR operation`                                                                                                                                                                  |
 |                        | `The result is placed into general-purpose register rD.`                                                                                                                                                                                                                                                  |
 
-:OpenRISC - "OpenRISC Base Integer Instruction Set"
+:OpenRISC 32-Bit - "OpenRISC 32-Bit Base Integer Instruction Set"
