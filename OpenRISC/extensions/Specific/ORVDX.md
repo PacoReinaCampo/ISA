@@ -91,3 +91,5 @@
 | `0x0A` | `001010DDDDDAAAAABBBBB---01111001` | `lv.unpack.b` | `Vector Byte Elements Unpack`                                                    | `I`     |
 | `0x0A` | `001010DDDDDAAAAABBBBB---01111010` | `lv.unpack.h` | `Vector Half-Word Elements Unpack`                                               | `I`     |
 | `0x0A` | `001010DDDDDAAAAABBBBB---01111011` | `lv.xor`      | `Vector Exclusive Or`                                                            | `I`     |
+
+: ORVDX32, ORVDX64 Instructions
