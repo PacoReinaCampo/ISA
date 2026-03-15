@@ -6,49 +6,49 @@ Format of a line in the table:
 
 | instruction name       | instruction pseudo code                                                                 |
 |------------------------|:----------------------------------------------------------------------------------------|
-| `lv.cust1`             | `N/A`                                                                                   |
-| `lv.cust2`             | `N/A`                                                                                   |
-| `lv.cust3`             | `N/A`                                                                                   |
-| `lv.cust4`             | `N/A`                                                                                   |
-| `lv.madds.h rD,rA,rB`  | `N/A`                                                                                   |
-| `lv.max.b rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.max.h rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.merge.b rD,rA,rB`  | `N/A`                                                                                   |
-| `lv.merge.h rD,rA,rB`  | `N/A`                                                                                   |
-| `lv.min.b rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.min.h rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.msubs.h rD,rA,rB`  | `N/A`                                                                                   |
-| `lv.muls.h rD,rA,rB`   | `N/A`                                                                                   |
-| `lv.nand rD,rA,rB`     | `N/A`                                                                                   |
-| `lv.nor rD,rA,rB`      | `N/A`                                                                                   |
-| `lv.or rD,rA,rB`       | `N/A`                                                                                   |
-| `lv.pack.b rD,rA,rB`   |                                                                                         |
-| `lv.pack.h rD,rA,rB`   | `N/A`                                                                                   |
-| `lv.packs.b rD,rA,rB`  |                                                                                         |
-| `lv.packs.h rD,rA,rB`  | `N/A`                                                                                   |
-| `lv.packus.b rD,rA,rB` |                                                                                         |
-| `lv.packus.h rD,rA,rB` | `N/A`                                                                                   |
-| `lv.perm.n rD,rA,rB`   |                                                                                         |
-| `lv.rl.b rD,rA,rB`     | `N/A`                                                                                   |
-| `lv.rl.h rD,rA,rB`     | `N/A`                                                                                   |
-| `lv.sll rD,rA,rB`      | `N/A`                                                                                   |
-| `lv.sll.b rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.sll.h rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.sra.b rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.sra.h rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.srl rD,rA,rB`      | `N/A`                                                                                   |
-| `lv.srl.b rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.srl.h rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.sub.b rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.sub.h rD,rA,rB`    | `N/A`                                                                                   |
-| `lv.subs.b rD,rA,rB`   | `N/A`                                                                                   |
-| `lv.subs.h rD,rA,rB`   | `N/A`                                                                                   |
-| `lv.subu.b rD,rA,rB`   | `N/A`                                                                                   |
-| `lv.subu.h rD,rA,rB`   | `N/A`                                                                                   |
-| `lv.subus.b rD,rA,rB`  | `N/A`                                                                                   |
-| `lv.subus.h rD,rA,rB`  | `N/A`                                                                                   |
-| `lv.unpack.b rD,rA,rB` | `N/A`                                                                                   |
-| `lv.unpack.h rD,rA,rB` | `N/A`                                                                                   |
-| `lv.xor rD,rA,rB`      | `N/A`                                                                                   |
+| `ly.cust1`             | `N/A`                                                                                   |
+| `ly.cust2`             | `N/A`                                                                                   |
+| `ly.cust3`             | `N/A`                                                                                   |
+| `ly.cust4`             | `N/A`                                                                                   |
+| `ly.madds.h rD,rA,rB`  | `N/A`                                                                                   |
+| `ly.max.b rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.max.h rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.merge.b rD,rA,rB`  | `N/A`                                                                                   |
+| `ly.merge.h rD,rA,rB`  | `N/A`                                                                                   |
+| `ly.min.b rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.min.h rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.msubs.h rD,rA,rB`  | `N/A`                                                                                   |
+| `ly.muls.h rD,rA,rB`   | `N/A`                                                                                   |
+| `ly.nand rD,rA,rB`     | `N/A`                                                                                   |
+| `ly.nor rD,rA,rB`      | `N/A`                                                                                   |
+| `ly.or rD,rA,rB`       | `N/A`                                                                                   |
+| `ly.pack.b rD,rA,rB`   |                                                                                         |
+| `ly.pack.h rD,rA,rB`   | `N/A`                                                                                   |
+| `ly.packs.b rD,rA,rB`  |                                                                                         |
+| `ly.packs.h rD,rA,rB`  | `N/A`                                                                                   |
+| `ly.packus.b rD,rA,rB` |                                                                                         |
+| `ly.packus.h rD,rA,rB` | `N/A`                                                                                   |
+| `ly.perm.n rD,rA,rB`   |                                                                                         |
+| `ly.rl.b rD,rA,rB`     | `N/A`                                                                                   |
+| `ly.rl.h rD,rA,rB`     | `N/A`                                                                                   |
+| `ly.sll rD,rA,rB`      | `N/A`                                                                                   |
+| `ly.sll.b rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.sll.h rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.sra.b rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.sra.h rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.srl rD,rA,rB`      | `N/A`                                                                                   |
+| `ly.srl.b rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.srl.h rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.sub.b rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.sub.h rD,rA,rB`    | `N/A`                                                                                   |
+| `ly.subs.b rD,rA,rB`   | `N/A`                                                                                   |
+| `ly.subs.h rD,rA,rB`   | `N/A`                                                                                   |
+| `ly.subu.b rD,rA,rB`   | `N/A`                                                                                   |
+| `ly.subu.h rD,rA,rB`   | `N/A`                                                                                   |
+| `ly.subus.b rD,rA,rB`  | `N/A`                                                                                   |
+| `ly.subus.h rD,rA,rB`  | `N/A`                                                                                   |
+| `ly.unpack.b rD,rA,rB` | `N/A`                                                                                   |
+| `ly.unpack.h rD,rA,rB` | `N/A`                                                                                   |
+| `ly.xor rD,rA,rB`      | `N/A`                                                                                   |
 
 :OpenRISC 32-Bit - "OpenRISC 32-Bit Base Integer Instruction Set"
