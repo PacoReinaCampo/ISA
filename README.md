@@ -31,3 +31,4 @@
   - Machine
   - Structured
 * RISC-V / OpenRISC Exceptions
+  - Pseudo-Instruction
