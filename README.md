@@ -5,6 +5,8 @@
 
 **Instruction Set Architecture**
 
+* RISC-V / OpenRISC GreenCard
+  - Machine
 * RISC-V / OpenRISC Architecture
   - Constraint
   - Description
