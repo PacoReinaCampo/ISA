@@ -1,47 +1,321 @@
-# RISC-V D Extension
+= RV D Instructions Code
 
-## Formats
-
-## Instructions
-
-* **RV32D - "RV32D Standard Extension for Double-Precision Floating-Point"**
-
-  | **Name**    | **Pseudo-Code**                                                                       |
-  |:------------|:--------------------------------------------------------------------------------------|
-  | `fld`       | "u64 t; mmu.load<u64>(rs1 + imm, t); u64(frd) = t" # f64(frd) = *(f64*)ptr(rs1 + imm) |
-  | `fsd`       | "mmu.store<f64>(rs1 + imm, f64(frs2))" # *(f64*)ptr(rs1 + imm) = f64(frs2)            |
-  | `fmadd.d`   | "fenv_setrm(rm); f64(frd) = f64(frs1) * f64(frs2) + f64(frs3)"                        |
-  | `fmsub.d`   | "fenv_setrm(rm); f64(frd) = f64(frs1) * f64(frs2) - f64(frs3)"                        |
-  | `fnmadd.d`  | "fenv_setrm(rm); f64(frd) = f64(frs1) * -f64(frs2) - f64(frs3)"                       |
-  | `fnmsub.d`  | "fenv_setrm(rm); f64(frd) = f64(frs1) * -f64(frs2) + f64(frs3)"                       |
-  | `fadd.d`    | "fenv_setrm(rm); f64(frd) = f64(frs1) + f64(frs2)"                                    |
-  | `fsub.d`    | "fenv_setrm(rm); f64(frd) = f64(frs1) - f64(frs2)"                                    |
-  | `fmul.d`    | "fenv_setrm(rm); f64(frd) = f64(frs1) * f64(frs2)"                                    |
-  | `fdiv.d`    | "fenv_setrm(rm); f64(frd) = f64(frs1) / f64(frs2)"                                    |
-  | `fsgnj.d`   | "u64(frd) = (u64(frs1) & u64(~(1ULL<<63))) \| (u64(frs2) & u64(1ULL<<63))"            |
-  | `fsgnjn.d`  | "u64(frd) = (u64(frs1) & u64(~(1ULL<<63))) \| (~u64(frs2) & u64(1ULL<<63))"           |
-  | `fsgnjx.d`  | "u64(frd) = u64(frs1) ^ (u64(frs2) & u64(1ULL<<63))"                                  |
-  | `fmin.d`    | "f64(frd) = (f64(frs1) < f64(frs2)) \|\| isnan(f64(frs2)) ? f64(frs1) : f64(frs2)"    |
-  | `fmax.d`    | "f64(frd) = (f64(frs1) > f64(frs2)) \|\| isnan(f64(frs2)) ? f64(frs1) : f64(frs2)"    |
-  | `fcvt.s.d`  | "fenv_setrm(rm); f32(frd) = f32(f64(frs1))"                                           |
-  | `fcvt.d.s`  | "fenv_setrm(rm); f64(frd) = f64(f32(frs1))"                                           |
-  | `fsqrt.d`   | "fenv_setrm(rm); f64(frd) = riscv::f64_sqrt(f64(frs1))"                               |
-  | `fle.d`     | "rd = f64(frs1) <= f64(frs2)"                                                         |
-  | `flt.d`     | "rd = f64(frs1) < f64(frs2)"                                                          |
-  | `feq.d`     | "rd = f64(frs1) == f64(frs2)"                                                         |
-  | `fcvt.w.d`  | "fenv_setrm(rm); rd = riscv::fcvt_w(fcsr, f64(frs1))" # s32(f64(frs1))                |
-  | `fcvt.wu.d` | "fenv_setrm(rm); rd = riscv::fcvt_wu(fcsr, f64(frs1))" # s32(u32(f64(frs1)))          |
-  | `fcvt.d.w`  | "fenv_setrm(rm); f64(frd) = f64(s32(rs1))"                                            |
-  | `fcvt.d.wu` | "fenv_setrm(rm); f64(frd) = f64(u32(rs1))"                                            |
-  | `fclass.d`  | "rd = f64_classify(f64(frs1))"                                                        |
-
-* **RV64D - "RV64D Standard Extension for Double-Precision Floating-Point (in addition to RV32D)"**
-
-  | **Name**    | **Pseudo-Code**                                                              |
-  |:------------|:-----------------------------------------------------------------------------|
-  | `fcvt.l.d`  | "fenv_setrm(rm); rd = riscv::fcvt_l(fcsr, f64(frs1))" # s64(f64(frs1))       |
-  | `fcvt.lu.d` | "fenv_setrm(rm); rd = riscv::fcvt_lu(fcsr, f64(frs1))" # s64(u64(f64(frs1))) |
-  | `fmv.x.d`   | "rd = isnan(f64(frs1)) ? s64(u64(f64(NAN))) : s64(frs1)" # s64(frs1)         |
-  | `fcvt.d.l`  | "fenv_setrm(rm); f64(frd) = f64(s64(rs1))"                                   |
-  | `fcvt.d.lu` | "fenv_setrm(rm); f64(frd) = f64(u64(rs1))"                                   |
-  | `fmv.d.x`   | "u64(frd) = u64(rs1)"                                                        |
+[cols="1,4", options="header"]
+|===
+| instruction | code
+| fadd_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(f64_add(FRS1_D, FRS2_D));
+set_fp_exceptions;
+----
+| fclass_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+WRITE_RD(f64_classify(FRS1_D));
+----
+| fcvt_d_l
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_rv64;
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(i64_to_f64(RS1));
+set_fp_exceptions;
+----
+| fcvt_d_lu
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_rv64;
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(ui64_to_f64(RS1));
+set_fp_exceptions;
+----
+| fcvt_d_s
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(f32_to_f64(FRS1_F));
+set_fp_exceptions;
+----
+| fcvt_d_w
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(i32_to_f64((int32_t)RS1));
+set_fp_exceptions;
+----
+| fcvt_d_wu
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(ui32_to_f64((uint32_t)RS1));
+set_fp_exceptions;
+----
+| fcvt_l_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_rv64;
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_RD(f64_to_i64(FRS1_D, RM, true));
+set_fp_exceptions;
+----
+| fcvt_lu_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_rv64;
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_RD(f64_to_ui64(FRS1_D, RM, true));
+set_fp_exceptions;
+----
+| fcvt_s_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_F(f64_to_f32(FRS1_D));
+set_fp_exceptions;
+----
+| fcvt_w_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_RD(sext32(f64_to_i32(FRS1_D, RM, true)));
+set_fp_exceptions;
+----
+| fcvt_wu_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_RD(sext32(f64_to_ui32(FRS1_D, RM, true)));
+set_fp_exceptions;
+----
+| fdiv_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(f64_div(FRS1_D, FRS2_D));
+set_fp_exceptions;
+----
+| feq_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+WRITE_RD(f64_eq(FRS1_D, FRS2_D));
+set_fp_exceptions;
+----
+| fld
+a|
+[source,c]
+----
+require_extension('D');
+require_fp;
+WRITE_FRD(f64(MMU.load<uint64_t>(RS1 + insn.i_imm())));
+----
+| fle_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+WRITE_RD(f64_le(FRS1_D, FRS2_D));
+set_fp_exceptions;
+----
+| flt_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+WRITE_RD(f64_lt(FRS1_D, FRS2_D));
+set_fp_exceptions;
+----
+| fmadd_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(f64_mulAdd(FRS1_D, FRS2_D, FRS3_D));
+set_fp_exceptions;
+----
+| fmax_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+bool greater = f64_lt_quiet(FRS2_D, FRS1_D) \|\|
+              (f64_eq(FRS2_D, FRS1_D) && (FRS2_D.v & F64_SIGN));
+if (isNaNF64UI(FRS1_D.v) && isNaNF64UI(FRS2_D.v))
+  WRITE_FRD_D(f64(defaultNaNF64UI));
+else
+  WRITE_FRD_D((greater \|\| isNaNF64UI(FRS2_D.v) ? FRS1_D : FRS2_D));
+set_fp_exceptions;
+----
+| fmin_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+bool less = f64_lt_quiet(FRS1_D, FRS2_D) \|\|
+            (f64_eq(FRS1_D, FRS2_D) && (FRS1_D.v & F64_SIGN));
+if (isNaNF64UI(FRS1_D.v) && isNaNF64UI(FRS2_D.v))
+  WRITE_FRD_D(f64(defaultNaNF64UI));
+else
+  WRITE_FRD_D((less \|\| isNaNF64UI(FRS2_D.v) ? FRS1_D : FRS2_D));
+set_fp_exceptions;
+----
+| fmsub_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(f64_mulAdd(FRS1_D, FRS2_D, f64(FRS3_D.v ^ F64_SIGN)));
+set_fp_exceptions;
+----
+| fmul_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(f64_mul(FRS1_D, FRS2_D));
+set_fp_exceptions;
+----
+| fmv_d_x
+a|
+[source,c]
+----
+require_extension('D');
+require_rv64;
+require_fp;
+WRITE_FRD(f64(RS1));
+----
+| fmv_x_d
+a|
+[source,c]
+----
+require_extension('D');
+require_rv64;
+require_fp;
+WRITE_RD(FRS1.v[0]);
+----
+| fnmadd_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(f64_mulAdd(f64(FRS1_D.v ^ F64_SIGN), FRS2_D, f64(FRS3_D.v ^ F64_SIGN)));
+set_fp_exceptions;
+----
+| fnmsub_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(f64_mulAdd(f64(FRS1_D.v ^ F64_SIGN), FRS2_D, FRS3_D));
+set_fp_exceptions;
+----
+| fsd
+a|
+[source,c]
+----
+require_extension('D');
+require_fp;
+MMU.store<uint64_t>(RS1 + insn.s_imm(), FRS2.v[0]);
+----
+| fsgnj_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+WRITE_FRD_D(fsgnj64(freg(FRS1_D), freg(FRS2_D), false, false));
+----
+| fsgnjn_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+WRITE_FRD_D(fsgnj64(freg(FRS1_D), freg(FRS2_D), true, false));
+----
+| fsgnjx_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+WRITE_FRD_D(fsgnj64(freg(FRS1_D), freg(FRS2_D), false, true));
+----
+| fsqrt_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(f64_sqrt(FRS1_D));
+set_fp_exceptions;
+----
+| fsub_d
+a|
+[source,c]
+----
+require_either_extension('D', EXT_ZDINX);
+require_fp;
+softfloat_roundingMode = RM;
+WRITE_FRD_D(f64_sub(FRS1_D, FRS2_D));
+set_fp_exceptions;
+----
+|===
