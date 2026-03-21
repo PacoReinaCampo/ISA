@@ -30,7 +30,6 @@
   - Fullname
   - Pseudocode-HDL
   - Pseudocode-PL
-  - Machine
-  - Structured
+  - Opcode
 * RISC-V / OpenRISC Exceptions
   - Pseudo-Instruction
