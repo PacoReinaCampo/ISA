@@ -1,6 +1,12 @@
-PADD.BS:
+= RV P Instructions Code
 
-```
+[cols="1,4", options="header"]
+|===
+| instruction | code
+| PADD.BS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2_b0 = X(rs2)[7..0];
     var d : bits(xlen);
@@ -9,11 +15,11 @@ PADD.BS:
         d[(i*8+7)..(i*8)] = s1_b + s2_b0;
     }
     X(rd) = d;
-```
-
-PABD.B:
-
-```
+----
+| PABD.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -24,11 +30,11 @@ PABD.B:
             if (s1_b <_s s2_b) then s2_b - s1_b else s1_b - s2_b;
     }
     X(rd) = d;
-```
-
-PABDU.B:
-
-```
+----
+| PABDU.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -39,11 +45,11 @@ PABDU.B:
             if (s1_b <_u s2_b) then s2_b - s1_b else s1_b - s2_b;
     }
     X(rd) = d;
-```
-
-PREDSUM.BS:
-
-```
+----
+| PREDSUM.BS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     var sum : bits(xlen) = X(rs2);
     foreach (i from 0 to sizeof(xlen_bytes) - 1) {
@@ -51,11 +57,11 @@ PREDSUM.BS:
         sum = sum + sign_extend(sizeof(xlen), s1_b);
     }
     X(rd) = sum;
-```
-
-PREDSUMU.BS:
-
-```
+----
+| PREDSUMU.BS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     var sum : bits(xlen) = X(rs2);
     foreach (i from 0 to sizeof(xlen_bytes) - 1) {
@@ -63,11 +69,11 @@ PREDSUMU.BS:
         sum = sum + zero_extend(sizeof(xlen), s1_b);
     }
     X(rd) = sum;
-```
-
-PADD.HS:
-
-```
+----
+| PADD.HS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2_h0 = X(rs2)[15..0];
     var d : bits(xlen);
@@ -76,11 +82,11 @@ PADD.HS:
         d[(i*16+15)..(i*16)] = s1_h + s2_h0;
     }
     X(rd) = d;
-```
-
-PSH1ADD.H:
-
-```
+----
+| PSH1ADD.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -90,11 +96,11 @@ PSH1ADD.H:
         d[(i*16+15)..(i*16)] = (s1_h << 1) + s2_h;
     }
     X(rd) = d;
-```
-
-PSSH1SADD.H:
-
-```
+----
+| PSSH1SADD.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -112,11 +118,11 @@ PSSH1SADD.H:
                     else xadd_ssh1[15..0];
     }
     X(rd) = d;
-```
-
-PABD.H:
-
-```
+----
+| PABD.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -127,11 +133,11 @@ PABD.H:
             if (s1_h <_s s2_h) then s2_h - s1_h else s1_h - s2_h;
     }
     X(rd) = d;
-```
-
-PABDU.H:
-
-```
+----
+| PABDU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -142,11 +148,11 @@ PABDU.H:
             if (s1_h <_u s2_h) then s2_h - s1_h else s1_h - s2_h;
     }
     X(rd) = d;
-```
-
-PREDSUM.HS:
-
-```
+----
+| PREDSUM.HS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     var sum : bits(xlen) = X(rs2);
     foreach (i from 0 to sizeof(xlen_bytes)/2 - 1) {
@@ -154,11 +160,11 @@ PREDSUM.HS:
         sum = sum + sign_extend(sizeof(xlen), s1_h);
     }
     X(rd) = sum;
-```
-
-PREDSUMU.HS:
-
-```
+----
+| PREDSUMU.HS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     var sum : bits(xlen) = X(rs2);
     foreach (i from 0 to sizeof(xlen_bytes)/2 - 1) {
@@ -166,11 +172,11 @@ PREDSUMU.HS:
         sum = sum + zero_extend(sizeof(xlen), s1_h);
     }
     X(rd) = sum;
-```
-
-RV32 SSH1SADD:
-
-```
+----
+| RV32 SSH1SADD
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let ssh1_s1 : bits(32) =
@@ -182,33 +188,33 @@ RV32 SSH1SADD:
         if (xadd_ssh1 <_s 0xF80000000) then { vxsat = 1; 0x80000000 }
             else if (xadd_ssh1 >_s 0x07FFFFFFF) then { vxsat = 1; 0x7FFFFFFF }
                 else xadd_ssh1[31..0];
-```
-
-RV64 PADD.WS:
-
-```
+----
+| RV64 PADD.WS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2_w0 = X(rs2)[31..0];
     var d : bits(64);
     d[31..0]  = s1[31..0]  + s2_w0;
     d[63..32] = s1[63..32] + s2_w0;
     X(rd) = d;
-```
-
-RV64 PSH1ADD.W:
-
-```
+----
+| RV64 PSH1ADD.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
     d[31..0]  = (s1[31..0]  << 1) + s2[31..0];
     d[63..32] = (s1[63..32] << 1) + s2[63..32];
     X(rd) = d;
-```
-
-RV64 PSSH1SADD.W:
-
-```
+----
+| RV64 PSSH1SADD.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
@@ -226,25 +232,25 @@ RV64 PSSH1SADD.W:
                     then { vxsat = 1; 0x7FFFFFFF } else xadd_ssh1[31..0];
     }
     X(rd) = d;
-```
-
-RV64 PREDSUM.WS:
-
-```
+----
+| RV64 PREDSUM.WS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     X(rd) = X(rs2) + sign_extend(64, s1[31..0]) + sign_extend(64, s1[63..32]);
-```
-
-RV64 PREDSUMU.WS:
-
-```
+----
+| RV64 PREDSUMU.WS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     X(rd) = X(rs2) + zero_extend(64, s1[31..0]) + zero_extend(64, s1[63..32]);
-```
-
-PSLL.BS:
-
-```
+----
+| PSLL.BS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[4..0];
     var d : bits(xlen);
@@ -253,11 +259,11 @@ PSLL.BS:
         d[(i*8+7)..(i*8)] = (zero_extend(32, s1_b) << shamt)[7..0];
     }
     X(rd) = d;
-```
-
-PSRL.BS:
-
-```
+----
+| PSRL.BS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[4..0];
     var d : bits(xlen);
@@ -266,11 +272,11 @@ PSRL.BS:
         d[(i*8+7)..(i*8)] = (zero_extend(32, s1_b) >> shamt)[7..0];
     }
     X(rd) = d;
-```
-
-PSRA.BS:
-
-```
+----
+| PSRA.BS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[4..0];
     var d : bits(xlen);
@@ -279,11 +285,11 @@ PSRA.BS:
         d[(i*8+7)..(i*8)] = (sign_extend(40, s1_b) >> shamt)[7..0];
     }
     X(rd) = d;
-```
-
-PSLL.HS:
-
-```
+----
+| PSLL.HS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[4..0];
     var d : bits(xlen);
@@ -292,11 +298,11 @@ PSLL.HS:
         d[(i*16+15)..(i*16)] = (zero_extend(32, s1_h) << shamt)[15..0];
     }
     X(rd) = d;
-```
-
-PSRL.HS:
-
-```
+----
+| PSRL.HS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[4..0];
     var d : bits(xlen);
@@ -305,11 +311,11 @@ PSRL.HS:
         d[(i*16+15)..(i*16)] = (zero_extend(32, s1_h) >> shamt)[15..0];
     }
     X(rd) = d;
-```
-
-PSRA.HS:
-
-```
+----
+| PSRA.HS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[4..0];
     var d : bits(xlen);
@@ -318,11 +324,11 @@ PSRA.HS:
         d[(i*16+15)..(i*16)] = (sign_extend(48, s1_h) >> shamt)[15..0];
     }
     X(rd) = d;
-```
-
-PSSHA.HS:
-
-```
+----
+| PSSHA.HS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[7..0];
     let sshamt = signed(shamt);
@@ -344,11 +350,11 @@ PSSHA.HS:
             };
     }
     X(rd) = d;
-```
-
-PSSHAR.HS:
-
-```
+----
+| PSSHAR.HS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[7..0];
     let sshamt = signed(shamt);
@@ -372,11 +378,11 @@ PSSHAR.HS:
             };
     }
     X(rd) = d;
-```
-
-RV32 SSHA:
-
-```
+----
+| RV32 SSHA
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[7..0];
     let sshamt = signed(shamt);
@@ -392,11 +398,11 @@ RV32 SSHA:
                 else if (shx >_s 0x000000007FFFFFFF)
                     then { vxsat = 1; 0x7FFFFFFF } else shx[31..0]
         };
-```
-
-RV32 SSHAR:
-
-```
+----
+| RV32 SSHAR
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[7..0];
     let sshamt = signed(shamt);
@@ -415,43 +421,43 @@ RV32 SSHAR:
                 else if (shx >_s 0x000000007FFFFFFF)
                     then { vxsat = 1; 0x7FFFFFFF } else shx[31..0]
         };
-```
-
-RV32 MSEQ:
-
-```
+----
+| RV32 MSEQ
+a|
+[source,rust]
+----
     X(rd) = if (X(rs1) == X(rs2)) then 0xFFFFFFFF else 0x00000000;
-```
-
-RV32 MSLT:
-
-```
+----
+| RV32 MSLT
+a|
+[source,rust]
+----
     X(rd) = if (X(rs1) <_s X(rs2)) then 0xFFFFFFFF else 0x00000000;
-```
-
-RV32 MSLTU:
-
-```
+----
+| RV32 MSLTU
+a|
+[source,rust]
+----
     X(rd) = if (X(rs1) <_u X(rs2)) then 0xFFFFFFFF else 0x00000000;
-```
-
-RV64 PSEXT.W.B:
-
-```
+----
+| RV64 PSEXT.W.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     X(rd) = sign_extend(32, s1[39..32]) @ sign_extend(32, s1[7..0]);
-```
-
-RV64 PSEXT.W.H:
-
-```
+----
+| RV64 PSEXT.W.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     X(rd) = sign_extend(32, s1[47..32]) @ sign_extend(32, s1[15..0]);
-```
-
-RV64 PSSHA.WS:
-
-```
+----
+| RV64 PSSHA.WS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[7..0];
     let sshamt = signed(shamt);
@@ -473,11 +479,11 @@ RV64 PSSHA.WS:
             };
     }
     X(rd) = d;
-```
-
-RV64 PSSHAR.WS:
-
-```
+----
+| RV64 PSSHAR.WS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[7..0];
     let sshamt = signed(shamt);
@@ -501,41 +507,41 @@ RV64 PSSHAR.WS:
             };
     }
     X(rd) = d;
-```
-
-RV64 PMSEQ.W:
-
-```
+----
+| RV64 PMSEQ.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = if (s1[31..0]  == s2[31..0] ) then 0xFFFFFFFF else 0x00000000;
     let d_w1 = if (s1[63..32] == s2[63..32]) then 0xFFFFFFFF else 0x00000000;
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMSLT.W:
-
-```
+----
+| RV64 PMSLT.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = if (s1[31..0]  <_s s2[31..0] ) then 0xFFFFFFFF else 0x00000000;
     let d_w1 = if (s1[63..32] <_s s2[63..32]) then 0xFFFFFFFF else 0x00000000;
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMSLTU.W:
-
-```
+----
+| RV64 PMSLTU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = if (s1[31..0]  <_u s2[31..0] ) then 0xFFFFFFFF else 0x00000000;
     let d_w1 = if (s1[63..32] <_u s2[63..32]) then 0xFFFFFFFF else 0x00000000;
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 SATI:
-
-```
+----
+| RV64 SATI
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let n = w_uimm[5..0];
     let minval : bits(64) = 0xFFFFFFFFFFFFFFFF << n;
@@ -543,22 +549,22 @@ RV64 SATI:
     X(rd) =
         if (s1 <_s minval) then { vxsat = 1; minval }
             else if (s1 >_s maxval) then { vxsat = 1; maxval } else s1;
-```
-
-RV64 USATI:
-
-```
+----
+| RV64 USATI
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let n = w_uimm[5..0];
     let maxval : bits(64) = ~(0xFFFFFFFFFFFFFFFF << n);
     X(rd) =
         if (s1 <_s 0x0000000000000000) then { vxsat = 1; 0x0000000000000000 }
             else if (s1 >_s maxval) then { vxsat = 1; maxval } else s1;
-```
-
-RV64 SHA:
-
-```
+----
+| RV64 SHA
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[7..0];
     let sshamt = signed(shamt);
@@ -570,11 +576,11 @@ RV64 SHA:
         } else {
             if (sshamt >= 64) then 0x0000000000000000 else s1 << shamt[5..0]
         };
-```
-
-RV64 SHAR:
-
-```
+----
+| RV64 SHAR
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[7..0];
     let sshamt = signed(shamt);
@@ -588,11 +594,11 @@ RV64 SHAR:
         } else {
             if (sshamt >= 64) then 0x0000000000000000 else s1 << shamt[5..0]
         };
-```
-
-PPAIRE.B:
-
-```
+----
+| PPAIRE.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -602,11 +608,11 @@ PPAIRE.B:
         d[(i*16+15)..(i*16)] = s2_h[7..0] @ s1_h[7..0];
     }
     X(rd) = d;
-```
-
-PPAIREO.B:
-
-```
+----
+| PPAIREO.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -616,11 +622,11 @@ PPAIREO.B:
         d[(i*16+15)..(i*16)] = s2_h[15..8] @ s1_h[7..0];
     }
     X(rd) = d;
-```
-
-PPAIROE.B:
-
-```
+----
+| PPAIROE.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -630,11 +636,11 @@ PPAIROE.B:
         d[(i*16+15)..(i*16)] = s2_h[7..0] @ s1_h[15..8];
     }
     X(rd) = d;
-```
-
-PPAIRO.B:
-
-```
+----
+| PPAIRO.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -644,98 +650,98 @@ PPAIRO.B:
         d[(i*16+15)..(i*16)] = s2_h[15..8] @ s1_h[15..8];
     }
     X(rd) = d;
-```
-
-RV64 REV16:
-
-```
+----
+| RV64 REV16
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     X(rd) = s1[15..0] @ s1[31..16] @ s1[47..32] @ s1[63..48];
-```
-
-RV64 ZIP8P:
-
-```
+----
+| RV64 ZIP8P
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
         s2[31..24] @ s1[31..24] @ s2[23..16] @ s1[23..16]
             @ s2[15..8] @ s1[15..8] @ s2[7..0] @ s1[7..0];
-```
-
-RV64 ZIP8HP:
-
-```
+----
+| RV64 ZIP8HP
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
         s2[63..56] @ s1[63..56] @ s2[55..48] @ s1[55..48]
             @ s2[47..40] @ s1[47..40] @ s2[39..32] @ s1[39..32];
-```
-
-RV64 UNZIP8P:
-
-```
+----
+| RV64 UNZIP8P
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
         s2[55..48] @ s2[39..32] @ s2[23..16] @ s2[7..0]
             @ s1[55..48] @ s1[39..32] @ s1[23..16] @ s1[7..0];
-```
-
-RV64 UNZIP8HP:
-
-```
+----
+| RV64 UNZIP8HP
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
         s2[63..56] @ s2[47..40] @ s2[31..24] @ s2[15..8]
             @ s1[63..56] @ s1[47..40] @ s1[31..24] @ s1[15..8];
-```
-
-RV64 ZIP16P:
-
-```
+----
+| RV64 ZIP16P
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) = s2[31..16] @ s1[31..16] @ s2[15..0] @ s1[15..0];
-```
-
-RV64 ZIP16HP:
-
-```
+----
+| RV64 ZIP16HP
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) = s2[63..48] @ s1[63..48] @ s2[47..32] @ s1[47..32];
-```
-
-RV64 UNZIP16P:
-
-```
+----
+| RV64 UNZIP16P
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) = s2[47..32] @ s2[15..0] @ s1[47..32] @ s1[15..0];
-```
-
-RV64 UNZIP16HP:
-
-```
+----
+| RV64 UNZIP16HP
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) = s2[63..48] @ s2[31..16] @ s1[63..48] @ s1[31..16];
-```
-
-
-ABS:
-
-```
+----
+| 
+ABS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     X(rd) = if (signed(s1) < 0) then 0 - s1 else s1;
-```
-
-CLS:
-
-```
+----
+| CLS
+a|
+[source,rust]
+----
     var v : bits(xlen) = X(rs1);
     let lo_bound = to_bits(sizeof(xlen), -(2^(sizeof(xlen) - 2)));
     let hi_bound = ~lo_bound;
@@ -745,55 +751,55 @@ CLS:
         v = v << 1;
     }
     X(rd) = to_bits(sizeof(xlen), c);
-```
-
-SLX:
-
-```
+----
+| SLX
+a|
+[source,rust]
+----
     let shamt = X(rs2)[(log2(sizeof(xlen))-1)..0];
     X(rd) = ((X(rd) @ X(rs1)) << shamt)[(sizeof(xlen)*2-1)..sizeof(xlen)];
-```
-
-SRX:
-
-```
+----
+| SRX
+a|
+[source,rust]
+----
     let shamt = X(rs2)[(log2(sizeof(xlen))-1)..0];
     X(rd) = ((X(rs1) @ X(rd)) >> shamt)[(sizeof(xlen)-1)..0];
-```
-
-MVM:
-
-```
+----
+| MVM
+a|
+[source,rust]
+----
     let s2 = X(rs2);
-    X(rd) = (~s2 & X(rd)) | (s2 & X(rs1));
-```
-
-MVMN:
-
-```
+    X(rd) = (~s2 & X(rd)) \| (s2 & X(rs1));
+----
+| MVMN
+a|
+[source,rust]
+----
     let s2 = X(rs2);
-    X(rd) = (~s2 & X(rs1)) | (s2 & X(rd));
-```
-
-MERGE:
-
-```
+    X(rd) = (~s2 & X(rs1)) \| (s2 & X(rd));
+----
+| MERGE
+a|
+[source,rust]
+----
     let d = X(rd);
-    X(rd) = (~d & X(rs1)) | (d & X(rs2));
-```
-
-RV64 ABSW:
-
-```
+    X(rd) = (~d & X(rs1)) \| (d & X(rs2));
+----
+| RV64 ABSW
+a|
+[source,rust]
+----
     let s1_w = X(rs1)[31..0];
     X(rd) =
         sign_extend(
             64, if (signed(s1_w) <_s 0) then 0x00000000 - s1_w else s1_w);
-```
-
-RV64 CLSW:
-
-```
+----
+| RV64 CLSW
+a|
+[source,rust]
+----
     var w : bits(32) = X(rs1)[31..0];
     var c : int = 0;
     while (c < 31) & (w >=_s 0xC0000000) & (w <=_s 0x3FFFFFFF) do {
@@ -801,11 +807,11 @@ RV64 CLSW:
         w = w << 1;
     }
     X(rd) = to_bits(sizeof(xlen), c);
-```
-
-RV32 PWADD.B:
-
-```
+----
+| RV32 PWADD.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
@@ -818,11 +824,11 @@ RV32 PWADD.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWADDA.B:
-
-```
+----
+| RV32 PWADDA.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64) =
@@ -837,11 +843,11 @@ RV32 PWADDA.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWADDU.B:
-
-```
+----
+| RV32 PWADDU.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
@@ -854,11 +860,11 @@ RV32 PWADDU.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWADDAU.B:
-
-```
+----
+| RV32 PWADDAU.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64) =
@@ -874,11 +880,11 @@ RV32 PWADDAU.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWSUB.B:
-
-```
+----
+| RV32 PWSUB.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
@@ -891,11 +897,11 @@ RV32 PWSUB.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWSUBA.B:
-
-```
+----
+| RV32 PWSUBA.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64) =
@@ -910,11 +916,11 @@ RV32 PWSUBA.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWSUBU.B:
-
-```
+----
+| RV32 PWSUBU.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
@@ -927,11 +933,11 @@ RV32 PWSUBU.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWSUBAU.B:
-
-```
+----
+| RV32 PWSUBAU.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64) =
@@ -947,11 +953,11 @@ RV32 PWSUBAU.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWSLLI.B:
-
-```
+----
+| RV32 PWSLLI.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = w_uimm[3..0];
     var d : bits(64);
@@ -963,11 +969,11 @@ RV32 PWSLLI.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWSLL.BS:
-
-```
+----
+| RV32 PWSLL.BS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[4..0];
     var d : bits(64);
@@ -979,11 +985,11 @@ RV32 PWSLL.BS:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWSLAI.B:
-
-```
+----
+| RV32 PWSLAI.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = w_uimm[3..0];
     var d : bits(64);
@@ -995,11 +1001,11 @@ RV32 PWSLAI.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWSLA.BS:
-
-```
+----
+| RV32 PWSLA.BS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[4..0];
     var d : bits(64);
@@ -1011,11 +1017,11 @@ RV32 PWSLA.BS:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWADD.H:
-
-```
+----
+| RV32 PWADD.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(32, signed(s1[15..0])  + signed(s2[15..0]) );
@@ -1024,11 +1030,11 @@ RV32 PWADD.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWADDA.H:
-
-```
+----
+| RV32 PWADDA.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d_w0 = X(rd_p*2);
@@ -1039,11 +1045,11 @@ RV32 PWADDA.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWADDU.H:
-
-```
+----
+| RV32 PWADDU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(32, unsigned(s1[15..0])  + unsigned(s2[15..0]) );
@@ -1052,11 +1058,11 @@ RV32 PWADDU.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWADDAU.H:
-
-```
+----
+| RV32 PWADDAU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d_w0 = X(rd_p*2);
@@ -1067,11 +1073,11 @@ RV32 PWADDAU.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWSUB.H:
-
-```
+----
+| RV32 PWSUB.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(32, signed(s1[15..0])  - signed(s2[15..0]) );
@@ -1080,11 +1086,11 @@ RV32 PWSUB.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWSUBA.H:
-
-```
+----
+| RV32 PWSUBA.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d_w0 = X(rd_p*2);
@@ -1095,11 +1101,11 @@ RV32 PWSUBA.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWSUBU.H:
-
-```
+----
+| RV32 PWSUBU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(32, unsigned(s1[15..0])  - unsigned(s2[15..0]) );
@@ -1108,11 +1114,11 @@ RV32 PWSUBU.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWSUBAU.H:
-
-```
+----
+| RV32 PWSUBAU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d_w0 = X(rd_p*2);
@@ -1123,11 +1129,11 @@ RV32 PWSUBAU.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWSLLI.H:
-
-```
+----
+| RV32 PWSLLI.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = w_uimm[4..0];
     let d_w0 = zero_extend(32, s1[15..0] ) << shamt;
@@ -1136,11 +1142,11 @@ RV32 PWSLLI.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWSLL.HS:
-
-```
+----
+| RV32 PWSLL.HS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[4..0];
     let d_w0 = zero_extend(32, s1[15..0] ) << shamt;
@@ -1149,11 +1155,11 @@ RV32 PWSLL.HS:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWSLAI.H:
-
-```
+----
+| RV32 PWSLAI.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = w_uimm[4..0];
     let d_w0 = sign_extend(32, s1[15..0] ) << shamt;
@@ -1162,11 +1168,11 @@ RV32 PWSLAI.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWSLA.HS:
-
-```
+----
+| RV32 PWSLA.HS
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let shamt = X(rs2)[4..0];
     let d_w0 = sign_extend(32, s1[15..0] ) << shamt;
@@ -1175,21 +1181,21 @@ RV32 PWSLA.HS:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 WADD:
-
-```
+----
+| RV32 WADD
+a|
+[source,rust]
+----
     let d = to_bits(64, signed(X(rs1)) + signed(X(rs2)));
     if (rd_p != 0x0) then {
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WADDA:
-
-```
+----
+| RV32 WADDA
+a|
+[source,rust]
+----
     var d : bits(64) =
         if (rd_p == 0x0) then zeros() else X(rd_p*2+1) @ X(rd_p*2);
     d = d + to_bits(64, signed(X(rs1)) + signed(X(rs2)));
@@ -1197,21 +1203,21 @@ RV32 WADDA:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WADDU:
-
-```
+----
+| RV32 WADDU
+a|
+[source,rust]
+----
     let d = to_bits(64, unsigned(X(rs1)) + unsigned(X(rs2)));
     if (rd_p != 0x0) then {
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WADDAU:
-
-```
+----
+| RV32 WADDAU
+a|
+[source,rust]
+----
     var d : bits(64) =
         if (rd_p == 0x0) then zeros() else X(rd_p*2+1) @ X(rd_p*2);
     d = d + to_bits(64, unsigned(X(rs1)) + unsigned(X(rs2)));
@@ -1219,21 +1225,21 @@ RV32 WADDAU:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WSUB:
-
-```
+----
+| RV32 WSUB
+a|
+[source,rust]
+----
     let d = to_bits(64, signed(X(rs1)) - signed(X(rs2)));
     if (rd_p != 0x0) then {
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WSUBA:
-
-```
+----
+| RV32 WSUBA
+a|
+[source,rust]
+----
     var d : bits(64) =
         if (rd_p == 0x0) then zeros() else X(rd_p*2+1) @ X(rd_p*2);
     d = d + to_bits(64, signed(X(rs1)) - signed(X(rs2)));
@@ -1241,21 +1247,21 @@ RV32 WSUBA:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WSUBU:
-
-```
+----
+| RV32 WSUBU
+a|
+[source,rust]
+----
     let d = to_bits(64, unsigned(X(rs1)) - unsigned(X(rs2)));
     if (rd_p != 0x0) then {
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WSUBAU:
-
-```
+----
+| RV32 WSUBAU
+a|
+[source,rust]
+----
     var d : bits(64) =
         if (rd_p == 0x0) then zeros() else X(rd_p*2+1) @ X(rd_p*2);
     d = d + to_bits(64, unsigned(X(rs1)) - unsigned(X(rs2)));
@@ -1263,77 +1269,77 @@ RV32 WSUBAU:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WSLLI:
-
-```
+----
+| RV32 WSLLI
+a|
+[source,rust]
+----
     let shamt = w_uimm[5..0];
     let d = zero_extend(64, X(rs1)) << shamt;
     if (rd_p != 0x0) then {
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WSLL:
-
-```
+----
+| RV32 WSLL
+a|
+[source,rust]
+----
     let shamt = X(rs2)[5..0];
     let d = zero_extend(64, X(rs1)) << shamt;
     if (rd_p != 0x0) then {
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WSLAI:
-
-```
+----
+| RV32 WSLAI
+a|
+[source,rust]
+----
     let shamt = w_uimm[5..0];
     let d = sign_extend(64, X(rs1)) << shamt;
     if (rd_p != 0x0) then {
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WSLA:
-
-```
+----
+| RV32 WSLA
+a|
+[source,rust]
+----
     let shamt = X(rs2)[5..0];
     let d = sign_extend(64, X(rs1)) << shamt;
     if (rd_p != 0x0) then {
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WZIP8P:
-
-```
+----
+| RV32 WZIP8P
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     if (rd_p != 0x0) then {
         X(rd_p*2)   = s2[15..8]  @ s1[15..8]  @ s2[7..0]   @ s1[7..0];
         X(rd_p*2+1) = s2[31..24] @ s1[31..24] @ s2[23..16] @ s1[23..16];
     }
-```
-
-RV32 WZIP16P:
-
-```
+----
+| RV32 WZIP16P
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     if (rd_p != 0x0) then {
         X(rd_p*2)   = s2[15..0]  @ s1[15..0];
         X(rd_p*2+1) = s2[31..16] @ s1[31..16];
     }
-```
-
-RV32 PLI.DB, PLI.DH, PLUI.DH:
-
-```
+----
+| RV32 PLI.DB, PLI.DH, PLUI.DH
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.D<s> rd,imm    // only even destination register number allowed
@@ -1344,11 +1350,11 @@ RV32 PLI.DB, PLI.DH, PLUI.DH:
         P<op>.<s> rd+,imm    // the odd destination register
 
     See the introduction for the precise meaning of "rd+".
-```
-
-RV32 PADD.DB, PSUB.DB, PSADD.DB, PSADDU.DB, PSSUB.DB, PSSUBU.DB, PAADD.DB, PAADDU.DB, PASUB.DB, PASUBU.DB, PABD.DB, PABDU.DB, PADD.DH, PSUB.DH, PSADD.DH, PSADDU.DH, PSSUB.DH, PSSUBU.DH, PAADD.DH, PAADDU.DH, PASUB.DH, PASUBU.DH, PSH1ADD.DH, PSSH1SADD.DH, PABD.DH, PABDU.DH:
-
-```
+----
+| RV32 PADD.DB, PSUB.DB, PSADD.DB, PSADDU.DB, PSSUB.DB, PSSUBU.DB, PAADD.DB, PAADDU.DB, PASUB.DB, PASUBU.DB, PABD.DB, PABDU.DB, PADD.DH, PSUB.DH, PSADD.DH, PSADDU.DH, PSSUB.DH, PSSUBU.DH, PAADD.DH, PAADDU.DH, PASUB.DH, PASUBU.DH, PSH1ADD.DH, PSSH1SADD.DH, PABD.DH, PABDU.DH
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.D<s> rd,rs1,rs2     // only even register numbers allowed
@@ -1360,11 +1366,11 @@ RV32 PADD.DB, PSUB.DB, PSADD.DB, PSADDU.DB, PSSUB.DB, PSSUBU.DB, PAADD.DB, PAADD
 
     See the introduction for the precise meaning of "rd+", "rs1+", and
     "rs2+".
-```
-
-RV32 PAS.DHX, PSA.DHX, PSAS.DHX, PSSA.DHX, PAAS.DHX, PASA.DHX:
-
-```
+----
+| RV32 PAS.DHX, PSA.DHX, PSAS.DHX, PSSA.DHX, PAAS.DHX, PASA.DHX
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.DHX rd,rs1,rs2      // only even register numbers allowed
@@ -1376,11 +1382,11 @@ RV32 PAS.DHX, PSA.DHX, PSAS.DHX, PSSA.DHX, PAAS.DHX, PASA.DHX:
 
     See the introduction for the precise meaning of "rd+", "rs1+", and
     "rs2+".
-```
-
-RV32 PSABS.DB, PSABS.DH:
-
-```
+----
+| RV32 PSABS.DB, PSABS.DH
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         PSABS.D<s> rd,rs1         // only even register numbers allowed
@@ -1391,11 +1397,11 @@ RV32 PSABS.DB, PSABS.DH:
         PSABS.<s> rd+,rs1+        // the odd registers
 
     See the introduction for the precise meaning of "rd+" and "rs1+".
-```
-
-RV32 PADD.DW, PSUB.DW, PSADD.DW, PSADDU.DW, PSSUB.DW, PSSUBU.DW, PAADD.DW, PAADDU.DW, PASUB.DW, PASUBU.DW, PSH1ADD.DW, PSSH1SADD.DW:
-
-```
+----
+| RV32 PADD.DW, PSUB.DW, PSADD.DW, PSADDU.DW, PSSUB.DW, PSSUBU.DW, PAADD.DW, PAADDU.DW, PASUB.DW, PASUBU.DW, PSH1ADD.DW, PSSH1SADD.DW
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.DW rd,rs1,rs2       // only even register numbers allowed
@@ -1407,11 +1413,11 @@ RV32 PADD.DW, PSUB.DW, PSADD.DW, PSADDU.DW, PSSUB.DW, PSSUBU.DW, PAADD.DW, PAADD
 
     See the introduction for the precise meaning of "rd+", "rs1+", and
     "rs2+".
-```
-
-RV32 PREDSUM.DBS:
-
-```
+----
+| RV32 PREDSUM.DBS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     X(rd) =
@@ -1422,11 +1428,11 @@ RV32 PREDSUM.DBS:
                 + signed(s1[39..32]) + signed(s1[47..40])
                 + signed(s1[55..48]) + signed(s1[63..56])
         );
-```
-
-RV32 PREDSUMU.DBS:
-
-```
+----
+| RV32 PREDSUMU.DBS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     X(rd) =
@@ -1437,11 +1443,11 @@ RV32 PREDSUMU.DBS:
                 + unsigned(s1[39..32]) + unsigned(s1[47..40])
                 + unsigned(s1[55..48]) + unsigned(s1[63..56])
         );
-```
-
-RV32 PREDSUM.DHS:
-
-```
+----
+| RV32 PREDSUM.DHS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     X(rd) =
@@ -1450,11 +1456,11 @@ RV32 PREDSUM.DHS:
             signed(X(rs2)) + signed(s1[15..0]) + signed(s1[31..16])
                 + signed(s1[47..32]) + signed(s1[63..48])
         );
-```
-
-RV32 PREDSUMU.DHS:
-
-```
+----
+| RV32 PREDSUMU.DHS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     X(rd) =
@@ -1463,11 +1469,11 @@ RV32 PREDSUMU.DHS:
             unsigned(X(rs2)) + unsigned(s1[15..0]) + unsigned(s1[31..16])
                 + unsigned(s1[47..32]) + unsigned(s1[63..48])
         );
-```
-
-RV32 PSLLI.DB, PSRLI.DB, PSRAI.DB, PSATI.DH, PUSATI.DH, PSLLI.DH, PSRLI.DH, PSRAI.DH, PSSLAI.DH, PSRARI.DH:
-
-```
+----
+| RV32 PSLLI.DB, PSRLI.DB, PSRAI.DB, PSATI.DH, PUSATI.DH, PSLLI.DH, PSRLI.DH, PSRAI.DH, PSSLAI.DH, PSRARI.DH
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.D<s> rd,rs1,imm     // only even register numbers allowed
@@ -1478,11 +1484,11 @@ RV32 PSLLI.DB, PSRLI.DB, PSRAI.DB, PSATI.DH, PUSATI.DH, PSLLI.DH, PSRLI.DH, PSRA
         P<op>.<s> rd+,rs1+,imm    // the odd registers
 
     See the introduction for the precise meaning of "rd+" and "rs1+".
-```
-
-RV32 PMIN.DB, PMINU.DB, PMAX.DB, PMAXU.DB, PMSEQ.DB, PMSLT.DB, PMSLTU.DB, PMIN.DH, PMINU.DH, PMAX.DH, PMAXU.DH, PMSEQ.DH, PMSLT.DH, PMSLTU.DH:
-
-```
+----
+| RV32 PMIN.DB, PMINU.DB, PMAX.DB, PMAXU.DB, PMSEQ.DB, PMSLT.DB, PMSLTU.DB, PMIN.DH, PMINU.DH, PMAX.DH, PMAXU.DH, PMSEQ.DH, PMSLT.DH, PMSLTU.DH
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.D<s> rd,rs1,rs2     // only even register numbers allowed
@@ -1494,11 +1500,11 @@ RV32 PMIN.DB, PMINU.DB, PMAX.DB, PMAXU.DB, PMSEQ.DB, PMSLT.DB, PMSLTU.DB, PMIN.D
 
     See the introduction for the precise meaning of "rd+", "rs1+", and
     "rs2+".
-```
-
-RV32 PSEXT.DH.B:
-
-```
+----
+| RV32 PSEXT.DH.B
+a|
+[source,rust]
+----
     The function of
 
         PSEXT.DH.B rd,rs1         // only even register numbers allowed
@@ -1509,11 +1515,11 @@ RV32 PSEXT.DH.B:
         PSEXT.H.B rd+,rs1+        // the odd registers
 
     See the introduction for the precise meaning of "rd+" and "rs1+".
-```
-
-RV32 PSEXT.DW.B, PSEXT.DW.H:
-
-```
+----
+| RV32 PSEXT.DW.B, PSEXT.DW.H
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         PSEXT.DW.<s> rd,rs1       // only even register numbers allowed
@@ -1524,11 +1530,11 @@ RV32 PSEXT.DW.B, PSEXT.DW.H:
         SEXT.<s> rd+,rs1+         // the odd registers
 
     See the introduction for the precise meaning of "rd+" and "rs1+".
-```
-
-RV32 PSATI.DW, PUSATI.DW, PSLLI.DW, PSRLI.DW, PSRAI.DW, PSSLAI.DW, PSRARI.DW:
-
-```
+----
+| RV32 PSATI.DW, PUSATI.DW, PSLLI.DW, PSRLI.DW, PSRAI.DW, PSSLAI.DW, PSRARI.DW
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.DW rd,rs1,imm       // only even register numbers allowed
@@ -1539,11 +1545,11 @@ RV32 PSATI.DW, PUSATI.DW, PSLLI.DW, PSRLI.DW, PSRAI.DW, PSSLAI.DW, PSRARI.DW:
         <op> rd+,rs1+,imm         // the odd registers
 
     See the introduction for the precise meaning of "rd+" and "rs1+".
-```
-
-RV32 PMIN.DW, PMINU.DW, PMAX.DW, PMAXU.DW, PMSEQ.DW, PMSLT.DW, PMSLTU.DW:
-
-```
+----
+| RV32 PMIN.DW, PMINU.DW, PMAX.DW, PMAXU.DW, PMSEQ.DW, PMSLT.DW, PMSLTU.DW
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.DW rd,rs1,rs2       // only even register numbers allowed
@@ -1555,11 +1561,11 @@ RV32 PMIN.DW, PMINU.DW, PMAX.DW, PMAXU.DW, PMSEQ.DW, PMSLT.DW, PMSLTU.DW:
 
     See the introduction for the precise meaning of "rd+", "rs1+", and
     "rs2+".
-```
-
-RV32 PADD.DBS, PSLL.DBS, PSRL.DBS, PSRA.DBS, PADD.DHS, PSLL.DHS, PSRL.DHS, PSRA.DHS, PSSHA.DHS, PSSHAR.DHS:
-
-```
+----
+| RV32 PADD.DBS, PSLL.DBS, PSRL.DBS, PSRA.DBS, PADD.DHS, PSLL.DHS, PSRL.DHS, PSRA.DHS, PSSHA.DHS, PSSHAR.DHS
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.D<s>S rd,rs1,rs2    // only even register numbers allowed
@@ -1577,11 +1583,11 @@ RV32 PADD.DBS, PSLL.DBS, PSRL.DBS, PSRA.DBS, PADD.DHS, PSLL.DHS, PSRL.DHS, PSRA.
     rd+ could be executed before the first instruction.)
 
     See the introduction for the precise meaning of "rd+" and "rs1+".
-```
-
-RV32 PADD.DWS, PSLL.DWS, PSRL.DWS, PSRA.DWS, PSSHA.DWS, PSSHAR.DWS:
-
-```
+----
+| RV32 PADD.DWS, PSLL.DWS, PSRL.DWS, PSRA.DWS, PSSHA.DWS, PSSHAR.DWS
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.DWS rd,rs1,rs2      // only even register numbers allowed for
@@ -1599,11 +1605,11 @@ RV32 PADD.DWS, PSLL.DWS, PSRL.DWS, PSRA.DWS, PSSHA.DWS, PSSHAR.DWS:
     rd+ could be executed before the first instruction.)
 
     See the introduction for the precise meaning of "rd+" and "rs1+".
-```
-
-RV32 PPAIRE.DB, PPAIREO.DB, PPAIROE.DB, PPAIRO.DB, PPAIRE.DH, PPAIREO.DH, PPAIROE.DH, PPAIRO.DH:
-
-```
+----
+| RV32 PPAIRE.DB, PPAIREO.DB, PPAIROE.DB, PPAIRO.DB, PPAIRE.DH, PPAIREO.DH, PPAIROE.DH, PPAIRO.DH
+a|
+[source,rust]
+----
     For these instructions, the function of
 
         P<op>.D<s> rd,rs1,rs2     // only even register numbers allowed
@@ -1618,11 +1624,11 @@ RV32 PPAIRE.DB, PPAIREO.DB, PPAIROE.DB, PPAIRO.DB, PPAIRE.DH, PPAIREO.DH, PPAIRO
 
     (For RV32, pseudoinstruction PPAIRE.H is an alias for actual instruction
     PACK.)
-```
-
-RV32 PNSRLI.B:
-
-```
+----
+| RV32 PNSRLI.B
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[3..0];
@@ -1632,11 +1638,11 @@ RV32 PNSRLI.B:
         d[(i*8+7)..(i*8)] = (s1_h >> shamt)[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNSRL.BS:
-
-```
+----
+| RV32 PNSRL.BS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1646,11 +1652,11 @@ RV32 PNSRL.BS:
         d[(i*8+7)..(i*8)] = (zero_extend(32, s1_h) >> shamt)[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNSRAI.B:
-
-```
+----
+| RV32 PNSRAI.B
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[3..0];
@@ -1660,11 +1666,11 @@ RV32 PNSRAI.B:
         d[(i*8+7)..(i*8)] = (sign_extend(24, s1_h) >> shamt)[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNSRA.BS:
-
-```
+----
+| RV32 PNSRA.BS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1674,11 +1680,11 @@ RV32 PNSRA.BS:
         d[(i*8+7)..(i*8)] = (sign_extend(40, s1_h) >> shamt)[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNSRARI.B:
-
-```
+----
+| RV32 PNSRARI.B
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[3..0];
@@ -1689,11 +1695,11 @@ RV32 PNSRARI.B:
         d[(i*8+7)..(i*8)] = (shx + 1)[8..1];
     }
     X(rd) = d;
-```
-
-RV32 PNSRAR.BS:
-
-```
+----
+| RV32 PNSRAR.BS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1704,11 +1710,11 @@ RV32 PNSRAR.BS:
         d[(i*8+7)..(i*8)] = (shx + 1)[8..1];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPI.B:
-
-```
+----
+| RV32 PNCLIPI.B
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[3..0];
@@ -1722,11 +1728,11 @@ RV32 PNCLIPI.B:
                     else shx[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIP.BS:
-
-```
+----
+| RV32 PNCLIP.BS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1740,11 +1746,11 @@ RV32 PNCLIP.BS:
                     else shx[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPRI.B:
-
-```
+----
+| RV32 PNCLIPRI.B
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[3..0];
@@ -1759,11 +1765,11 @@ RV32 PNCLIPRI.B:
                     else round_shx[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPR.BS:
-
-```
+----
+| RV32 PNCLIPR.BS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1778,11 +1784,11 @@ RV32 PNCLIPR.BS:
                     else round_shx[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPIU.B:
-
-```
+----
+| RV32 PNCLIPIU.B
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[3..0];
@@ -1794,11 +1800,11 @@ RV32 PNCLIPIU.B:
             if (shx >_u 0x00FF) then { vxsat = 1; 0xFF } else shx[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPU.BS:
-
-```
+----
+| RV32 PNCLIPU.BS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1810,11 +1816,11 @@ RV32 PNCLIPU.BS:
             if (shx >_u 0x00FF) then { vxsat = 1; 0xFF } else shx[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPRIU.B:
-
-```
+----
+| RV32 PNCLIPRIU.B
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[3..0];
@@ -1828,11 +1834,11 @@ RV32 PNCLIPRIU.B:
                 else round_shx[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPRU.BS:
-
-```
+----
+| RV32 PNCLIPRU.BS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1846,11 +1852,11 @@ RV32 PNCLIPRU.BS:
                 else round_shx[7..0];
     }
     X(rd) = d;
-```
-
-RV32 PNSRLI.H:
-
-```
+----
+| RV32 PNSRLI.H
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[4..0];
@@ -1858,11 +1864,11 @@ RV32 PNSRLI.H:
     d[15..0]  = (s1[31..0]  >> shamt)[15..0];
     d[31..16] = (s1[63..32] >> shamt)[15..0];
     X(rd) = d;
-```
-
-RV32 PNSRL.HS:
-
-```
+----
+| RV32 PNSRL.HS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1870,11 +1876,11 @@ RV32 PNSRL.HS:
     d[15..0]  = (s1[31..0]  >> shamt)[15..0];
     d[31..16] = (s1[63..32] >> shamt)[15..0];
     X(rd) = d;
-```
-
-RV32 PNSRAI.H:
-
-```
+----
+| RV32 PNSRAI.H
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[4..0];
@@ -1882,11 +1888,11 @@ RV32 PNSRAI.H:
     d[15..0]  = (sign_extend(48, s1[31..0]))  >> shamt)[15..0];
     d[31..16] = (sign_extend(48, s1[63..32])) >> shamt)[15..0];
     X(rd) = d;
-```
-
-RV32 PNSRA.HS:
-
-```
+----
+| RV32 PNSRA.HS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1894,11 +1900,11 @@ RV32 PNSRA.HS:
     d[15..0]  = (sign_extend(48, s1[31..0]))  >> shamt)[15..0];
     d[31..16] = (sign_extend(48, s1[63..32])) >> shamt)[15..0];
     X(rd) = d;
-```
-
-RV32 PNSRARI.H:
-
-```
+----
+| RV32 PNSRARI.H
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[4..0];
@@ -1909,11 +1915,11 @@ RV32 PNSRARI.H:
         d[(i*16+15)..(i*16)] = (shx + 1)[17..1];
     }
     X(rd) = d;
-```
-
-RV32 PNSRAR.HS:
-
-```
+----
+| RV32 PNSRAR.HS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1924,11 +1930,11 @@ RV32 PNSRAR.HS:
         d[(i*16+15)..(i*16)] = (shx + 1)[17..1];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPI.H:
-
-```
+----
+| RV32 PNCLIPI.H
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[4..0];
@@ -1942,11 +1948,11 @@ RV32 PNCLIPI.H:
                     else shx[15..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIP.HS:
-
-```
+----
+| RV32 PNCLIP.HS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1960,11 +1966,11 @@ RV32 PNCLIP.HS:
                     else shx[15..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPRI.H:
-
-```
+----
+| RV32 PNCLIPRI.H
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[4..0];
@@ -1979,11 +1985,11 @@ RV32 PNCLIPRI.H:
                     else round_shx[15..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPR.HS:
-
-```
+----
+| RV32 PNCLIPR.HS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -1998,11 +2004,11 @@ RV32 PNCLIPR.HS:
                     else round_shx[15..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPIU.H:
-
-```
+----
+| RV32 PNCLIPIU.H
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[4..0];
@@ -2014,11 +2020,11 @@ RV32 PNCLIPIU.H:
             if (shx >_u 0x0000FFFF) then { vxsat = 1; 0xFFFF } else shx[15..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPU.HS:
-
-```
+----
+| RV32 PNCLIPU.HS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -2030,11 +2036,11 @@ RV32 PNCLIPU.HS:
             if (shx >_u 0x0000FFFF) then { vxsat = 1; 0xFFFF } else shx[15..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPRIU.H:
-
-```
+----
+| RV32 PNCLIPRIU.H
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[4..0];
@@ -2048,11 +2054,11 @@ RV32 PNCLIPRIU.H:
                 else round_shx[15..0];
     }
     X(rd) = d;
-```
-
-RV32 PNCLIPRU.HS:
-
-```
+----
+| RV32 PNCLIPRU.HS
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[4..0];
@@ -2066,67 +2072,67 @@ RV32 PNCLIPRU.HS:
                 else round_shx[15..0];
     }
     X(rd) = d;
-```
-
-RV32 NSRLI:
-
-```
+----
+| RV32 NSRLI
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[5..0];
     X(rd) = (s1 >> shamt)[31..0];
-```
-
-RV32 NSRL:
-
-```
+----
+| RV32 NSRL
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[5..0];
     X(rd) = (s1 >> shamt)[31..0];
-```
-
-RV32 NSRAI:
-
-```
+----
+| RV32 NSRAI
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[5..0];
     X(rd) = (sign_extend(96, s1) >> shamt)[31..0];
-```
-
-RV32 NSRA:
-
-```
+----
+| RV32 NSRA
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[5..0];
     X(rd) = (sign_extend(96, s1) >> shamt)[31..0];
-```
-
-RV32 NSRARI:
-
-```
+----
+| RV32 NSRARI
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[5..0];
     let shx : bits(33) = ((sign_extend(96, s1) @ 0b0) >> shamt)[32..0];
     X(rd) = (shx + 1)[32..1];
-```
-
-RV32 NSRAR:
-
-```
+----
+| RV32 NSRAR
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[5..0];
     let shx : bits(33) = ((sign_extend(96, s1) @ 0b0) >> shamt)[32..0];
     X(rd) = (shx + 1)[32..1];
-```
-
-RV32 NCLIPI:
-
-```
+----
+| RV32 NCLIPI
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[5..0];
@@ -2135,11 +2141,11 @@ RV32 NCLIPI:
         if (shx <_s 0xFFFFFFFF80000000) then { vxsat = 1; 0x80000000 }
             else if (shx >_s 0x000000007FFFFFFF) then { vxsat = 1; 0x7FFFFFFF }
                 else shx[31..0];
-```
-
-RV32 NCLIP:
-
-```
+----
+| RV32 NCLIP
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[5..0];
@@ -2148,11 +2154,11 @@ RV32 NCLIP:
         if (shx <_s 0xFFFFFFFF80000000) then { vxsat = 1; 0x80000000 }
             else if (shx >_s 0x000000007FFFFFFF) then { vxsat = 1; 0x7FFFFFFF }
                 else shx[31..0];
-```
-
-RV32 NCLIPRI:
-
-```
+----
+| RV32 NCLIPRI
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[5..0];
@@ -2162,11 +2168,11 @@ RV32 NCLIPRI:
         if (round_shx <_s 0xFFFFFFFF80000000) then { vxsat = 1; 0x80000000 }
             else if (round_shx >_s 0x000000007FFFFFFF)
                 then { vxsat = 1; 0x7FFFFFFF } else round_shx[31..0];
-```
-
-RV32 NCLIPR:
-
-```
+----
+| RV32 NCLIPR
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[5..0];
@@ -2176,11 +2182,11 @@ RV32 NCLIPR:
         if (round_shx <_s 0xFFFFFFFF80000000) then { vxsat = 1; 0x80000000 }
             else if (round_shx >_s 0x000000007FFFFFFF)
                 then { vxsat = 1; 0x7FFFFFFF } else round_shx[31..0];
-```
-
-RV32 NCLIPIU:
-
-```
+----
+| RV32 NCLIPIU
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[5..0];
@@ -2188,11 +2194,11 @@ RV32 NCLIPIU:
     X(rd) =
         if (shx >_u 0x00000000FFFFFFFF) then { vxsat = 1; 0xFFFFFFFF }
             else shx[31..0];
-```
-
-RV32 NCLIPU:
-
-```
+----
+| RV32 NCLIPU
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[5..0];
@@ -2200,11 +2206,11 @@ RV32 NCLIPU:
     X(rd) =
         if (shx >_u 0x00000000FFFFFFFF) then { vxsat = 1; 0xFFFFFFFF }
             else shx[31..0];
-```
-
-RV32 NCLIPRIU:
-
-```
+----
+| RV32 NCLIPRIU
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = w_uimm[5..0];
@@ -2213,11 +2219,11 @@ RV32 NCLIPRIU:
     X(rd) =
         if (round_shx >_u 0x00000000FFFFFFFF) then { vxsat = 1; 0xFFFFFFFF }
             else round_shx[31..0];
-```
-
-RV32 NCLIPRU:
-
-```
+----
+| RV32 NCLIPRU
+a|
+[source,rust]
+----
     let s1 : bits(64) =
         if (rs1_p == 0x0) then zeros() else X(rs1_p*2+1) @ X(rs1_p*2);
     let shamt = X(rs2)[5..0];
@@ -2226,11 +2232,11 @@ RV32 NCLIPRU:
     X(rd) =
         if (round_shx >_u 0x00000000FFFFFFFF) then { vxsat = 1; 0xFFFFFFFF }
             else round_shx[31..0];
-```
-
-PMULH.H:
-
-```
+----
+| PMULH.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2241,11 +2247,11 @@ PMULH.H:
             to_bits(32, signed(s1_h) * signed(s2_h))[31..16];
     }
     X(rd) = d;
-```
-
-PMULHR.H:
-
-```
+----
+| PMULHR.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2256,11 +2262,11 @@ PMULHR.H:
             to_bits(32, signed(s1_h) * signed(s2_h) + 2^15)[31..16];
     }
     X(rd) = d;
-```
-
-PMULHSU.H:
-
-```
+----
+| PMULHSU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2271,11 +2277,11 @@ PMULHSU.H:
             to_bits(32, signed(s1_h) * unsigned(s2_h))[31..16];
     }
     X(rd) = d;
-```
-
-PMULHRSU.H:
-
-```
+----
+| PMULHRSU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2286,11 +2292,11 @@ PMULHRSU.H:
             to_bits(32, signed(s1_h) * unsigned(s2_h) + 2^15)[31..16];
     }
     X(rd) = d;
-```
-
-PMULHU.H:
-
-```
+----
+| PMULHU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2301,11 +2307,11 @@ PMULHU.H:
             to_bits(32, unsigned(s1_h) * unsigned(s2_h))[31..16];
     }
     X(rd) = d;
-```
-
-PMULHRU.H:
-
-```
+----
+| PMULHRU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2316,11 +2322,11 @@ PMULHRU.H:
             to_bits(32, unsigned(s1_h) * unsigned(s2_h) + 2^15)[31..16];
     }
     X(rd) = d;
-```
-
-PMULQR.H:
-
-```
+----
+| PMULQR.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2332,11 +2338,11 @@ PMULQR.H:
                 else to_bits(32, signed(s1_h) * signed(s2_h) + 2^14)[30..15];
     }
     X(rd) = d;
-```
-
-PMHACC.H:
-
-```
+----
+| PMHACC.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -2348,11 +2354,11 @@ PMHACC.H:
             d_h + to_bits(32, signed(s1_h) * signed(s2_h))[31..16];
     }
     X(rd) = d;
-```
-
-PMHRACC.H:
-
-```
+----
+| PMHRACC.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -2364,11 +2370,11 @@ PMHRACC.H:
             d_h + to_bits(32, signed(s1_h) * signed(s2_h) + 2^15)[31..16];
     }
     X(rd) = d;
-```
-
-PMHACCSU.H:
-
-```
+----
+| PMHACCSU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -2380,11 +2386,11 @@ PMHACCSU.H:
             d_h + to_bits(32, signed(s1_h) * unsigned(s2_h))[31..16];
     }
     X(rd) = d;
-```
-
-PMHRACCSU.H:
-
-```
+----
+| PMHRACCSU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -2396,11 +2402,11 @@ PMHRACCSU.H:
             d_h + to_bits(32, signed(s1_h) * unsigned(s2_h) + 2^15)[31..16];
     }
     X(rd) = d;
-```
-
-PMHACCU.H:
-
-```
+----
+| PMHACCU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -2412,11 +2418,11 @@ PMHACCU.H:
             d_h + to_bits(32, unsigned(s1_h) * unsigned(s2_h))[31..16];
     }
     X(rd) = d;
-```
-
-PMHRACCU.H:
-
-```
+----
+| PMHRACCU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -2428,63 +2434,63 @@ PMHRACCU.H:
             d_h + to_bits(32, unsigned(s1_h) * unsigned(s2_h) + 2^15)[31..16];
     }
     X(rd) = d;
-```
-
-RV32 MULHRSU:
-
-```
+----
+| RV32 MULHRSU
+a|
+[source,rust]
+----
     X(rd) = to_bits(64, signed(X(rs1)) * unsigned(X(rs2)) + 2^31)[63..32];
-```
-
-RV32 MULHRU:
-
-```
+----
+| RV32 MULHRU
+a|
+[source,rust]
+----
     X(rd) = to_bits(64, unsigned(X(rs1)) * unsigned(X(rs2)) + 2^31)[63..32];
-```
-
-RV32 MHACC:
-
-```
+----
+| RV32 MHACC
+a|
+[source,rust]
+----
     X(rd) = X(rd) + to_bits(64, signed(X(rs1)) * signed(X(rs2)))[63..32];
-```
-
-RV32 MHRACC:
-
-```
+----
+| RV32 MHRACC
+a|
+[source,rust]
+----
     X(rd) =
         X(rd) + to_bits(64, signed(X(rs1)) * signed(X(rs2)) + 2^31)[63..32];
-```
-
-RV32 MHACCSU:
-
-```
+----
+| RV32 MHACCSU
+a|
+[source,rust]
+----
     X(rd) = X(rd) + to_bits(64, signed(X(rs1)) * unsigned(X(rs2)))[63..32];
-```
-
-RV32 MHRACCSU:
-
-```
+----
+| RV32 MHRACCSU
+a|
+[source,rust]
+----
     X(rd) =
         X(rd) + to_bits(64, signed(X(rs1)) * unsigned(X(rs2)) + 2^31)[63..32];
-```
-
-RV32 MHACCU:
-
-```
+----
+| RV32 MHACCU
+a|
+[source,rust]
+----
     X(rd) = X(rd) + to_bits(64, unsigned(X(rs1)) * unsigned(X(rs2)))[63..32];
-```
-
-RV32 MHRACCU:
-
-```
+----
+| RV32 MHRACCU
+a|
+[source,rust]
+----
     X(rd) =
         X(rd)
             + to_bits(64, unsigned(X(rs1)) * unsigned(X(rs2)) + 2^31)[63..32];
-```
-
-RV64 PMULHSU.W:
-
-```
+----
+| RV64 PMULHSU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
@@ -2495,11 +2501,11 @@ RV64 PMULHSU.W:
             to_bits(64, signed(s1_w) * unsigned(s2_w))[63..32];
     }
     X(rd) = d;
-```
-
-RV64 PMULHRSU.W:
-
-```
+----
+| RV64 PMULHRSU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
@@ -2510,11 +2516,11 @@ RV64 PMULHRSU.W:
             to_bits(64, signed(s1_w) * unsigned(s2_w) + 2^31)[63..32];
     }
     X(rd) = d;
-```
-
-RV64 PMULHU.W:
-
-```
+----
+| RV64 PMULHU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
@@ -2525,11 +2531,11 @@ RV64 PMULHU.W:
             to_bits(64, unsigned(s1_w) * unsigned(s2_w))[63..32];
     }
     X(rd) = d;
-```
-
-RV64 PMULHRU.W:
-
-```
+----
+| RV64 PMULHRU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
@@ -2540,11 +2546,11 @@ RV64 PMULHRU.W:
             to_bits(64, unsigned(s1_w) * unsigned(s2_w) + 2^31)[63..32];
     }
     X(rd) = d;
-```
-
-RV64 PMHACC.W:
-
-```
+----
+| RV64 PMHACC.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2556,11 +2562,11 @@ RV64 PMHACC.W:
             d_w + to_bits(64, signed(s1_w) * signed(s2_w))[63..32];
     }
     X(rd) = d;
-```
-
-RV64 PMHRACC.W:
-
-```
+----
+| RV64 PMHRACC.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2572,11 +2578,11 @@ RV64 PMHRACC.W:
             d_w + to_bits(64, signed(s1_w) * signed(s2_w) + 2^31)[63..32];
     }
     X(rd) = d;
-```
-
-RV64 PMHACCSU.W:
-
-```
+----
+| RV64 PMHACCSU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2588,11 +2594,11 @@ RV64 PMHACCSU.W:
             d_w + to_bits(64, signed(s1_w) * unsigned(s2_w))[63..32];
     }
     X(rd) = d;
-```
-
-RV64 PMHRACCSU.W:
-
-```
+----
+| RV64 PMHRACCSU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2604,11 +2610,11 @@ RV64 PMHRACCSU.W:
             d_w + to_bits(64, signed(s1_w) * unsigned(s2_w) + 2^31)[63..32];
     }
     X(rd) = d;
-```
-
-RV64 PMHACCU.W:
-
-```
+----
+| RV64 PMHACCU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2620,11 +2626,11 @@ RV64 PMHACCU.W:
             d_w + to_bits(64, unsigned(s1_w) * unsigned(s2_w))[63..32];
     }
     X(rd) = d;
-```
-
-RV64 PMHRACCU.W:
-
-```
+----
+| RV64 PMHRACCU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2636,59 +2642,59 @@ RV64 PMHRACCU.W:
             d_w + to_bits(64, unsigned(s1_w) * unsigned(s2_w) + 2^31)[63..32];
     }
     X(rd) = d;
-```
-
-RV32 MQACC.H00:
-
-```
+----
+| RV32 MQACC.H00
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h0 = X(rs2)[15..0];
     X(rd) = X(rd) + to_bits(47, signed(s1_h0) * signed(s2_h0))[46..15];
-```
-
-RV32 MQACC.H01:
-
-```
+----
+| RV32 MQACC.H01
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(47, signed(s1_h0) * signed(s2_h1))[46..15];
-```
-
-RV32 MQACC.H11:
-
-```
+----
+| RV32 MQACC.H11
+a|
+[source,rust]
+----
     let s1_h1 = X(rs1)[31..16];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(47, signed(s1_h1) * signed(s2_h1))[46..15];
-```
-
-RV32 MQRACC.H00:
-
-```
+----
+| RV32 MQRACC.H00
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h0 = X(rs2)[15..0];
     X(rd) = X(rd) + to_bits(47, signed(s1_h0) * signed(s2_h0) + 2^14)[46..15];
-```
-
-RV32 MQRACC.H01:
-
-```
+----
+| RV32 MQRACC.H01
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(47, signed(s1_h0) * signed(s2_h1) + 2^14)[46..15];
-```
-
-RV32 MQRACC.H11:
-
-```
+----
+| RV32 MQRACC.H11
+a|
+[source,rust]
+----
     let s1_h1 = X(rs1)[31..16];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(47, signed(s1_h1) * signed(s2_h1) + 2^14)[46..15];
-```
-
-RV64 PMQACC.W.H00:
-
-```
+----
+| RV64 PMQACC.W.H00
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2700,11 +2706,11 @@ RV64 PMQACC.W.H00:
             d_w + to_bits(47, signed(s1_h0) * signed(s2_h0))[46..15];
     }
     X(rd) = d;
-```
-
-RV64 PMQACC.W.H01:
-
-```
+----
+| RV64 PMQACC.W.H01
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2716,11 +2722,11 @@ RV64 PMQACC.W.H01:
             d_w + to_bits(47, signed(s1_h0) * signed(s2_h1))[46..15];
     }
     X(rd) = d;
-```
-
-RV64 PMQACC.W.H11:
-
-```
+----
+| RV64 PMQACC.W.H11
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2732,11 +2738,11 @@ RV64 PMQACC.W.H11:
             d_w + to_bits(47, signed(s1_h1) * signed(s2_h1))[46..15];
     }
     X(rd) = d;
-```
-
-RV64 PMQRACC.W.H00:
-
-```
+----
+| RV64 PMQRACC.W.H00
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2748,11 +2754,11 @@ RV64 PMQRACC.W.H00:
             d_w + to_bits(47, signed(s1_h0) * signed(s2_h0) + 2^14)[46..15];
     }
     X(rd) = d;
-```
-
-RV64 PMQRACC.W.H01:
-
-```
+----
+| RV64 PMQRACC.W.H01
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2764,11 +2770,11 @@ RV64 PMQRACC.W.H01:
             d_w + to_bits(47, signed(s1_h0) * signed(s2_h1) + 2^14)[46..15];
     }
     X(rd) = d;
-```
-
-RV64 PMQRACC.W.H11:
-
-```
+----
+| RV64 PMQRACC.W.H11
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d = X(rd);
@@ -2780,11 +2786,11 @@ RV64 PMQRACC.W.H11:
             d_w + to_bits(47, signed(s1_h1) * signed(s2_h1) + 2^14)[46..15];
     }
     X(rd) = d;
-```
-
-PMQ2ADD.H:
-
-```
+----
+| PMQ2ADD.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2798,11 +2804,11 @@ PMQ2ADD.H:
             + to_bits(47, signed(s1_h1) * signed(s2_h1))[46..15];
     }
     X(rd) = d;
-```
-
-PMQ2ADDA.H:
-
-```
+----
+| PMQ2ADDA.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -2817,11 +2823,11 @@ PMQ2ADDA.H:
                 + to_bits(47, signed(s1_h1) * signed(s2_h1))[46..15];
     }
     X(rd) = d;
-```
-
-PMQR2ADD.H:
-
-```
+----
+| PMQR2ADD.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2835,11 +2841,11 @@ PMQR2ADD.H:
             + to_bits(47, signed(s1_h1) * signed(s2_h1) + 2^14)[46..15];
     }
     X(rd) = d;
-```
-
-PMQR2ADDA.H:
-
-```
+----
+| PMQR2ADDA.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -2854,89 +2860,89 @@ PMQR2ADDA.H:
                 + to_bits(47, signed(s1_h1) * signed(s2_h1) + 2^14)[46..15];
     }
     X(rd) = d;
-```
-
-RV64 MQACC.W00:
-
-```
+----
+| RV64 MQACC.W00
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w0 = X(rs2)[31..0];
     X(rd) = X(rd) + to_bits(95, signed(s1_w0) * signed(s2_w0))[94..31];
-```
-
-RV64 MQACC.W01:
-
-```
+----
+| RV64 MQACC.W01
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = X(rd) + to_bits(95, signed(s1_w0) * signed(s2_w1))[94..31];
-```
-
-RV64 MQACC.W11:
-
-```
+----
+| RV64 MQACC.W11
+a|
+[source,rust]
+----
     let s1_w1 = X(rs1)[63..32];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = X(rd) + to_bits(95, signed(s1_w1) * signed(s2_w1))[94..31];
-```
-
-RV64 MQRACC.W00:
-
-```
+----
+| RV64 MQRACC.W00
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w0 = X(rs2)[31..0];
     X(rd) = X(rd) + to_bits(95, signed(s1_w0) * signed(s2_w0) + 2^30)[94..31];
-```
-
-RV64 MQRACC.W01:
-
-```
+----
+| RV64 MQRACC.W01
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = X(rd) + to_bits(95, signed(s1_w0) * signed(s2_w1) + 2^30)[94..31];
-```
-
-RV64 MQRACC.W11:
-
-```
+----
+| RV64 MQRACC.W11
+a|
+[source,rust]
+----
     let s1_w1 = X(rs1)[63..32];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = X(rd) + to_bits(95, signed(s1_w1) * signed(s2_w1) + 2^30)[94..31];
-```
-
-RV64 PMQ2ADD.W:
-
-```
+----
+| RV64 PMQ2ADD.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
           to_bits(95, signed(s1[31..0])  * signed(s2[31..0]) )[94..31]
         + to_bits(95, signed(s1[63..32]) * signed(s2[63..32]))[94..31];
-```
-
-RV64 PMQ2ADDA.W:
-
-```
+----
+| RV64 PMQ2ADDA.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
         X(rd) + to_bits(95, signed(s1[31..0])  * signed(s2[31..0]) )[94..31]
               + to_bits(95, signed(s1[63..32]) * signed(s2[63..32]))[94..31];
-```
-
-RV64 PMQR2ADD.W:
-
-```
+----
+| RV64 PMQR2ADD.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
           to_bits(95, signed(s1[31..0])  * signed(s2[31..0])  + 2^30)[94..31]
         + to_bits(95, signed(s1[63..32]) * signed(s2[63..32]) + 2^30)[94..31];
-```
-
-RV64 PMQR2ADDA.W:
-
-```
+----
+| RV64 PMQR2ADDA.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
@@ -2945,11 +2951,11 @@ RV64 PMQR2ADDA.W:
                   94..31]
             + to_bits(95, signed(s1[63..32]) * signed(s2[63..32]) + 2^30)[
                   94..31];
-```
-
-PMUL.H.B00:
-
-```
+----
+| PMUL.H.B00
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2959,11 +2965,11 @@ PMUL.H.B00:
         d[(i*16+15)..(i*16)] = to_bits(16, signed(s1_b0) * signed(s2_b0));
     }
     X(rd) = d;
-```
-
-PMUL.H.B01:
-
-```
+----
+| PMUL.H.B01
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2973,11 +2979,11 @@ PMUL.H.B01:
         d[(i*16+15)..(i*16)] = to_bits(16, signed(s1_b0) * signed(s2_b1));
     }
     X(rd) = d;
-```
-
-PMUL.H.B11:
-
-```
+----
+| PMUL.H.B11
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -2987,11 +2993,11 @@ PMUL.H.B11:
         d[(i*16+15)..(i*16)] = to_bits(16, signed(s1_b1) * signed(s2_b1));
     }
     X(rd) = d;
-```
-
-PMULSU.H.B00:
-
-```
+----
+| PMULSU.H.B00
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3001,11 +3007,11 @@ PMULSU.H.B00:
         d[(i*16+15)..(i*16)] = to_bits(16, signed(s1_b0) * unsigned(s2_b0));
     }
     X(rd) = d;
-```
-
-PMULSU.H.B11:
-
-```
+----
+| PMULSU.H.B11
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3015,11 +3021,11 @@ PMULSU.H.B11:
         d[(i*16+15)..(i*16)] = to_bits(16, signed(s1_b1) * unsigned(s2_b1));
     }
     X(rd) = d;
-```
-
-PMULU.H.B00:
-
-```
+----
+| PMULU.H.B00
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3029,11 +3035,11 @@ PMULU.H.B00:
         d[(i*16+15)..(i*16)] = to_bits(16, unsigned(s1_b0) * unsigned(s2_b0));
     }
     X(rd) = d;
-```
-
-PMULU.H.B01:
-
-```
+----
+| PMULU.H.B01
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3043,11 +3049,11 @@ PMULU.H.B01:
         d[(i*16+15)..(i*16)] = to_bits(16, unsigned(s1_b0) * unsigned(s2_b1));
     }
     X(rd) = d;
-```
-
-PMULU.H.B11:
-
-```
+----
+| PMULU.H.B11
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3057,165 +3063,165 @@ PMULU.H.B11:
         d[(i*16+15)..(i*16)] = to_bits(16, unsigned(s1_b1) * unsigned(s2_b1));
     }
     X(rd) = d;
-```
-
-RV32 MULSU.H00:
-
-```
+----
+| RV32 MULSU.H00
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h0 = X(rs2)[15..0];
     X(rd) = to_bits(32, signed(s1_h0) * unsigned(s2_h0));
-```
-
-RV32 MULSU.H11:
-
-```
+----
+| RV32 MULSU.H11
+a|
+[source,rust]
+----
     let s1_h1 = X(rs1)[31..16];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = to_bits(32, signed(s1_h1) * unsigned(s2_h1));
-```
-
-RV32 MULU.H00:
-
-```
+----
+| RV32 MULU.H00
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h0 = X(rs2)[15..0];
     X(rd) = to_bits(32, unsigned(s1_h0) * unsigned(s2_h0));
-```
-
-RV32 MULU.H01:
-
-```
+----
+| RV32 MULU.H01
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = to_bits(32, unsigned(s1_h0) * unsigned(s2_h1));
-```
-
-RV32 MULU.H11:
-
-```
+----
+| RV32 MULU.H11
+a|
+[source,rust]
+----
     let s1_h1 = X(rs1)[31..16];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = to_bits(32, unsigned(s1_h1) * unsigned(s2_h1));
-```
-
-RV32 MACC.H00:
-
-```
+----
+| RV32 MACC.H00
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h0 = X(rs2)[15..0];
     X(rd) = X(rd) + to_bits(32, signed(s1_h0) * signed(s2_h0));
-```
-
-RV32 MACC.H01:
-
-```
+----
+| RV32 MACC.H01
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(32, signed(s1_h0) * signed(s2_h1));
-```
-
-RV32 MACC.H11:
-
-```
+----
+| RV32 MACC.H11
+a|
+[source,rust]
+----
     let s1_h1 = X(rs1)[31..16];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(32, signed(s1_h1) * signed(s2_h1));
-```
-
-RV32 MACCSU.H00:
-
-```
+----
+| RV32 MACCSU.H00
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h0 = X(rs2)[15..0];
     X(rd) = X(rd) + to_bits(32, signed(s1_h0) * unsigned(s2_h0));
-```
-
-RV32 MACCSU.H11:
-
-```
+----
+| RV32 MACCSU.H11
+a|
+[source,rust]
+----
     let s1_h1 = X(rs1)[31..16];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(32, signed(s1_h1) * unsigned(s2_h1));
-```
-
-RV32 MACCU.H00:
-
-```
+----
+| RV32 MACCU.H00
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h0 = X(rs2)[15..0];
     X(rd) = X(rd) + to_bits(32, unsigned(s1_h0) * unsigned(s2_h0));
-```
-
-RV32 MACCU.H01:
-
-```
+----
+| RV32 MACCU.H01
+a|
+[source,rust]
+----
     let s1_h0 = X(rs1)[15..0];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(32, unsigned(s1_h0) * unsigned(s2_h1));
-```
-
-RV32 MACCU.H11:
-
-```
+----
+| RV32 MACCU.H11
+a|
+[source,rust]
+----
     let s1_h1 = X(rs1)[31..16];
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(32, unsigned(s1_h1) * unsigned(s2_h1));
-```
-
-RV64 PMULSU.W.H00:
-
-```
+----
+| RV64 PMULSU.W.H00
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(32, signed(s1[15..0])  * unsigned(s2[15..0]) );
     let d_w1 = to_bits(32, signed(s1[47..32]) * unsigned(s2[47..32]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMULSU.W.H11:
-
-```
+----
+| RV64 PMULSU.W.H11
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(32, signed(s1[31..16]) * unsigned(s2[31..16]));
     let d_w1 = to_bits(32, signed(s1[63..48]) * unsigned(s2[63..48]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMULU.W.H00:
-
-```
+----
+| RV64 PMULU.W.H00
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(32, unsigned(s1[15..0])  * unsigned(s2[15..0]) );
     let d_w1 = to_bits(32, unsigned(s1[47..32]) * unsigned(s2[47..32]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMULU.W.H01:
-
-```
+----
+| RV64 PMULU.W.H01
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(32, unsigned(s1[15..0])  * unsigned(s2[31..16]));
     let d_w1 = to_bits(32, unsigned(s1[47..32]) * unsigned(s2[63..48]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMULU.W.H11:
-
-```
+----
+| RV64 PMULU.W.H11
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(32, unsigned(s1[31..16]) * unsigned(s2[31..16]));
     let d_w1 = to_bits(32, unsigned(s1[63..48]) * unsigned(s2[63..48]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMACC.W.H00:
-
-```
+----
+| RV64 PMACC.W.H00
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -3224,11 +3230,11 @@ RV64 PMACC.W.H00:
     let d_w1 =
         din[63..32] + to_bits(32, signed(s1[47..32]) * signed(s2[47..32]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMACC.W.H01:
-
-```
+----
+| RV64 PMACC.W.H01
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -3237,11 +3243,11 @@ RV64 PMACC.W.H01:
     let d_w1 =
         din[63..32] + to_bits(32, signed(s1[47..32]) * signed(s2[63..48]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMACC.W.H11:
-
-```
+----
+| RV64 PMACC.W.H11
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -3250,11 +3256,11 @@ RV64 PMACC.W.H11:
     let d_w1 =
         din[63..32] + to_bits(32, signed(s1[63..48]) * signed(s2[63..48]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMACCSU.W.H00:
-
-```
+----
+| RV64 PMACCSU.W.H00
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -3263,11 +3269,11 @@ RV64 PMACCSU.W.H00:
     let d_w1 =
         din[63..32] + to_bits(32, signed(s1[47..32]) * unsigned(s2[47..32]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMACCSU.W.H11:
-
-```
+----
+| RV64 PMACCSU.W.H11
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -3276,11 +3282,11 @@ RV64 PMACCSU.W.H11:
     let d_w1 =
         din[63..32] + to_bits(32, signed(s1[63..48]) * unsigned(s2[63..48]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMACCU.W.H00:
-
-```
+----
+| RV64 PMACCU.W.H00
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -3289,11 +3295,11 @@ RV64 PMACCU.W.H00:
     let d_w1 =
         din[63..32] + to_bits(32, unsigned(s1[47..32]) * unsigned(s2[47..32]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMACCU.W.H01:
-
-```
+----
+| RV64 PMACCU.W.H01
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -3302,11 +3308,11 @@ RV64 PMACCU.W.H01:
     let d_w1 =
         din[63..32] + to_bits(32, unsigned(s1[47..32]) * unsigned(s2[63..48]));
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMACCU.W.H11:
-
-```
+----
+| RV64 PMACCU.W.H11
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -3315,11 +3321,11 @@ RV64 PMACCU.W.H11:
     let d_w1 =
         din[63..32] + to_bits(32, unsigned(s1[63..48]) * unsigned(s2[63..48]));
     X(rd) = d_w1 @ d_w0;
-```
-
-PM2ADD.H:
-
-```
+----
+| PM2ADD.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3333,11 +3339,11 @@ PM2ADD.H:
             + to_bits(32, signed(s1_h1) * signed(s2_h1));
     }
     X(rd) = d;
-```
-
-PM2ADDA.H:
-
-```
+----
+| PM2ADDA.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -3352,11 +3358,11 @@ PM2ADDA.H:
                 + to_bits(32, signed(s1_h1) * signed(s2_h1));
     }
     X(rd) = d;
-```
-
-PM2ADDSU.H:
-
-```
+----
+| PM2ADDSU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3370,11 +3376,11 @@ PM2ADDSU.H:
             + to_bits(32, signed(s1_h1) * unsigned(s2_h1));
     }
     X(rd) = d;
-```
-
-PM2ADDASU.H:
-
-```
+----
+| PM2ADDASU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -3389,11 +3395,11 @@ PM2ADDASU.H:
                 + to_bits(32, signed(s1_h1) * unsigned(s2_h1));
     }
     X(rd) = d;
-```
-
-PM2ADDU.H:
-
-```
+----
+| PM2ADDU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3407,11 +3413,11 @@ PM2ADDU.H:
             + to_bits(32, unsigned(s1_h1) * unsigned(s2_h1));
     }
     X(rd) = d;
-```
-
-PM2ADDAU.H:
-
-```
+----
+| PM2ADDAU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -3426,11 +3432,11 @@ PM2ADDAU.H:
                 + to_bits(32, unsigned(s1_h1) * unsigned(s2_h1));
     }
     X(rd) = d;
-```
-
-PM2ADD.HX:
-
-```
+----
+| PM2ADD.HX
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3444,11 +3450,11 @@ PM2ADD.HX:
             + to_bits(32, signed(s1_h1) * signed(s2_h0));
     }
     X(rd) = d;
-```
-
-PM2ADDA.HX:
-
-```
+----
+| PM2ADDA.HX
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -3463,11 +3469,11 @@ PM2ADDA.HX:
                 + to_bits(32, signed(s1_h1) * signed(s2_h0));
     }
     X(rd) = d;
-```
-
-PM2SUBA.H:
-
-```
+----
+| PM2SUBA.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -3482,11 +3488,11 @@ PM2SUBA.H:
                 - to_bits(32, signed(s1_h1) * signed(s2_h1));
     }
     X(rd) = d;
-```
-
-PM2SUBA.HX:
-
-```
+----
+| PM2SUBA.HX
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -3501,195 +3507,195 @@ PM2SUBA.HX:
                 - to_bits(32, signed(s1_h1) * signed(s2_h0));
     }
     X(rd) = d;
-```
-
-RV64 MULSU.W00:
-
-```
+----
+| RV64 MULSU.W00
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w0 = X(rs2)[31..0];
     X(rd) = to_bits(64, signed(s1_w0) * unsigned(s2_w0));
-```
-
-RV64 MULSU.W11:
-
-```
+----
+| RV64 MULSU.W11
+a|
+[source,rust]
+----
     let s1_w1 = X(rs1)[63..32];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = to_bits(64, signed(s1_w1) * unsigned(s2_w1));
-```
-
-RV64 MULU.W00:
-
-```
+----
+| RV64 MULU.W00
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w0 = X(rs2)[31..0];
     X(rd) = to_bits(64, unsigned(s1_w0) * unsigned(s2_w0));
-```
-
-RV64 MULU.W01:
-
-```
+----
+| RV64 MULU.W01
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = to_bits(64, unsigned(s1_w0) * unsigned(s2_w1));
-```
-
-RV64 MULU.W11:
-
-```
+----
+| RV64 MULU.W11
+a|
+[source,rust]
+----
     let s1_w1 = X(rs1)[63..32];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = to_bits(64, unsigned(s1_w1) * unsigned(s2_w1));
-```
-
-RV64 MACC.W00:
-
-```
+----
+| RV64 MACC.W00
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w0 = X(rs2)[31..0];
     X(rd) = X(rd) + to_bits(64, signed(s1_w0) * signed(s2_w0));
-```
-
-RV64 MACC.W01:
-
-```
+----
+| RV64 MACC.W01
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = X(rd) + to_bits(64, signed(s1_w0) * signed(s2_w1));
-```
-
-RV64 MACC.W11:
-
-```
+----
+| RV64 MACC.W11
+a|
+[source,rust]
+----
     let s1_w1 = X(rs1)[63..32];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = X(rd) + to_bits(64, signed(s1_w1) * signed(s2_w1));
-```
-
-RV64 MACCSU.W00:
-
-```
+----
+| RV64 MACCSU.W00
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w0 = X(rs2)[31..0];
     X(rd) = X(rd) + to_bits(64, signed(s1_w0) * unsigned(s2_w0));
-```
-
-RV64 MACCSU.W11:
-
-```
+----
+| RV64 MACCSU.W11
+a|
+[source,rust]
+----
     let s1_w1 = X(rs1)[63..32];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = X(rd) + to_bits(64, signed(s1_w1) * unsigned(s2_w1));
-```
-
-RV64 MACCU.W00:
-
-```
+----
+| RV64 MACCU.W00
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w0 = X(rs2)[31..0];
     X(rd) = X(rd) + to_bits(64, unsigned(s1_w0) * unsigned(s2_w0));
-```
-
-RV64 MACCU.W01:
-
-```
+----
+| RV64 MACCU.W01
+a|
+[source,rust]
+----
     let s1_w0 = X(rs1)[31..0];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = X(rd) + to_bits(64, unsigned(s1_w0) * unsigned(s2_w1));
-```
-
-RV64 MACCU.W11:
-
-```
+----
+| RV64 MACCU.W11
+a|
+[source,rust]
+----
     let s1_w1 = X(rs1)[63..32];
     let s2_w1 = X(rs2)[63..32];
     X(rd) = X(rd) + to_bits(64, unsigned(s1_w1) * unsigned(s2_w1));
-```
-
-RV64 PM2ADD.W:
-
-```
+----
+| RV64 PM2ADD.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
           to_bits(64, signed(s1[31..0])  * signed(s2[31..0]) )
         + to_bits(64, signed(s1[63..32]) * signed(s2[63..32]));
-```
-
-RV64 PM2ADDSU.W:
-
-```
+----
+| RV64 PM2ADDSU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
           to_bits(64, signed(s1[31..0])  * unsigned(s2[31..0] ))
         + to_bits(64, signed(s1[63..32]) * unsigned(s2[63..32]));
-```
-
-RV64 PM2ADDASU.W:
-
-```
+----
+| RV64 PM2ADDASU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
         X(rd) + to_bits(64, signed(s1[31..0])  * unsigned(s2[31..0]) )
               + to_bits(64, signed(s1[63..32]) * unsigned(s2[63..32]));
-```
-
-RV64 PM2ADDU.W:
-
-```
+----
+| RV64 PM2ADDU.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
           to_bits(64, unsigned(s1[31..0])  * unsigned(s2[31..0]) )
         + to_bits(64, unsigned(s1[63..32]) * unsigned(s2[63..32]));
-```
-
-RV64 PM2ADD.WX:
-
-```
+----
+| RV64 PM2ADD.WX
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
           to_bits(64, signed(s1[31..0])  * signed(s2[63..32]))
         + to_bits(64, signed(s1[63..32]) * signed(s2[31..0]) );
-```
-
-RV64 PM2ADDA.WX:
-
-```
+----
+| RV64 PM2ADDA.WX
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
         X(rd) + to_bits(64, signed(s1[31..0])  * signed(s2[63..32]))
               + to_bits(64, signed(s1[63..32]) * signed(s2[31..0]) );
-```
-
-RV64 PM2SUBA.W:
-
-```
+----
+| RV64 PM2SUBA.W
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
         X(rd) + to_bits(64, signed(s1[31..0])  * signed(s2[31..0]) )
               - to_bits(64, signed(s1[63..32]) * signed(s2[63..32]));
-```
-
-RV64 PM2SUBA.WX:
-
-```
+----
+| RV64 PM2SUBA.WX
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
         X(rd) + to_bits(64, signed(s1[31..0])  * signed(s2[63..32]))
               - to_bits(64, signed(s1[63..32]) * signed(s2[31..0]) );
-```
-
-PM4ADD.B:
-
-```
+----
+| PM4ADD.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3709,11 +3715,11 @@ PM4ADD.B:
             + to_bits(32, signed(s1_b3) * signed(s2_b3));
     }
     X(rd) = d;
-```
-
-PM4ADDSU.B:
-
-```
+----
+| PM4ADDSU.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3733,11 +3739,11 @@ PM4ADDSU.B:
             + to_bits(32, signed(s1_b3) * unsigned(s2_b3));
     }
     X(rd) = d;
-```
-
-PM4ADDU.B:
-
-```
+----
+| PM4ADDU.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3757,11 +3763,11 @@ PM4ADDU.B:
             + to_bits(32, unsigned(s1_b3) * unsigned(s2_b3));
     }
     X(rd) = d;
-```
-
-RV64 PM4ADD.H:
-
-```
+----
+| RV64 PM4ADD.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
@@ -3769,11 +3775,11 @@ RV64 PM4ADD.H:
         + to_bits(64, signed(s1[31..16]) * signed(s2[31..16]))
         + to_bits(64, signed(s1[47..32]) * signed(s2[47..32]))
         + to_bits(64, signed(s1[63..48]) * signed(s2[63..48]));
-```
-
-RV64 PM4ADDSU.H:
-
-```
+----
+| RV64 PM4ADDSU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
@@ -3781,11 +3787,11 @@ RV64 PM4ADDSU.H:
         + to_bits(64, signed(s1[31..16]) * unsigned(s2[31..16]))
         + to_bits(64, signed(s1[47..32]) * unsigned(s2[47..32]))
         + to_bits(64, signed(s1[63..48]) * unsigned(s2[63..48]));
-```
-
-RV64 PM4ADDASU.H:
-
-```
+----
+| RV64 PM4ADDASU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
@@ -3793,11 +3799,11 @@ RV64 PM4ADDASU.H:
               + to_bits(64, signed(s1[31..16]) * unsigned(s2[31..16]))
               + to_bits(64, signed(s1[47..32]) * unsigned(s2[47..32]))
               + to_bits(64, signed(s1[63..48]) * unsigned(s2[63..48]));
-```
-
-RV64 PM4ADDU.H:
-
-```
+----
+| RV64 PM4ADDU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
@@ -3805,11 +3811,11 @@ RV64 PM4ADDU.H:
         + to_bits(64, unsigned(s1[31..16]) * unsigned(s2[31..16]))
         + to_bits(64, unsigned(s1[47..32]) * unsigned(s2[47..32]))
         + to_bits(64, unsigned(s1[63..48]) * unsigned(s2[63..48]));
-```
-
-RV64 PM4ADDAU.H:
-
-```
+----
+| RV64 PM4ADDAU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     X(rd) =
@@ -3817,11 +3823,11 @@ RV64 PM4ADDAU.H:
               + to_bits(64, unsigned(s1[31..16]) * unsigned(s2[31..16]))
               + to_bits(64, unsigned(s1[47..32]) * unsigned(s2[47..32]))
               + to_bits(64, unsigned(s1[63..48]) * unsigned(s2[63..48]));
-```
-
-PMULH.H.B0:
-
-```
+----
+| PMULH.H.B0
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3832,11 +3838,11 @@ PMULH.H.B0:
             to_bits(24, signed(s1_h) * signed(s2_b0))[23..8];
     }
     X(rd) = d;
-```
-
-PMULH.H.B1:
-
-```
+----
+| PMULH.H.B1
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3847,11 +3853,11 @@ PMULH.H.B1:
             to_bits(24, signed(s1_h) * signed(s2_b1))[23..8];
     }
     X(rd) = d;
-```
-
-PMULHSU.H.B0:
-
-```
+----
+| PMULHSU.H.B0
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3862,11 +3868,11 @@ PMULHSU.H.B0:
             to_bits(24, signed(s1_h) * unsigned(s2_b0))[23..8];
     }
     X(rd) = d;
-```
-
-PMULHSU.H.B1:
-
-```
+----
+| PMULHSU.H.B1
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen);
@@ -3877,11 +3883,11 @@ PMULHSU.H.B1:
             to_bits(24, signed(s1_h) * unsigned(s2_b1))[23..8];
     }
     X(rd) = d;
-```
-
-PMHACC.H.B0:
-
-```
+----
+| PMHACC.H.B0
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -3893,11 +3899,11 @@ PMHACC.H.B0:
             d_h + to_bits(24, signed(s1_h) * signed(s2_b0))[23..8];
     }
     X(rd) = d;
-```
-
-PMHACC.H.B1:
-
-```
+----
+| PMHACC.H.B1
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);
@@ -3909,11 +3915,11 @@ PMHACC.H.B1:
             d_h + to_bits(24, signed(s1_h) * signed(s2_b1))[23..8];
     }
     X(rd) = d;
-```
-
-PMHACCSU.H.B0:
-
-```
+----
+| PMHACCSU.H.B0
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);;
@@ -3925,11 +3931,11 @@ PMHACCSU.H.B0:
             d_h + to_bits(24, signed(s1_h) * unsigned(s2_b0))[23..8];
     }
     X(rd) = d;
-```
-
-PMHACCSU.H.B1:
-
-```
+----
+| PMHACCSU.H.B1
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(xlen) = X(rd);;
@@ -3941,73 +3947,73 @@ PMHACCSU.H.B1:
             d_h + to_bits(24, signed(s1_h) * unsigned(s2_b1))[23..8];
     }
     X(rd) = d;
-```
-
-RV32 MULHSU.H0:
-
-```
+----
+| RV32 MULHSU.H0
+a|
+[source,rust]
+----
     let s2_h0 = X(rs2)[15..0];
     X(rd) = to_bits(48, signed(X(rs1)) * unsigned(s2_h0))[47..16];
-```
-
-RV32 MULHSU.H1:
-
-```
+----
+| RV32 MULHSU.H1
+a|
+[source,rust]
+----
     let s2_h1 = X(rs2)[31..16];
     X(rd) = to_bits(48, signed(X(rs1)) * unsigned(s2_h1))[47..16];
-```
-
-RV32 MHACC.H0:
-
-```
+----
+| RV32 MHACC.H0
+a|
+[source,rust]
+----
     let s2_h0 = X(rs2)[15..0];
     X(rd) = X(rd) + to_bits(48, signed(X(rs1)) * signed(s2_h0))[47..16];
-```
-
-RV32 MHACC.H1:
-
-```
+----
+| RV32 MHACC.H1
+a|
+[source,rust]
+----
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(48, signed(X(rs1)) * signed(s2_h1))[47..16];
-```
-
-RV32 MHACCSU.H0:
-
-```
+----
+| RV32 MHACCSU.H0
+a|
+[source,rust]
+----
     let s2_h0 = X(rs2)[15..0];
     X(rd) = X(rd) + to_bits(48, signed(X(rs1)) * unsigned(s2_h0))[47..16];
-```
-
-RV32 MHACCSU.H1:
-
-```
+----
+| RV32 MHACCSU.H1
+a|
+[source,rust]
+----
     let s2_h1 = X(rs2)[31..16];
     X(rd) = X(rd) + to_bits(48, signed(X(rs1)) * unsigned(s2_h1))[47..16];
-```
-
-RV64 PMULHSU.W.H0:
-
-```
+----
+| RV64 PMULHSU.W.H0
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(48, signed(s1[31..0])  * unsigned(s2[15..0]) )[47..16];
     let d_w1 = to_bits(48, signed(s1[63..32]) * unsigned(s2[47..32]))[47..16];
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMULHSU.W.H1:
-
-```
+----
+| RV64 PMULHSU.W.H1
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(48, signed(s1[31..0])  * unsigned(s2[31..16]))[47..16];
     let d_w1 = to_bits(48, signed(s1[63..32]) * unsigned(s2[63..48]))[47..16];
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMHACC.W.H0:
-
-```
+----
+| RV64 PMHACC.W.H0
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -4018,11 +4024,11 @@ RV64 PMHACC.W.H0:
         din[63..32]
             + to_bits(48, signed(s1[63..32]) * signed(s2[47..32]))[47..16];
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMHACC.W.H1:
-
-```
+----
+| RV64 PMHACC.W.H1
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -4033,11 +4039,11 @@ RV64 PMHACC.W.H1:
         din[63..32]
             + to_bits(48, signed(s1[63..32]) * signed(s2[63..48]))[47..16];
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMHACCSU.W.H0:
-
-```
+----
+| RV64 PMHACCSU.W.H0
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -4048,11 +4054,11 @@ RV64 PMHACCSU.W.H0:
         din[63..32]
             + to_bits(48, signed(s1[63..32]) * unsigned(s2[47..32]))[47..16];
     X(rd) = d_w1 @ d_w0;
-```
-
-RV64 PMHACCSU.W.H1:
-
-```
+----
+| RV64 PMHACCSU.W.H1
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let din = X(rd);
@@ -4063,11 +4069,11 @@ RV64 PMHACCSU.W.H1:
         din[63..32]
             + to_bits(48, signed(s1[63..32]) * unsigned(s2[63..48]))[47..16];
     X(rd) = d_w1 @ d_w0;
-```
-
-RV32 PMQWACC.H:
-
-```
+----
+| RV32 PMQWACC.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64) =
@@ -4083,11 +4089,11 @@ RV32 PMQWACC.H:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PMQRWACC.H:
-
-```
+----
+| RV32 PMQRWACC.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64) =
@@ -4103,11 +4109,11 @@ RV32 PMQRWACC.H:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 MQWACC:
-
-```
+----
+| RV32 MQWACC
+a|
+[source,rust]
+----
     var d : bits(64) =
         if (rd_p == 0x0) then zeros() else X(rd_p*2+1) @ X(rd_p*2);
     d = d + to_bits(95, signed(X(rs1)) * signed(X(rs2)))[94..31];
@@ -4115,11 +4121,11 @@ RV32 MQWACC:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 MQRWACC:
-
-```
+----
+| RV32 MQRWACC
+a|
+[source,rust]
+----
     var d : bits(64) =
         if (rd_p == 0x0) then zeros() else X(rd_p*2+1) @ X(rd_p*2);
     d = d + to_bits(95, signed(X(rs1)) * signed(X(rs2)) + 2^30)[94..31];
@@ -4127,11 +4133,11 @@ RV32 MQRWACC:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWMULSU.B:
-
-```
+----
+| RV32 PWMULSU.B
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64);
@@ -4144,11 +4150,11 @@ RV32 PWMULSU.B:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PWMULSU.H:
-
-```
+----
+| RV32 PWMULSU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d_w0 = to_bits(32, signed(s1[15..0])  * unsigned(s2[15..0]) );
@@ -4157,11 +4163,11 @@ RV32 PWMULSU.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWMACC.H:
-
-```
+----
+| RV32 PWMACC.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d_w0 = X(rd_p*2);
@@ -4172,11 +4178,11 @@ RV32 PWMACC.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWMACCSU.H:
-
-```
+----
+| RV32 PWMACCSU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d_w0 = X(rd_p*2);
@@ -4187,11 +4193,11 @@ RV32 PWMACCSU.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 PWMACCU.H:
-
-```
+----
+| RV32 PWMACCU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d_w0 = X(rd_p*2);
@@ -4202,21 +4208,21 @@ RV32 PWMACCU.H:
         X(rd_p*2)   = d_w0;
         X(rd_p*2+1) = d_w1;
     }
-```
-
-RV32 WMULSU:
-
-```
+----
+| RV32 WMULSU
+a|
+[source,rust]
+----
     let d = to_bits(64, signed(X(rs1)) * unsigned(X(rs2)));
     if (rd_p != 0x0) then {
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 WMACCSU:
-
-```
+----
+| RV32 WMACCSU
+a|
+[source,rust]
+----
     var d : bits(64) =
         if (rd_p == 0x0) then zeros() else X(rd_p*2+1) @ X(rd_p*2);
     d = d + to_bits(64, signed(X(rs1)) * unsigned(X(rs2)));
@@ -4224,11 +4230,11 @@ RV32 WMACCSU:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PM2WADD.H:
-
-```
+----
+| RV32 PM2WADD.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d =
@@ -4238,11 +4244,11 @@ RV32 PM2WADD.H:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PM2WADDSU.H:
-
-```
+----
+| RV32 PM2WADDSU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d =
@@ -4252,11 +4258,11 @@ RV32 PM2WADDSU.H:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PM2WADDASU.H:
-
-```
+----
+| RV32 PM2WADDASU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64) =
@@ -4267,11 +4273,11 @@ RV32 PM2WADDASU.H:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PM2WADDU.H:
-
-```
+----
+| RV32 PM2WADDU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d =
@@ -4281,11 +4287,11 @@ RV32 PM2WADDU.H:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PM2WADDAU.H:
-
-```
+----
+| RV32 PM2WADDAU.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     var d : bits(64) =
@@ -4296,11 +4302,11 @@ RV32 PM2WADDAU.H:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PM2WADD.HX:
-
-```
+----
+| RV32 PM2WADD.HX
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d =
@@ -4310,11 +4316,11 @@ RV32 PM2WADD.HX:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PM2WSUB.H:
-
-```
+----
+| RV32 PM2WSUB.H
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d =
@@ -4324,11 +4330,11 @@ RV32 PM2WSUB.H:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
-
-RV32 PM2WSUB.HX:
-
-```
+----
+| RV32 PM2WSUB.HX
+a|
+[source,rust]
+----
     let s1 = X(rs1);
     let s2 = X(rs2);
     let d =
@@ -4338,4 +4344,5 @@ RV32 PM2WSUB.HX:
         X(rd_p*2)   = d[31..0];
         X(rd_p*2+1) = d[63..32];
     }
-```
+----
+|===
