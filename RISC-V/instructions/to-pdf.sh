@@ -1,66 +1,66 @@
-asciidoctor-pdf base/rv-e/pseudocode-pl.adoc \
+asciidoctor-pdf base/rv-e/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf base/rv-i/pseudocode-pl.adoc \
+asciidoctor-pdf base/rv-i/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf base/rv-o/pseudocode-pl.adoc \
+asciidoctor-pdf base/rv-o/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf standard/rv-a/pseudocode-pl.adoc \
+asciidoctor-pdf standard/rv-a/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf standard/rv-c/pseudocode-pl.adoc \
+asciidoctor-pdf standard/rv-c/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf standard/rv-m/pseudocode-pl.adoc \
+asciidoctor-pdf standard/rv-m/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Arithmetic/rv-d/pseudocode-pl.adoc \
+asciidoctor-pdf specific/arithmetic/rv-d/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Arithmetic/rv-f/pseudocode-pl.adoc \
+asciidoctor-pdf specific/arithmetic/rv-f/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Arithmetic/rv-q/pseudocode-pl.adoc \
+asciidoctor-pdf specific/arithmetic/rv-q/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Parallelism/rv-b/pseudocode-pl.adoc \
+asciidoctor-pdf specific/parallelism/rv-b/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Parallelism/rv-n/pseudocode-pl.adoc \
+asciidoctor-pdf specific/parallelism/rv-n/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Parallelism/rv-p/pseudocode-pl.adoc \
+asciidoctor-pdf specific/parallelism/rv-p/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Privilege/rv-h/pseudocode-pl.adoc \
+asciidoctor-pdf specific/privilege/rv-h/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Privilege/rv-s/pseudocode-pl.adoc \
+asciidoctor-pdf specific/privilege/rv-s/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Algebra/rv-v/pseudocode-pl.adoc \
+asciidoctor-pdf specific/algebra/rv-v/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Algebra/rv-w/pseudocode-pl.adoc \
+asciidoctor-pdf specific/algebra/rv-w/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Algebra/rv-y/pseudocode-pl.adoc \
+asciidoctor-pdf specific/algebra/rv-y/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Cryptography/rv-zk/pseudocode-pl.adoc \
+asciidoctor-pdf specific/cryptography/rv-zk/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Cryptography/rv-zvk/pseudocode-pl.adoc \
+asciidoctor-pdf specific/cryptography/rv-zvk/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Cryptography/rv-zwk/pseudocode-pl.adoc \
+asciidoctor-pdf specific/cryptography/rv-zwk/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Cryptography/rv-zyk/pseudocode-pl.adoc \
+asciidoctor-pdf specific/cryptography/rv-zyk/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
-asciidoctor-pdf specific/Parallelism/rv-t/pseudocode-pl.adoc \
+asciidoctor-pdf specific/parallelism/rv-t/software-description.adoc \
   -a pdf-theme=my-theme.yml
 
