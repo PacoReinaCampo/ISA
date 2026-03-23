@@ -1,0 +1,826 @@
+\documentclass{report}
+\usepackage[letterpaper, portrait, margin=0.5in]{geometry}
+\usepackage[utf8]{inputenc}
+\begin{document}
+\newpage
+\begin{table}[p]
+\begin{small}
+\begin{center}
+\begin{tabular}{p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{50mm}l}& & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\
+\multicolumn{3}{l}{\scriptsize{31}} & \multicolumn{4}{r}{\scriptsize{25}} & \multicolumn{2}{l}{\scriptsize{24}} & \multicolumn{3}{r}{\scriptsize{20}} & \multicolumn{2}{l}{\scriptsize{19}} & \multicolumn{3}{r}{\scriptsize{15}} & \multicolumn{1}{l}{\scriptsize{14}} & \multicolumn{2}{r}{\scriptsize{12}} & \multicolumn{2}{l}{\scriptsize{11}} & \multicolumn{3}{r}{\scriptsize{7}} & \multicolumn{3}{l}{\scriptsize{6}} & \multicolumn{4}{r}{\scriptsize{0}} &  \\
+\cline{1-32}
+\multicolumn{20}{|c|}{imm[31:12]} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-U} \\
+\cline{1-32}
+\multicolumn{20}{|c|}{imm[20$\vert$10:1$\vert$11$\vert$19:12]} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-UJ} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{imm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-I} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{imm[12$\vert$10:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{imm[4:1$\vert$11]} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-SB} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{imm[11:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{imm[4:0]} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-S} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{funct5} & \multicolumn{2}{c|}{funct2} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-R} \\
+\cline{1-32}
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32I Base Integer Instruction Set } & \\
+\cline{1-32}
+\multicolumn{20}{|c|}{simm[31:12]} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110111} & \scriptsize{LUI rd, imm} \\
+\cline{1-32}
+\multicolumn{20}{|c|}{simm[31:12]} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010111} & \scriptsize{AUIPC rd, offset} \\
+\cline{1-32}
+\multicolumn{20}{|c|}{simm[20$\vert$10:1$\vert$11$\vert$19:12]} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1101111} & \scriptsize{JAL rd, offset} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1100111} & \scriptsize{JALR rd, rs1, offset} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[12$\vert$10:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{simm[4:1$\vert$11]} & \multicolumn{7}{c|}{1100011} & \scriptsize{BEQ rs1, rs2, offset} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[12$\vert$10:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{simm[4:1$\vert$11]} & \multicolumn{7}{c|}{1100011} & \scriptsize{BNE rs1, rs2, offset} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[12$\vert$10:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{simm[4:1$\vert$11]} & \multicolumn{7}{c|}{1100011} & \scriptsize{BLT rs1, rs2, offset} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[12$\vert$10:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{simm[4:1$\vert$11]} & \multicolumn{7}{c|}{1100011} & \scriptsize{BGE rs1, rs2, offset} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[12$\vert$10:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{110} & \multicolumn{5}{c|}{simm[4:1$\vert$11]} & \multicolumn{7}{c|}{1100011} & \scriptsize{BLTU rs1, rs2, offset} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[12$\vert$10:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{111} & \multicolumn{5}{c|}{simm[4:1$\vert$11]} & \multicolumn{7}{c|}{1100011} & \scriptsize{BGEU rs1, rs2, offset} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0000011} & \scriptsize{LB rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0000011} & \scriptsize{LH rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0000011} & \scriptsize{LW rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0000011} & \scriptsize{LBU rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0000011} & \scriptsize{LHU rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[11:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{simm[4:0]} & \multicolumn{7}{c|}{0100011} & \scriptsize{SB rs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[11:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{simm[4:0]} & \multicolumn{7}{c|}{0100011} & \scriptsize{SH rs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[11:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{simm[4:0]} & \multicolumn{7}{c|}{0100011} & \scriptsize{SW rs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{ADDI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SLTI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SLTIU rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{XORI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{110} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{ORI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{111} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{ANDI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{shamt[4:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SLLI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{shamt[4:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SRLI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{shamt[4:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SRAI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{ADD rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{SUB rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{SLL rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{SLT rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{SLTU rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{XOR rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{SRL rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{SRA rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{110} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{OR rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{111} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{AND rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{4}{|c|}{0000} & \multicolumn{1}{c|}{pred} & \multicolumn{2}{c|}{pred} & \multicolumn{1}{c|}{pred} & \multicolumn{4}{c|}{succ} & \multicolumn{5}{c|}{00000} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{0001111} & \scriptsize{FENCE pred, succ} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0000000} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{00000} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{0001111} & \scriptsize{FENCE.I } \\
+\cline{1-32}
+\tabularnewline
+\end{tabular}
+\end{center}
+\end{small}
+\end{table}
+\newpage
+\begin{table}[p]
+\begin{small}
+\begin{center}
+\begin{tabular}{p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{50mm}l}& & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\
+\multicolumn{3}{l}{\scriptsize{31}} & \multicolumn{4}{r}{\scriptsize{25}} & \multicolumn{2}{l}{\scriptsize{24}} & \multicolumn{3}{r}{\scriptsize{20}} & \multicolumn{2}{l}{\scriptsize{19}} & \multicolumn{3}{r}{\scriptsize{15}} & \multicolumn{1}{l}{\scriptsize{14}} & \multicolumn{2}{r}{\scriptsize{12}} & \multicolumn{2}{l}{\scriptsize{11}} & \multicolumn{3}{r}{\scriptsize{7}} & \multicolumn{3}{l}{\scriptsize{6}} & \multicolumn{4}{r}{\scriptsize{0}} &  \\
+\cline{1-32}
+\multicolumn{12}{|c|}{imm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-I} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{imm[11:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{imm[4:0]} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-S} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{funct5} & \multicolumn{2}{c|}{funct2} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-R} \\
+\cline{1-32}
+\tabularnewline
+\multicolumn{32}{c}{\bf RV64I Base Integer Instruction Set (in addition to RV32I) } & \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{110} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0000011} & \scriptsize{LWU rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0000011} & \scriptsize{LD rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[11:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{simm[4:0]} & \multicolumn{7}{c|}{0100011} & \scriptsize{SD rs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{1}{c|}{0} & \multicolumn{6}{c|}{shamt[5:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SLLI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{1}{c|}{0} & \multicolumn{6}{c|}{shamt[5:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SRLI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{1}{c|}{0} & \multicolumn{6}{c|}{shamt[5:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SRAI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0011011} & \scriptsize{ADDIW rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0000000} & \multicolumn{5}{c|}{shamt[4:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0011011} & \scriptsize{SLLIW rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0000000} & \multicolumn{5}{c|}{shamt[4:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0011011} & \scriptsize{SRLIW rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0100000} & \multicolumn{5}{c|}{shamt[4:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0011011} & \scriptsize{SRAIW rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0111011} & \scriptsize{ADDW rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0111011} & \scriptsize{SUBW rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0111011} & \scriptsize{SLLW rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0111011} & \scriptsize{SRLW rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0111011} & \scriptsize{SRAW rd, rs1, rs2} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV128I Base Integer Instruction Set (in addition to RV64I) } & \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{111} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0000011} & \scriptsize{LDU rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0001111} & \scriptsize{LQ rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[11:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{simm[4:0]} & \multicolumn{7}{c|}{0100011} & \scriptsize{SQ rs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{7}{c|}{shamt[6:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SLLI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{7}{c|}{shamt[6:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SRLI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{7}{c|}{shamt[6:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0010011} & \scriptsize{SRAI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1011011} & \scriptsize{ADDID rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{000000} & \multicolumn{6}{c|}{shamt[5:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1011011} & \scriptsize{SLLID rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{000000} & \multicolumn{6}{c|}{shamt[5:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1011011} & \scriptsize{SRLID rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{010000} & \multicolumn{6}{c|}{shamt[5:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1011011} & \scriptsize{SRAID rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1111011} & \scriptsize{ADDD rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1111011} & \scriptsize{SUBD rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1111011} & \scriptsize{SLLD rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1111011} & \scriptsize{SRLD rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1111011} & \scriptsize{SRAD rd, rs1, rs2} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32M Standard Extension for Integer Multiply and Divide } & \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{MUL rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{MULH rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{MULHSU rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{MULHU rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{DIV rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{DIVU rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{110} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{REM rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{111} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0110011} & \scriptsize{REMU rd, rs1, rs2} \\
+\cline{1-32}
+\end{tabular}
+\end{center}
+\end{small}
+\end{table}
+\newpage
+\begin{table}[p]
+\begin{small}
+\begin{center}
+\begin{tabular}{p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{50mm}l}& & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\
+\multicolumn{3}{l}{\scriptsize{31}} & \multicolumn{4}{r}{\scriptsize{25}} & \multicolumn{2}{l}{\scriptsize{24}} & \multicolumn{3}{r}{\scriptsize{20}} & \multicolumn{2}{l}{\scriptsize{19}} & \multicolumn{3}{r}{\scriptsize{15}} & \multicolumn{1}{l}{\scriptsize{14}} & \multicolumn{2}{r}{\scriptsize{12}} & \multicolumn{2}{l}{\scriptsize{11}} & \multicolumn{3}{r}{\scriptsize{7}} & \multicolumn{3}{l}{\scriptsize{6}} & \multicolumn{4}{r}{\scriptsize{0}} &  \\
+\cline{1-32}
+\multicolumn{5}{|c|}{funct5} & \multicolumn{2}{c|}{funct2} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-R} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV64M Standard Extension for Integer Multiply and Divide (in addition to RV32M) } & \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0111011} & \scriptsize{MULW rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0111011} & \scriptsize{DIVW rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0111011} & \scriptsize{DIVUW rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{110} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0111011} & \scriptsize{REMW rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{111} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0111011} & \scriptsize{REMUW rd, rs1, rs2} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV128M Standard Extension for Integer Multiply and Divide (in addition to RV64M) } & \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1111011} & \scriptsize{MULD rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1111011} & \scriptsize{DIVD rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1111011} & \scriptsize{DIVUD rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{110} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1111011} & \scriptsize{REMD rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{111} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1111011} & \scriptsize{REMUD rd, rs1, rs2} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32A Standard Extension for Atomic Instructions } & \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00010} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{LR.W aqrl, rd, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00011} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{SC.W aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00001} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOSWAP.W aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOADD.W aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOXOR.W aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOOR.W aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOAND.W aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMIN.W aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMAX.W aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMINU.W aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMAXU.W aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV64A Standard Extension for Atomic Instructions (in addition to RV32A) } & \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00010} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{LR.D aqrl, rd, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00011} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{SC.D aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00001} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOSWAP.D aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOADD.D aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOXOR.D aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOOR.D aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOAND.D aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMIN.D aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMAX.D aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMINU.D aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMAXU.D aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\tabularnewline
+\end{tabular}
+\end{center}
+\end{small}
+\end{table}
+\newpage
+\begin{table}[p]
+\begin{small}
+\begin{center}
+\begin{tabular}{p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{50mm}l}& & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\
+\multicolumn{3}{l}{\scriptsize{31}} & \multicolumn{4}{r}{\scriptsize{25}} & \multicolumn{2}{l}{\scriptsize{24}} & \multicolumn{3}{r}{\scriptsize{20}} & \multicolumn{2}{l}{\scriptsize{19}} & \multicolumn{3}{r}{\scriptsize{15}} & \multicolumn{1}{l}{\scriptsize{14}} & \multicolumn{2}{r}{\scriptsize{12}} & \multicolumn{2}{l}{\scriptsize{11}} & \multicolumn{3}{r}{\scriptsize{7}} & \multicolumn{3}{l}{\scriptsize{6}} & \multicolumn{4}{r}{\scriptsize{0}} &  \\
+\cline{1-32}
+\multicolumn{5}{|c|}{funct5} & \multicolumn{2}{c|}{funct2} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-R} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{imm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-I} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{imm[11:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{imm[4:0]} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-S} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{rs3} & \multicolumn{2}{c|}{funct2} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-R4} \\
+\cline{1-32}
+\tabularnewline
+\multicolumn{32}{c}{\bf RV128A Standard Extension for Atomic Instructions (in addition to RV64A) } & \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00010} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{LR.Q aqrl, rd, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00011} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{SC.Q aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00001} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOSWAP.Q aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOADD.Q aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOXOR.Q aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOOR.Q aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOAND.Q aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMIN.Q aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMAX.Q aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMINU.Q aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11100} & \multicolumn{1}{c|}{aq} & \multicolumn{1}{c|}{rl} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{0101111} & \scriptsize{AMOMAXU.Q aqrl, rd, rs2, (rs1)} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32S Standard Extension for Supervisor-level Instructions } & \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0000000} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{00000} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{1110011} & \scriptsize{ECALL } \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0000000} & \multicolumn{5}{c|}{00001} & \multicolumn{5}{c|}{00000} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{1110011} & \scriptsize{EBREAK } \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0000000} & \multicolumn{5}{c|}{00010} & \multicolumn{5}{c|}{00000} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{1110011} & \scriptsize{URET } \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0001000} & \multicolumn{5}{c|}{00010} & \multicolumn{5}{c|}{00000} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{1110011} & \scriptsize{SRET } \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0010000} & \multicolumn{5}{c|}{00010} & \multicolumn{5}{c|}{00000} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{1110011} & \scriptsize{HRET } \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0011000} & \multicolumn{5}{c|}{00010} & \multicolumn{5}{c|}{00000} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{1110011} & \scriptsize{MRET } \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0111101} & \multicolumn{5}{c|}{10010} & \multicolumn{5}{c|}{00000} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{1110011} & \scriptsize{DRET } \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00010} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00100} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{1110011} & \scriptsize{SFENCE.VM rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00010} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{1110011} & \scriptsize{SFENCE.VMA rs1, rs2} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{0001000} & \multicolumn{5}{c|}{00101} & \multicolumn{5}{c|}{00000} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{00000} & \multicolumn{7}{c|}{1110011} & \scriptsize{WFI } \\
+\cline{1-32}
+\multicolumn{12}{|c|}{csr[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1110011} & \scriptsize{CSRRW rd, csr, rs1} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{csr[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1110011} & \scriptsize{CSRRS rd, csr, rs1} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{csr[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1110011} & \scriptsize{CSRRC rd, csr, rs1} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{csr[11:0]} & \multicolumn{5}{c|}{uimm[4:0]} & \multicolumn{3}{c|}{101} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1110011} & \scriptsize{CSRRWI rd, csr, zimm} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{csr[11:0]} & \multicolumn{5}{c|}{uimm[4:0]} & \multicolumn{3}{c|}{110} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1110011} & \scriptsize{CSRRSI rd, csr, zimm} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{csr[11:0]} & \multicolumn{5}{c|}{uimm[4:0]} & \multicolumn{3}{c|}{111} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1110011} & \scriptsize{CSRRCI rd, csr, zimm} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32F Standard Extension for Single-Precision Floating-Point } & \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{0000111} & \scriptsize{FLW frd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[11:5]} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{simm[4:0]} & \multicolumn{7}{c|}{0100111} & \scriptsize{FSW frs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1000011} & \scriptsize{FMADD.S rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1000111} & \scriptsize{FMSUB.S rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1001011} & \scriptsize{FNMSUB.S rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1001111} & \scriptsize{FNMADD.S rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FADD.S rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00001} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSUB.S rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00010} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMUL.S rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00011} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FDIV.S rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSGNJ.S frd, frs1, frs2} \\
+\cline{1-32}
+\end{tabular}
+\end{center}
+\end{small}
+\end{table}
+\newpage
+\begin{table}[p]
+\begin{small}
+\begin{center}
+\begin{tabular}{p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{50mm}l}& & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\
+\multicolumn{3}{l}{\scriptsize{31}} & \multicolumn{4}{r}{\scriptsize{25}} & \multicolumn{2}{l}{\scriptsize{24}} & \multicolumn{3}{r}{\scriptsize{20}} & \multicolumn{2}{l}{\scriptsize{19}} & \multicolumn{3}{r}{\scriptsize{15}} & \multicolumn{1}{l}{\scriptsize{14}} & \multicolumn{2}{r}{\scriptsize{12}} & \multicolumn{2}{l}{\scriptsize{11}} & \multicolumn{3}{r}{\scriptsize{7}} & \multicolumn{3}{l}{\scriptsize{6}} & \multicolumn{4}{r}{\scriptsize{0}} &  \\
+\cline{1-32}
+\multicolumn{5}{|c|}{funct5} & \multicolumn{2}{c|}{funct2} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-R} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{imm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-I} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{imm[11:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{imm[4:0]} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-S} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{rs3} & \multicolumn{2}{c|}{funct2} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-R4} \\
+\cline{1-32}
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32F Standard Extension for Single-Precision Floating-Point  contd} & \\
+\cline{1-32}
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSGNJN.S frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSGNJX.S frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00101} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMIN.S frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00101} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMAX.S frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01011} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSQRT.S rm, frd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FLE.S rd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FLT.S rd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FEQ.S rd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.W.S rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00001} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.WU.S rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.S.W rm, frd, rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00001} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.S.WU rm, frd, rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11100} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMV.X.S rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11100} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCLASS.S rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11110} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMV.S.X frd, rs1} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV64F Standard Extension for Single-Precision Floating-Point (in addition to RV32F) } & \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00010} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.L.S rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00011} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.LU.S rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00010} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.S.L rm, frd, rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00011} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.S.LU rm, frd, rs1} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32D Standard Extension for Double-Precision Floating-Point } & \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{0000111} & \scriptsize{FLD frd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[11:5]} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{011} & \multicolumn{5}{c|}{simm[4:0]} & \multicolumn{7}{c|}{0100111} & \scriptsize{FSD frs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1000011} & \scriptsize{FMADD.D rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1000111} & \scriptsize{FMSUB.D rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1001011} & \scriptsize{FNMSUB.D rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1001111} & \scriptsize{FNMADD.D rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FADD.D rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00001} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSUB.D rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00010} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMUL.D rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00011} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FDIV.D rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSGNJ.D frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSGNJN.D frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSGNJX.D frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00101} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMIN.D frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00101} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMAX.D frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00001} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.S.D rm, frd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.D.S rm, frd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01011} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSQRT.D rm, frd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FLE.D rd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FLT.D rd, frs1, frs2} \\
+\cline{1-32}
+\end{tabular}
+\end{center}
+\end{small}
+\end{table}
+\newpage
+\begin{table}[p]
+\begin{small}
+\begin{center}
+\begin{tabular}{p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{50mm}l}& & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\
+\multicolumn{3}{l}{\scriptsize{31}} & \multicolumn{4}{r}{\scriptsize{25}} & \multicolumn{2}{l}{\scriptsize{24}} & \multicolumn{3}{r}{\scriptsize{20}} & \multicolumn{2}{l}{\scriptsize{19}} & \multicolumn{3}{r}{\scriptsize{15}} & \multicolumn{1}{l}{\scriptsize{14}} & \multicolumn{2}{r}{\scriptsize{12}} & \multicolumn{2}{l}{\scriptsize{11}} & \multicolumn{3}{r}{\scriptsize{7}} & \multicolumn{3}{l}{\scriptsize{6}} & \multicolumn{4}{r}{\scriptsize{0}} &  \\
+\cline{1-32}
+\multicolumn{5}{|c|}{funct5} & \multicolumn{2}{c|}{funct2} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-R} \\
+\cline{1-32}
+\multicolumn{12}{|c|}{imm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-I} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{imm[11:5]} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{imm[4:0]} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-S} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{rs3} & \multicolumn{2}{c|}{funct2} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-R4} \\
+\cline{1-32}
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32D Standard Extension for Double-Precision Floating-Point  contd} & \\
+\cline{1-32}
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FEQ.D rd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.W.D rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00001} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.WU.D rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.D.W rm, frd, rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00001} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.D.WU rm, frd, rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11100} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCLASS.D rd, frs1} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV64D Standard Extension for Double-Precision Floating-Point (in addition to RV32D) } & \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00010} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.L.D rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00011} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.LU.D rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11100} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMV.X.D rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00010} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.D.L rm, frd, rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00011} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.D.LU rm, frd, rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11110} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMV.D.X frd, rs1} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32Q Standard Extension for Quadruple-Precision Floating-Point } & \\
+\cline{1-32}
+\multicolumn{12}{|c|}{simm[11:0]} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{0000111} & \scriptsize{FLQ frd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{7}{|c|}{simm[11:5]} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{100} & \multicolumn{5}{c|}{simm[4:0]} & \multicolumn{7}{c|}{0100111} & \scriptsize{FSQ frs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1000011} & \scriptsize{FMADD.Q rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1000111} & \scriptsize{FMSUB.Q rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1001011} & \scriptsize{FNMSUB.Q rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{frs3} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1001111} & \scriptsize{FNMADD.Q rm, frd, frs1, frs2, frs3} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00000} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FADD.Q rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00001} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSUB.Q rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00010} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMUL.Q rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00011} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FDIV.Q rm, frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSGNJ.Q frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSGNJN.Q frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00100} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSGNJX.Q frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00101} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMIN.Q frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{00101} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMAX.Q frd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{00} & \multicolumn{5}{c|}{00011} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.S.Q rm, frd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.Q.S rm, frd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{01} & \multicolumn{5}{c|}{00011} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.D.Q rm, frd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01000} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00001} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.Q.D rm, frd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{01011} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FSQRT.Q rm, frd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FLE.Q rd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FLT.Q rd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{10100} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{frs2} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{010} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FEQ.Q rd, frs1, frs2} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.W.Q rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00001} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.WU.Q rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.Q.W rm, frd, rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00001} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.Q.WU rm, frd, rs1} \\
+\cline{1-32}
+\end{tabular}
+\end{center}
+\end{small}
+\end{table}
+\newpage
+\begin{table}[p]
+\begin{small}
+\begin{center}
+\begin{tabular}{p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{50mm}l}& & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\
+\multicolumn{3}{l}{\scriptsize{31}} & \multicolumn{4}{r}{\scriptsize{25}} & \multicolumn{2}{l}{\scriptsize{24}} & \multicolumn{3}{r}{\scriptsize{20}} & \multicolumn{2}{l}{\scriptsize{19}} & \multicolumn{3}{r}{\scriptsize{15}} & \multicolumn{1}{l}{\scriptsize{14}} & \multicolumn{2}{r}{\scriptsize{12}} & \multicolumn{2}{l}{\scriptsize{11}} & \multicolumn{3}{r}{\scriptsize{7}} & \multicolumn{3}{l}{\scriptsize{6}} & \multicolumn{4}{r}{\scriptsize{0}} &  \\
+\cline{1-32}
+\multicolumn{5}{|c|}{funct5} & \multicolumn{2}{c|}{funct2} & \multicolumn{5}{c|}{rs2} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{funct3} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{opcode} & \scriptsize{\bf Type-R} \\
+\cline{1-32}
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32Q Standard Extension for Quadruple-Precision Floating-Point  contd} & \\
+\cline{1-32}
+\cline{1-32}
+\multicolumn{5}{|c|}{11100} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{001} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCLASS.Q rd, frs1} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV64Q Standard Extension for Quadruple-Precision Floating-Point (in addition to RV32Q) } & \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00010} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.L.Q rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11000} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00011} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.LU.Q rm, rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00010} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.Q.L rm, frd, rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11010} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00011} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{rm} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FCVT.Q.LU rm, frd, rs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11100} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{frs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{rd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMV.X.Q rd, frs1} \\
+\cline{1-32}
+\multicolumn{5}{|c|}{11110} & \multicolumn{2}{c|}{11} & \multicolumn{5}{c|}{00000} & \multicolumn{5}{c|}{rs1} & \multicolumn{3}{c|}{000} & \multicolumn{5}{c|}{frd} & \multicolumn{7}{c|}{1010011} & \scriptsize{FMV.Q.X frd, rs1} \\
+\cline{1-32}
+\tabularnewline
+\end{tabular}
+\end{center}
+\end{small}
+\end{table}
+\newpage
+\begin{table}[p]
+\begin{small}
+\begin{center}
+\begin{tabular}{p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{50mm}l}& & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\
+\multicolumn{1}{l}{\scriptsize{15}} & \multicolumn{5}{r}{\scriptsize{13}} & \multicolumn{1}{l}{\scriptsize{12}} & \multicolumn{5}{r}{\scriptsize{10}} & \multicolumn{1}{l}{\scriptsize{9}} & \multicolumn{5}{r}{\scriptsize{7}} & \multicolumn{1}{l}{\scriptsize{6}} & \multicolumn{3}{r}{\scriptsize{5}} & \multicolumn{1}{l}{\scriptsize{4}} & \multicolumn{5}{r}{\scriptsize{2}} & \multicolumn{1}{l}{\scriptsize{1}} & \multicolumn{3}{r}{\scriptsize{0}} &  \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{16}{c|}{imm8} & \multicolumn{6}{c|}{rd'} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CIW} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{6}{c|}{imm3} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{imm2} & \multicolumn{6}{c|}{rd'} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CL} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{6}{c|}{imm3} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{imm2} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CS} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{2}{c|}{imm1} & \multicolumn{10}{c|}{rd/rs1} & \multicolumn{10}{c|}{imm5} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CI} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{22}{c|}{imm11} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CJ} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{6}{c|}{imm3} & \multicolumn{6}{c|}{rs1'} & \multicolumn{10}{c|}{imm5} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CB} \\
+\cline{1-32}
+\multicolumn{8}{|c|}{funct4} & \multicolumn{10}{c|}{rd/rs1} & \multicolumn{10}{c|}{rs2} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CR} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{12}{c|}{imm6} & \multicolumn{10}{c|}{rs2} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CSS} \\
+\cline{1-32}
+\tabularnewline
+\multicolumn{32}{c}{\bf RV32C Standard Extension for Compressed Instructions } & \\
+\cline{1-32}
+\multicolumn{6}{|c|}{000} & \multicolumn{16}{c|}{nzuimm[5:4$\vert$9:6$\vert$2$\vert$3]} & \multicolumn{6}{c|}{rd'} & \multicolumn{4}{c|}{00} & \scriptsize{C.ADDI4SPN rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{001} & \multicolumn{6}{c|}{uimm[5:3]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{uimm[7:6]} & \multicolumn{6}{c|}{frd'} & \multicolumn{4}{c|}{00} & \scriptsize{C.FLD frd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{010} & \multicolumn{6}{c|}{uimm[5:3]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{uimm[2$\vert$6]} & \multicolumn{6}{c|}{rd'} & \multicolumn{4}{c|}{00} & \scriptsize{C.LW rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{011} & \multicolumn{6}{c|}{uimm[5:3]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{uimm[2$\vert$6]} & \multicolumn{6}{c|}{frd'} & \multicolumn{4}{c|}{00} & \scriptsize{C.FLW frd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{101} & \multicolumn{6}{c|}{uimm[5:3]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{uimm[7:6]} & \multicolumn{6}{c|}{frs2'} & \multicolumn{4}{c|}{00} & \scriptsize{C.FSD frs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{110} & \multicolumn{6}{c|}{uimm[5:3]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{uimm[2$\vert$6]} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{00} & \scriptsize{C.SW rs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{111} & \multicolumn{6}{c|}{uimm[5:3]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{uimm[2$\vert$6]} & \multicolumn{6}{c|}{frs2'} & \multicolumn{4}{c|}{00} & \scriptsize{C.FSW frs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{000} & \multicolumn{2}{c|}{0} & \multicolumn{10}{c|}{00000} & \multicolumn{10}{c|}{00000} & \multicolumn{4}{c|}{01} & \scriptsize{C.NOP } \\
+\cline{1-32}
+\multicolumn{6}{|c|}{000} & \multicolumn{2}{c|}{nzsimm[5]} & \multicolumn{10}{c|}{rs1/rd$\neq0$} & \multicolumn{10}{c|}{nzsimm[4:0]} & \multicolumn{4}{c|}{01} & \scriptsize{C.ADDI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{001} & \multicolumn{22}{c|}{simm[11$\vert$4$\vert$9:8$\vert$10$\vert$6$\vert$7$\vert$3:1$\vert$5]} & \multicolumn{4}{c|}{01} & \scriptsize{C.JAL rd, offset} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{010} & \multicolumn{2}{c|}{simm[5]} & \multicolumn{10}{c|}{rs1/rd$\neq0$} & \multicolumn{10}{c|}{simm[4:0]} & \multicolumn{4}{c|}{01} & \scriptsize{C.LI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{011} & \multicolumn{2}{c|}{nzsimm[9]} & \multicolumn{10}{c|}{rs1/rd$=2$} & \multicolumn{10}{c|}{nzsimm[4$\vert$6$\vert$8:7$\vert$5]} & \multicolumn{4}{c|}{01} & \scriptsize{C.ADDI16SP rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{011} & \multicolumn{2}{c|}{nzsimm[17]} & \multicolumn{10}{c|}{rd$\neq\left\{0,2\right\}$} & \multicolumn{10}{c|}{nzsimm[16:12]} & \multicolumn{4}{c|}{01} & \scriptsize{C.LUI rd, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{2}{c|}{0} & \multicolumn{4}{c|}{00} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{10}{c|}{nzuimm[4:0]} & \multicolumn{4}{c|}{01} & \scriptsize{C.SRLI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{2}{c|}{0} & \multicolumn{4}{c|}{01} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{10}{c|}{nzuimm[4:0]} & \multicolumn{4}{c|}{01} & \scriptsize{C.SRAI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{2}{c|}{nzsimm[5]} & \multicolumn{4}{c|}{10} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{10}{c|}{nzsimm[4:0]} & \multicolumn{4}{c|}{01} & \scriptsize{C.ANDI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{6}{c|}{011} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{4}{c|}{00} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{01} & \scriptsize{C.SUB rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{6}{c|}{011} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{4}{c|}{01} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{01} & \scriptsize{C.XOR rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{6}{c|}{011} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{4}{c|}{10} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{01} & \scriptsize{C.OR rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{6}{c|}{011} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{4}{c|}{11} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{01} & \scriptsize{C.AND rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{6}{c|}{111} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{4}{c|}{00} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{01} & \scriptsize{C.SUBW rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{6}{c|}{111} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{4}{c|}{01} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{01} & \scriptsize{C.ADDW rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{101} & \multicolumn{22}{c|}{simm[11$\vert$4$\vert$9:8$\vert$10$\vert$6$\vert$7$\vert$3:1$\vert$5]} & \multicolumn{4}{c|}{01} & \scriptsize{C.J rd, offset} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{110} & \multicolumn{6}{c|}{simm[8$\vert$4:3]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{10}{c|}{simm[7:6$\vert$2:1$\vert$5]} & \multicolumn{4}{c|}{01} & \scriptsize{C.BEQZ rs1, rs2, offset} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{111} & \multicolumn{6}{c|}{simm[8$\vert$4:3]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{10}{c|}{simm[7:6$\vert$2:1$\vert$5]} & \multicolumn{4}{c|}{01} & \scriptsize{C.BNEZ rs1, rs2, offset} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{000} & \multicolumn{2}{c|}{0} & \multicolumn{10}{c|}{rs1/rd$\neq0$} & \multicolumn{10}{c|}{nzuimm[4:0]} & \multicolumn{4}{c|}{10} & \scriptsize{C.SLLI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{001} & \multicolumn{2}{c|}{uimm[5]} & \multicolumn{10}{c|}{frd} & \multicolumn{10}{c|}{uimm[4:3$\vert$8:6]} & \multicolumn{4}{c|}{10} & \scriptsize{C.FLDSP frd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{010} & \multicolumn{2}{c|}{uimm[5]} & \multicolumn{10}{c|}{rd$\neq0$} & \multicolumn{10}{c|}{uimm[4:2$\vert$7:6]} & \multicolumn{4}{c|}{10} & \scriptsize{C.LWSP rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{011} & \multicolumn{2}{c|}{uimm[5]} & \multicolumn{10}{c|}{frd} & \multicolumn{10}{c|}{uimm[4:2$\vert$7:6]} & \multicolumn{4}{c|}{10} & \scriptsize{C.FLWSP frd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{2}{c|}{rd''} & \multicolumn{10}{c|}{rs1} & \multicolumn{10}{c|}{00000} & \multicolumn{4}{c|}{10} & \scriptsize{C.JR rd, rs1, offset} \\
+\cline{1-32}
+\multicolumn{8}{|c|}{1000} & \multicolumn{10}{c|}{rd$\neq0$} & \multicolumn{10}{c|}{rs2} & \multicolumn{4}{c|}{10} & \scriptsize{C.MV rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{2}{c|}{1} & \multicolumn{10}{c|}{00000} & \multicolumn{10}{c|}{00000} & \multicolumn{4}{c|}{10} & \scriptsize{C.EBREAK } \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{2}{c|}{rd''} & \multicolumn{10}{c|}{rs1} & \multicolumn{10}{c|}{00000} & \multicolumn{4}{c|}{10} & \scriptsize{C.JALR rd, rs1, offset} \\
+\cline{1-32}
+\multicolumn{8}{|c|}{1001} & \multicolumn{10}{c|}{rs1/rd$\neq0$} & \multicolumn{10}{c|}{rs2$\neq0$} & \multicolumn{4}{c|}{10} & \scriptsize{C.ADD rd, rs1, rs2} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{101} & \multicolumn{12}{c|}{uimm[5:3$\vert$8:6]} & \multicolumn{10}{c|}{frs2} & \multicolumn{4}{c|}{10} & \scriptsize{C.FSDSP frs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{110} & \multicolumn{12}{c|}{uimm[5:2$\vert$7:6]} & \multicolumn{10}{c|}{rs2} & \multicolumn{4}{c|}{10} & \scriptsize{C.SWSP rs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{111} & \multicolumn{12}{c|}{uimm[5:2$\vert$7:6]} & \multicolumn{10}{c|}{frs2} & \multicolumn{4}{c|}{10} & \scriptsize{C.FSWSP frs2, offset(rs1)} \\
+\cline{1-32}
+\tabularnewline
+\end{tabular}
+\end{center}
+\end{small}
+\end{table}
+\newpage
+\begin{table}[p]
+\begin{small}
+\begin{center}
+\begin{tabular}{p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{0.05mm}p{50mm}l}& & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & & \\
+\multicolumn{1}{l}{\scriptsize{15}} & \multicolumn{5}{r}{\scriptsize{13}} & \multicolumn{1}{l}{\scriptsize{12}} & \multicolumn{5}{r}{\scriptsize{10}} & \multicolumn{1}{l}{\scriptsize{9}} & \multicolumn{5}{r}{\scriptsize{7}} & \multicolumn{1}{l}{\scriptsize{6}} & \multicolumn{3}{r}{\scriptsize{5}} & \multicolumn{1}{l}{\scriptsize{4}} & \multicolumn{5}{r}{\scriptsize{2}} & \multicolumn{1}{l}{\scriptsize{1}} & \multicolumn{3}{r}{\scriptsize{0}} &  \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{6}{c|}{imm3} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{imm2} & \multicolumn{6}{c|}{rd'} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CL} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{6}{c|}{imm3} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{imm2} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CS} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{2}{c|}{imm1} & \multicolumn{10}{c|}{rd/rs1} & \multicolumn{10}{c|}{imm5} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CI} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{6}{c|}{imm3} & \multicolumn{6}{c|}{rs1'} & \multicolumn{10}{c|}{imm5} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CB} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{funct3} & \multicolumn{12}{c|}{imm6} & \multicolumn{10}{c|}{rs2} & \multicolumn{4}{c|}{op} & \scriptsize{\bf Type-CSS} \\
+\cline{1-32}
+\tabularnewline
+\multicolumn{32}{c}{\bf RV64C Standard Extension for Compressed Instructions (in addition to RV32C) } & \\
+\cline{1-32}
+\multicolumn{6}{|c|}{011} & \multicolumn{6}{c|}{uimm[5:3]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{uimm[7:6]} & \multicolumn{6}{c|}{rd'} & \multicolumn{4}{c|}{00} & \scriptsize{C.LD rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{111} & \multicolumn{6}{c|}{uimm[5:3]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{uimm[7:6]} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{00} & \scriptsize{C.SD rs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{001} & \multicolumn{2}{c|}{simm[5]} & \multicolumn{10}{c|}{rs1/rd$\neq0$} & \multicolumn{10}{c|}{simm[4:0]} & \multicolumn{4}{c|}{01} & \scriptsize{C.ADDIW rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{2}{c|}{nzuimm[5]} & \multicolumn{4}{c|}{00} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{10}{c|}{nzuimm[4:0]} & \multicolumn{4}{c|}{01} & \scriptsize{C.SRLI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{100} & \multicolumn{2}{c|}{nzuimm[5]} & \multicolumn{4}{c|}{01} & \multicolumn{6}{c|}{rs1'/rd'} & \multicolumn{10}{c|}{nzuimm[4:0]} & \multicolumn{4}{c|}{01} & \scriptsize{C.SRAI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{000} & \multicolumn{2}{c|}{nzuimm[5]} & \multicolumn{10}{c|}{rs1/rd$\neq0$} & \multicolumn{10}{c|}{nzuimm[4:0]} & \multicolumn{4}{c|}{10} & \scriptsize{C.SLLI rd, rs1, imm} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{011} & \multicolumn{2}{c|}{uimm[5]} & \multicolumn{10}{c|}{rd$\neq0$} & \multicolumn{10}{c|}{uimm[4:3$\vert$8:6]} & \multicolumn{4}{c|}{10} & \scriptsize{C.LDSP rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{111} & \multicolumn{12}{c|}{uimm[5:3$\vert$8:6]} & \multicolumn{10}{c|}{rs2} & \multicolumn{4}{c|}{10} & \scriptsize{C.SDSP rs2, offset(rs1)} \\
+\cline{1-32}
+\tabularnewline
+\tabularnewline
+\multicolumn{32}{c}{\bf RV128C Standard Extension for Compressed Instructions (in addition to RV64C) } & \\
+\cline{1-32}
+\multicolumn{6}{|c|}{001} & \multicolumn{6}{c|}{uimm[5:4$\vert$8]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{uimm[7:6]} & \multicolumn{6}{c|}{rd'} & \multicolumn{4}{c|}{00} & \scriptsize{C.LQ rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{101} & \multicolumn{6}{c|}{uimm[5:4$\vert$8]} & \multicolumn{6}{c|}{rs1'} & \multicolumn{4}{c|}{uimm[7:6]} & \multicolumn{6}{c|}{rs2'} & \multicolumn{4}{c|}{00} & \scriptsize{C.SQ rs2, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{001} & \multicolumn{2}{c|}{uimm[5]} & \multicolumn{10}{c|}{rd} & \multicolumn{10}{c|}{uimm[4$\vert$9:6]} & \multicolumn{4}{c|}{10} & \scriptsize{C.LQSP rd, offset(rs1)} \\
+\cline{1-32}
+\multicolumn{6}{|c|}{101} & \multicolumn{12}{c|}{uimm[5:4$\vert$9:6]} & \multicolumn{10}{c|}{rs2} & \multicolumn{4}{c|}{10} & \scriptsize{C.SQSP rs2, offset(rs1)} \\
+\cline{1-32}
+\tabularnewline
+\end{tabular}
+\end{center}
+\end{small}
+\end{table}
+\end{document}

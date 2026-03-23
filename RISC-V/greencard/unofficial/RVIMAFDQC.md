@@ -159,7 +159,7 @@
 
 : RVC: RISC-V Compressed (16-Bit) Instructions
 
-| Pseudoinstruction         | RISC-V Instructions           | Description                        | Operation                     |
+| Pseudo-Instruction        | RISC-V Instructions           | Description                        | Operation                     |
 |---------------------------|-------------------------------|------------------------------------|-------------------------------|
 | nop                       | addi x0, x0, 0                | no operation                       |                               |
 | li rd, imm11:0            | addi rd, x0, imm11:0          | load 12-bit immediate              | rd = SignExtend(imm11:0)      |

@@ -152,7 +152,7 @@ opcode	instr15:10	funct2	Type	RVC Instruction					32-Bit Equivalent
 
 RISC-V Pseudo-Instructions
 
-Pseudoinstruction			RISC-V Instructions				Description							Operation
+Pseudo-Instruction			RISC-V Instructions				Description							Operation
 nop							addi x0, x0, 0					no operation
 li rd, imm11:0				addi rd, x0, imm11:0			load 12-bit immediate				rd = SignExtend(imm11:0)
 li rd, imm31:0				lui rd, imm31:12*				load 32-bit immediate				rd = imm31:0

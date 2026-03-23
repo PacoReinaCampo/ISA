@@ -14,7 +14,7 @@
 | 0010011 (019) | 100    | –––––––  | I    | xori rd, rs1, imm    | xor immediate                 | rd = rs1 ^ SignExt(imm)             
 | 0010011 (019) | 101    | 0000000* | I    | srli rd, rs1, uimm   | shift right logical immediate | rd = rs1 >> uimm                    
 | 0010011 (019) | 101    | 0100000* | I    | srai rd, rs1, uimm   | shift right arithmetic imm.   | rd = rs1 >>> uimm                   
-| 0010011 (019) | 110    | –––––––  | I    | ori rd, rs1, imm     | or immediate                  | rd = rs1 | SignExt(imm)             
+| 0010011 (019) | 110    | –––––––  | I    | ori rd, rs1, imm     | or immediate                  | rd = rs1 \| SignExt(imm)             
 | 0010011 (019) | 111    | –––––––  | I    | andi rd, rs1, imm    | and immediate                 | rd = rs1 & SignExt(imm)             
 | 0010111 (023) | –––    | –––––––  | U    | auipc rd, upimm      | add upper immediate to PC     | rd = {upimm, 12'b0} + PC            
 | 0100011 (035) | 000    | –––––––  | S    | sb rs2, imm(rs1)     | store byte                    | [Address]7:0 = rs27:0               
@@ -28,7 +28,7 @@
 | 0110011 (051) | 100    | 0000000  | R    | xor rd, rs1, rs2     | xor                           | rd = rs1 ^ rs2                      
 | 0110011 (051) | 101    | 0000000  | R    | srl rd, rs1, rs2     | shift right logical           | rd = rs1 >> rs24:0                  
 | 0110011 (051) | 101    | 0100000  | R    | sra rd, rs1, rs2     | shift right arithmetic        | rd = rs1 >>> rs24:0                 
-| 0110011 (051) | 110    | 0000000  | R    | or rd, rs1, rs2      | or                            | rd = rs1 | rs2                      
+| 0110011 (051) | 110    | 0000000  | R    | or rd, rs1, rs2      | or                            | rd = rs1 \| rs2                      
 | 0110011 (051) | 111    | 0000000  | R    | and rd, rs1, rs2     | and                           | rd = rs1 & rs2                      
 | 0110111 (055) | –––    | –––––––  | U    | lui rd, upimm        | load upper immediate          | rd = {upimm, 12'b0}                 
 | 1100011 (099) | 000    | –––––––  | B    | beq rs1, rs2, label  | branch if =                   | if (rs1 == rs2) PC = BTA            
@@ -169,7 +169,7 @@
 .RISC-V Pseudo-Instructions
 [cols="4*", options="header"]
 |===============================================================================================================================
-| Pseudoinstruction         | RISC-V Instructions           | Description                        | Operation                    
+| Pseudo-Instruction        | RISC-V Instructions           | Description                        | Operation                    
 | nop                       | addi x0, x0, 0                | no operation                       |                              
 | li rd, imm11:0            | addi rd, x0, imm11:0          | load 12-bit immediate              | rd = SignExtend(imm11:0)     
 | li rd, imm31:0            | lui rd, imm31:12*             | load 32-bit immediate              | rd = imm31:0                 
