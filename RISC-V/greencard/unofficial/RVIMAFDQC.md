@@ -159,45 +159,45 @@
 
 : RVC: RISC-V Compressed (16-Bit) Instructions
 
-| Pseudo-Instruction        | RISC-V Instructions           | Description                        | Operation                     |
-|---------------------------|-------------------------------|------------------------------------|-------------------------------|
-| nop                       | addi x0, x0, 0                | no operation                       |                               |
-| li rd, imm11:0            | addi rd, x0, imm11:0          | load 12-bit immediate              | rd = SignExtend(imm11:0)      |
-| li rd, imm31:0            | lui rd, imm31:12*             | load 32-bit immediate              | rd = imm31:0                  |
-|                           | addi rd, rd, imm11:0          |                                    |                               |
-| mv rd, rs1                | addi rd, rs1, 0               | move (also called "register copy") | rd = rs1                      |
-| not rd, rs1               | xori rd, rs1, —1              | one's complement                   | rd = ~rs1                     |
-| neg rd, rs1               | sub rd, x0, rs1               | two's complement                   | rd = —rs1                     |
-| seqz rd, rs1              | sltiu rd, rs1, 1              | set if = 0                         | rd = (rs1 == 0)               |
-| snez rd, rs1              | sltu rd, x0, rs1              | set if ≠ 0                         | rd = (rs1 ≠ 0)                |
-| sltz rd, rs1              | slt rd, rs1, x0               | set if < 0                         | rd = (rs1 <  0)               |
-| sgtz rd, rs1              | slt rd, x0, rs1               | set if > 0                         | rd = (rs1 >  0)               |
-| beqz rs1, label           | beq rs1, x0, label            | branch if = 0                      | if (rs1 == 0) PC = label      |
-| bnez rs1, label           | bne rs1, x0, label            | branch if ≠ 0                      | if (rs1 ≠ 0) PC = label       |
-| blez rs1, label           | bge x0, rs1, label            | branch if ≤ 0                      | if (rs1 ≤  0) PC = label      |
-| bgez rs1, label           | bge rs1, x0, label            | branch if ≥ 0                      | if (rs1 ≥  0) PC = label      |
-| bltz rs1, label           | blt rs1, x0, label            | branch if < 0                      | if (rs1 <  0) PC = label      |
-| bgtz rs1, label           | blt x0, rs1, label            | branch if > 0                      | if (rs1 >  0) PC = label      |
-| ble rs1, rs2, label       | bge rs2, rs1, label           | branch if ≤                        | if (rs1 ≤  rs2) PC = label    |
-| bgt rs1, rs2, label       | blt rs2, rs1, label           | branch if >                        | if (rs1 >  rs2) PC = label    |
-| bleu rs1, rs2, label      | bgeu rs2, rs1, label          | branch if ≤ (unsigned)             | if (rs1 ≤  rs2) PC = label    |
-| bgtu rs1, rs2, label      | bltu rs2, rs1, offset         | branch if > (unsigned)             | if (rs1 >  rs2) PC = label    |
-| j label                   | jal x0, label                 | jump                               | PC = label                    |
-| jal label                 | jal ra, label                 | jump and link                      | PC = label, ra = PC + 4       |
-| jr rs1                    | jalr x0, rs1, 0               | jump register                      | PC = rs1                      |
-| jalr rs1                  | jalr ra, rs1, 0               | jump and link register             | PC = rs1, ra = PC + 4         |
-| ret                       | jalr x0, ra, 0                | return from function               | PC = ra                       |
-| call label                | jal ra, label                 | call nearby function               | PC = label, ra = PC + 4       |
-| call label                | auipc ra, offset31:12*        |                                    |                               |
-|                           | jalr ra, ra, offset11:0       | call far away function             | PC = PC + offset, ra = PC + 4 |
-| la rd, symbol             | auipc rd, symbol31:12*        |                                    |                               |
-|                           | addi rd, rd, symbol11:0       | load address of global variable    | rd = PC + symbol              |
-| l{b|h|w} rd, symbol       | auipc rd, symbol31:12*        |                                    |                               |
-|                           | l{b|h|w} rd, symbol11:0(rd)   | load global variable               | rd = [PC + symbol]            |
-| s{b|h|w} rs2, symbol, rs1 | auipc rs1, symbol31:12*       |                                    |                               |
-|                           | s{b|h|w} rs2, symbol11:0(rs1) | store global variable              | [PC + symbol] = rs2           |
-| csrr rd, csr              | csrrs rd, csr, x0             | read CSR                           | rd = csr                      |
-| csrw csr, rs1             | csrrw x0, csr, rs1            | write CSR                          | csr = rs1                     |
+| Pseudo-Instruction          | RISC-V Instructions             | Description                        | Operation                     |
+|-----------------------------|---------------------------------|------------------------------------|-------------------------------|
+| nop                         | addi x0, x0, 0                  | no operation                       |                               |
+| li rd, imm11:0              | addi rd, x0, imm11:0            | load 12-bit immediate              | rd = SignExtend(imm11:0)      |
+| li rd, imm31:0              | lui rd, imm31:12*               | load 32-bit immediate              | rd = imm31:0                  |
+|                             | addi rd, rd, imm11:0            |                                    |                               |
+| mv rd, rs1                  | addi rd, rs1, 0                 | move (also called "register copy") | rd = rs1                      |
+| not rd, rs1                 | xori rd, rs1, —1                | one's complement                   | rd = ~rs1                     |
+| neg rd, rs1                 | sub rd, x0, rs1                 | two's complement                   | rd = —rs1                     |
+| seqz rd, rs1                | sltiu rd, rs1, 1                | set if = 0                         | rd = (rs1 == 0)               |
+| snez rd, rs1                | sltu rd, x0, rs1                | set if ≠ 0                         | rd = (rs1 ≠ 0)                |
+| sltz rd, rs1                | slt rd, rs1, x0                 | set if < 0                         | rd = (rs1 <  0)               |
+| sgtz rd, rs1                | slt rd, x0, rs1                 | set if > 0                         | rd = (rs1 >  0)               |
+| beqz rs1, label             | beq rs1, x0, label              | branch if = 0                      | if (rs1 == 0) PC = label      |
+| bnez rs1, label             | bne rs1, x0, label              | branch if ≠ 0                      | if (rs1 ≠ 0) PC = label       |
+| blez rs1, label             | bge x0, rs1, label              | branch if ≤ 0                      | if (rs1 ≤  0) PC = label      |
+| bgez rs1, label             | bge rs1, x0, label              | branch if ≥ 0                      | if (rs1 ≥  0) PC = label      |
+| bltz rs1, label             | blt rs1, x0, label              | branch if < 0                      | if (rs1 <  0) PC = label      |
+| bgtz rs1, label             | blt x0, rs1, label              | branch if > 0                      | if (rs1 >  0) PC = label      |
+| ble rs1, rs2, label         | bge rs2, rs1, label             | branch if ≤                        | if (rs1 ≤  rs2) PC = label    |
+| bgt rs1, rs2, label         | blt rs2, rs1, label             | branch if >                        | if (rs1 >  rs2) PC = label    |
+| bleu rs1, rs2, label        | bgeu rs2, rs1, label            | branch if ≤ (unsigned)             | if (rs1 ≤  rs2) PC = label    |
+| bgtu rs1, rs2, label        | bltu rs2, rs1, offset           | branch if > (unsigned)             | if (rs1 >  rs2) PC = label    |
+| j label                     | jal x0, label                   | jump                               | PC = label                    |
+| jal label                   | jal ra, label                   | jump and link                      | PC = label, ra = PC + 4       |
+| jr rs1                      | jalr x0, rs1, 0                 | jump register                      | PC = rs1                      |
+| jalr rs1                    | jalr ra, rs1, 0                 | jump and link register             | PC = rs1, ra = PC + 4         |
+| ret                         | jalr x0, ra, 0                  | return from function               | PC = ra                       |
+| call label                  | jal ra, label                   | call nearby function               | PC = label, ra = PC + 4       |
+| call label                  | auipc ra, offset31:12*          |                                    |                               |
+|                             | jalr ra, ra, offset11:0         | call far away function             | PC = PC + offset, ra = PC + 4 |
+| la rd, symbol               | auipc rd, symbol31:12*          |                                    |                               |
+|                             | addi rd, rd, symbol11:0         | load address of global variable    | rd = PC + symbol              |
+| l{b\|h\|w} rd, symbol       | auipc rd, symbol31:12*          |                                    |                               |
+|                             | l{b\|h\|w} rd, symbol11:0(rd)   | load global variable               | rd = [PC + symbol]            |
+| s{b\|h\|w} rs2, symbol, rs1 | auipc rs1, symbol31:12*         |                                    |                               |
+|                             | s{b\|h\|w} rs2, symbol11:0(rs1) | store global variable              | [PC + symbol] = rs2           |
+| csrr rd, csr                | csrrs rd, csr, x0               | read CSR                           | rd = csr                      |
+| csrw csr, rs1               | csrrw x0, csr, rs1              | write CSR                          | csr = rs1                     |
 
 : RISC-V Pseudo-Instructions
 
@@ -209,10 +209,10 @@
 | 1110011 (115) | 000    | I    | sret               | return from supervisor exception (rs1=0,rd=0,imm=258) | PC = sepc                           |
 | 1110011 (115) | 000    | I    | mret               | return from machine exception (rs1=0,rd=0,imm=770)    | PC = mepc                           |
 | 1110011 (115) | 001    | I    | csrrw rd,csr,rs1   | CSR read/write (imm=CSR number)                       | rd = csr,csr = rs1                  |
-| 1110011 (115) | 010    | I    | csrrs rd,csr,rs1   | CSR read/set (imm=CSR number)                         | rd = csr,csr = csr | rs1            |
+| 1110011 (115) | 010    | I    | csrrs rd,csr,rs1   | CSR read/set (imm=CSR number)                         | rd = csr,csr = csr \| rs1           |
 | 1110011 (115) | 011    | I    | csrrc rd,csr,rs1   | CSR read/clear (imm=CSR number)                       | rd = csr,csr = csr & ~rs1           |
 | 1110011 (115) | 101    | I    | csrrwi rd,csr,uimm | CSR read/write immediate (imm=CSR number)             | rd = csr,csr = ZeroExt(uimm)        |
-| 1110011 (115) | 110    | I    | csrrsi rd,csr,uimm | CSR read/set immediate (imm=CSR number)               | rd = csr,csr = csr | ZeroExt(uimm)  |
+| 1110011 (115) | 110    | I    | csrrsi rd,csr,uimm | CSR read/set immediate (imm=CSR number)               | rd = csr,csr = csr \| ZeroExt(uimm) |
 | 1110011 (115) | 111    | I    | csrrci rd,csr,uimm | CSR read/clear immediate (imm=CSR number)             | rd = csr,csr = csr & ~ZeroExt(uimm) |
 
 : RISC-V Privileged / CSR Instructions
