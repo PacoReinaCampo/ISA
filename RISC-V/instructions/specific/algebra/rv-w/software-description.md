@@ -145,8 +145,8 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
   |:------------------|:--------------------------------------------------------|:-----------------------------------|:-----------------------------------------------|
   | `wfadd.vf`        | `31..26=0x00 vm ws2 rs1 14..12=0x5 wd 6..0=0x57`        | `wfadd.vf wd, ws2, rs1, vm`        | `wd[i][j] = ws2[i][j] + f[rs1], matrix-scalar` |
   | `wfsub.vf`        | `31..26=0x02 vm ws2 rs1 14..12=0x5 wd 6..0=0x57`        | `wfsub.vf wd, ws2, rs1, vm`        | `wd[i][j] = ws2[i][j] - f[rs1], matrix-scalar` |
-  | `wfmin.vf`        | `31..26=0x04 vm ws2 rs1 14..12=0x5 wd 6..0=0x57`        | `wfmin.vf wd, ws2, rs1, vm`        | `Floating-point minimum, matrix-scalar`        |
-  | `wfmax.vf`        | `31..26=0x06 vm ws2 rs1 14..12=0x5 wd 6..0=0x57`        | `wfmax.vf wd, ws2, rs1, vm`        | `Floating-point maximum, matrix-scalar`        |
+  | `wfmin.vf`        | `31..26=0x04 vm ws2 rs1 14..12=0x5 wd 6..0=0x57`        | `wfmin.vf wd, ws2, rs1, vm`        | `Floating-Point minimum, matrix-scalar`        |
+  | `wfmax.vf`        | `31..26=0x06 vm ws2 rs1 14..12=0x5 wd 6..0=0x57`        | `wfmax.vf wd, ws2, rs1, vm`        | `Floating-Point maximum, matrix-scalar`        |
   | `wfsgnj.vf`       | `31..26=0x08 vm ws2 rs1 14..12=0x5 wd 6..0=0x57`        | `wfsgnj.vf wd, ws2, rs1, vm`       | `Floating-Point Sign-Injection, matrix-scalar` |
   | `wfsgnjn.vf`      | `31..26=0x09 vm ws2 rs1 14..12=0x5 wd 6..0=0x57`        | `wfsgnjn.vf wd, ws2, rs1, vm`      | `Floating-Point Sign-Injection, matrix-scalar` |
   | `wfsgnjx.vf`      | `31..26=0x0a vm ws2 rs1 14..12=0x5 wd 6..0=0x57`        | `wfsgnjx.vf wd, ws2, rs1, vm`      | `Floating-Point Sign-Injection, matrix-scalar` |
@@ -171,9 +171,9 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
 
   | **Name**     | **Opcode / Argument**                            | **Format**                    | **Pseudo-Code**                               |
   |:-------------|:-------------------------------------------------|:------------------------------|:----------------------------------------------|
-  | `wfdiv.vf`   | `31..26=0x20 vm ws2 rs1 14..12=0x5 wd 6..0=0x57` | `wfdiv.vf wd, ws2, rs1, vm`   | `Floating-point divide, matrix-scalar`        |
+  | `wfdiv.vf`   | `31..26=0x20 vm ws2 rs1 14..12=0x5 wd 6..0=0x57` | `wfdiv.vf wd, ws2, rs1, vm`   | `Floating-Point divide, matrix-scalar`        |
   | `wfrdiv.vf`  | `31..26=0x21 vm ws2 rs1 14..12=0x5 wd 6..0=0x57` | `wfrdiv.vf wd, ws2, rs1, vm`  | `scalar-matrix, wd[i][j] = f[rs1]/ws2[i][j]`  |
-  | `wfmul.vf`   | `31..26=0x24 vm ws2 rs1 14..12=0x5 wd 6..0=0x57` | `wfmul.vf wd, ws2, rs1, vm`   | `Floating-point multiply, matrix-scalar`      |
+  | `wfmul.vf`   | `31..26=0x24 vm ws2 rs1 14..12=0x5 wd 6..0=0x57` | `wfmul.vf wd, ws2, rs1, vm`   | `Floating-Point multiply, matrix-scalar`      |
   | `wfrsub.vf`  | `31..26=0x27 vm ws2 rs1 14..12=0x5 wd 6..0=0x57` | `wfrsub.vf wd, ws2, rs1, vm`  | `Scalar-matrix wd[i][j] = f[rs1] - ws2[i][j]` |
   | `wfmadd.vf`  | `31..26=0x28 vm ws2 rs1 14..12=0x5 wd 6..0=0x57` | `wfmadd.vf wd, rs1, ws2, vm`  | `wd[i][j] = +(f[rs1] * wd[i][j]) + ws2[i][j]` |
   | `wfnmadd.vf` | `31..26=0x29 vm ws2 rs1 14..12=0x5 wd 6..0=0x57` | `wfnmadd.vf wd, rs1, ws2, vm` | `wd[i][j] = -(f[rs1] * wd[i][j]) - ws2[i][j]` |
@@ -208,9 +208,9 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
   | `wfredusum.ws` | `31..26=0x01 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfredusum.ws wd, ws2, ws1, vm` | `Unordered sum`                                            |
   | `wfsub.vv`     | `31..26=0x02 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfsub.vv wd, ws2, ws1, vm`     | `yd[i][j][k] = ys1[i][j][k] + ys2[i][j][k], matrix-matrix` |
   | `wfredosum.ws` | `31..26=0x03 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfredosum.ws wd, ws2, ws1, vm` | `Ordered sum`                                              |
-  | `wfmin.vv`     | `31..26=0x04 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfmin.vv wd, ws2, ws1, vm`     | `Floating-point minimum, matrix-matrix`                    |
+  | `wfmin.vv`     | `31..26=0x04 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfmin.vv wd, ws2, ws1, vm`     | `Floating-Point minimum, matrix-matrix`                    |
   | `wfredmin.ws`  | `31..26=0x05 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfredmin.ws  wd, ws2, ws1, vm` | `Minimum value`                                            |
-  | `wfmax.vv`     | `31..26=0x06 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfmax.vv wd, ws2, ws1, vm`     | `Floating-point maximum, matrix-matrix`                    |
+  | `wfmax.vv`     | `31..26=0x06 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfmax.vv wd, ws2, ws1, vm`     | `Floating-Point maximum, matrix-matrix`                    |
   | `wfredmax.ws`  | `31..26=0x07 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfredmax.ws  wd, ws2, ws1, vm` | `Maximum value`                                            |
   | `wfsgnj.vv`    | `31..26=0x08 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfsgnj.vv wd, ws2, ws1, vm`    | `Floating-Point Sign-Injection, matrix-matrix`             |
   | `wfsgnjn.vv`   | `31..26=0x09 vm ws2 ws1 14..12=0x1 wd 6..0=0x57`        | `wfsgnjn.vv wd, ws2, ws1, vm`   | `Floating-Point Sign-Injection, matrix-matrix`             |
@@ -230,8 +230,8 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
 
   | **Name**     | **Opcode / Argument**                            | **Format**                    | **Pseudo-Code**                                  |
   |:-------------|:-------------------------------------------------|:------------------------------|:-------------------------------------------------|
-  | `wfdiv.vv`   | `31..26=0x20 vm ws2 ws1 14..12=0x1 wd 6..0=0x57` | `wfdiv.vv wd, ws2, ws1, vm`   | `Floating-point divide, matrix-matrix`           |
-  | `wfmul.vv`   | `31..26=0x24 vm ws2 ws1 14..12=0x1 wd 6..0=0x57` | `wfmul.vv wd, ws2, ws1, vm`   | `Floating-point multiply, matrix-matrix`         |
+  | `wfdiv.vv`   | `31..26=0x20 vm ws2 ws1 14..12=0x1 wd 6..0=0x57` | `wfdiv.vv wd, ws2, ws1, vm`   | `Floating-Point divide, matrix-matrix`           |
+  | `wfmul.vv`   | `31..26=0x24 vm ws2 ws1 14..12=0x1 wd 6..0=0x57` | `wfmul.vv wd, ws2, ws1, vm`   | `Floating-Point multiply, matrix-matrix`         |
   | `wfmadd.vv`  | `31..26=0x28 vm ws2 ws1 14..12=0x1 wd 6..0=0x57` | `wfmadd.vv wd, ws1, ws2, vm`  | `wd[i][j] = +(ws1[i][j] * wd[i][j]) + ws2[i][j]` |
   | `wfnmadd.vv` | `31..26=0x29 vm ws2 ws1 14..12=0x1 wd 6..0=0x57` | `wfnmadd.vv wd, ws1, ws2, vm` | `wd[i][j] = -(ws1[i][j] * wd[i][j]) - ws2[i][j]` |
   | `wfmsub.vv`  | `31..26=0x2a vm ws2 ws1 14..12=0x1 wd 6..0=0x57` | `wfmsub.vv wd, ws1, ws2, vm`  | `wd[i][j] = +(ws1[i][j] * wd[i][j]) - ws2[i][j]` |

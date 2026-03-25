@@ -145,8 +145,8 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
   |:------------------|:--------------------------------------------------------|:-----------------------------------|:---------------------------------------------------------|
   | `yfadd.vf`        | `31..26=0x00 vm ys2 rs1 14..12=0x5 yd 6..0=0x57`        | `yfadd.vf yd, ys2, rs1, vm`        | `yd[i][j][k] = ys2[i][j][k] + f[rs1], tensor-scalar`     |
   | `yfsub.vf`        | `31..26=0x02 vm ys2 rs1 14..12=0x5 yd 6..0=0x57`        | `yfsub.vf yd, ys2, rs1, vm`        | `yd[i][j][k] = ys2[i][j][k] - f[rs1], tensor-scalar`     |
-  | `yfmin.vf`        | `31..26=0x04 vm ys2 rs1 14..12=0x5 yd 6..0=0x57`        | `yfmin.vf yd, ys2, rs1, vm`        | `Floating-point minimum, tensor-scalar`                  |
-  | `yfmax.vf`        | `31..26=0x06 vm ys2 rs1 14..12=0x5 yd 6..0=0x57`        | `yfmax.vf yd, ys2, rs1, vm`        | `Floating-point maximun, tensor-scalar`                  |
+  | `yfmin.vf`        | `31..26=0x04 vm ys2 rs1 14..12=0x5 yd 6..0=0x57`        | `yfmin.vf yd, ys2, rs1, vm`        | `Floating-Point minimum, tensor-scalar`                  |
+  | `yfmax.vf`        | `31..26=0x06 vm ys2 rs1 14..12=0x5 yd 6..0=0x57`        | `yfmax.vf yd, ys2, rs1, vm`        | `Floating-Point maximun, tensor-scalar`                  |
   | `yfsgnj.vf`       | `31..26=0x08 vm ys2 rs1 14..12=0x5 yd 6..0=0x57`        | `yfsgnj.vf yd, ys2, rs1, vm`       | `Floating-Point Sign-Injection, tensor-scalar`           |
   | `yfsgnjn.vf`      | `31..26=0x09 vm ys2 rs1 14..12=0x5 yd 6..0=0x57`        | `yfsgnjn.vf yd, ys2, rs1, vm`      | `Floating-Point Sign-Injection, tensor-scalar`           |
   | `yfsgnjx.vf`      | `31..26=0x0a vm ys2 rs1 14..12=0x5 yd 6..0=0x57`        | `yfsgnjx.vf yd, ys2, rs1, vm`      | `Floating-Point Sign-Injection, tensor-scalar`           |
@@ -171,9 +171,9 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
 
   | **Name**     | **Opcode / Argument**                            | **Format**                    | **Pseudo-Code**                                        |
   |:-------------|:-------------------------------------------------|:------------------------------|:-------------------------------------------------------|
-  | `yfdiv.vf`   | `31..26=0x20 vm ys2 rs1 14..12=0x5 yd 6..0=0x57` | `yfdiv.vf yd, ys2, rs1, vm`   | `Floating-point divide, tensor-scalar`                 |
+  | `yfdiv.vf`   | `31..26=0x20 vm ys2 rs1 14..12=0x5 yd 6..0=0x57` | `yfdiv.vf yd, ys2, rs1, vm`   | `Floating-Point divide, tensor-scalar`                 |
   | `yfrdiv.vf`  | `31..26=0x21 vm ys2 rs1 14..12=0x5 yd 6..0=0x57` | `yfrdiv.vf yd, ys2, rs1, vm`  | `scalar-tensor, yd[i][j][k] = f[rs1]/ys2[i][j][k]`     |
-  | `yfmul.vf`   | `31..26=0x24 vm ys2 rs1 14..12=0x5 yd 6..0=0x57` | `yfmul.vf yd, ys2, rs1, vm`   | `Floating-point multiply, tensor-scalar`               |
+  | `yfmul.vf`   | `31..26=0x24 vm ys2 rs1 14..12=0x5 yd 6..0=0x57` | `yfmul.vf yd, ys2, rs1, vm`   | `Floating-Point multiply, tensor-scalar`               |
   | `yfrsub.vf`  | `31..26=0x27 vm ys2 rs1 14..12=0x5 yd 6..0=0x57` | `yfrsub.vf yd, ys2, rs1, vm`  | `Scalar-tensor yd[i][j][k] = f[rs1] - ys2[i][j][k]`    |
   | `yfmadd.vf`  | `31..26=0x28 vm ys2 rs1 14..12=0x5 yd 6..0=0x57` | `yfmadd.vf yd, rs1, ys2, vm`  | `yd[i][j][k] = +(f[rs1] * yd[i][j][k]) + ys2[i][j][k]` |
   | `yfnmadd.vf` | `31..26=0x29 vm ys2 rs1 14..12=0x5 yd 6..0=0x57` | `yfnmadd.vf yd, rs1, ys2, vm` | `yd[i][j][k] = -(f[rs1] * yd[i][j][k]) - ys2[i][j][k]` |
@@ -208,9 +208,9 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
   | `yfredusum.ys` | `31..26=0x01 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfredusum.ys yd, ys2, ys1, vm` | `Unordered sum`                                            |
   | `yfsub.vv`     | `31..26=0x02 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfsub.vv yd, ys2, ys1, vm`     | `yd[i][j][k] = ys1[i][j][k] + ys2[i][j][k], tensor-tensor` |
   | `yfredosum.ys` | `31..26=0x03 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfredosum.ys yd, ys2, ys1, vm` | `Ordered sum`                                              |
-  | `yfmin.vv`     | `31..26=0x04 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfmin.vv yd, ys2, ys1, vm`     | `Floating-point minimum, tensor-tensor`                    |
+  | `yfmin.vv`     | `31..26=0x04 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfmin.vv yd, ys2, ys1, vm`     | `Floating-Point minimum, tensor-tensor`                    |
   | `yfredmin.ys`  | `31..26=0x05 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfredmin.ys  yd, ys2, ys1, vm` | `Minimum value`                                            |
-  | `yfmax.vv`     | `31..26=0x06 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfmax.vv yd, ys2, ys1, vm`     | `Floating-point maximun, tensor-tensor`                    |
+  | `yfmax.vv`     | `31..26=0x06 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfmax.vv yd, ys2, ys1, vm`     | `Floating-Point maximun, tensor-tensor`                    |
   | `yfredmax.ys`  | `31..26=0x07 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfredmax.ys  yd, ys2, ys1, vm` | `Maximum value`                                            |
   | `yfsgnj.vv`    | `31..26=0x08 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfsgnj.vv yd, ys2, ys1, vm`    | `Floating-Point Sign-Injection, tensor-tensor`             |
   | `yfsgnjn.vv`   | `31..26=0x09 vm ys2 ys1 14..12=0x1 yd 6..0=0x57`        | `yfsgnjn.vv yd, ys2, ys1, vm`   | `Floating-Point Sign-Injection, tensor-tensor`             |
@@ -230,8 +230,8 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
 
   | **Name**     | **Opcode / Argument**                            | **Format**                    | **Pseudo-Code**                                              |
   |:-------------|:-------------------------------------------------|:------------------------------|:-------------------------------------------------------------|
-  | `yfdiv.vv`   | `31..26=0x20 vm ys2 ys1 14..12=0x1 yd 6..0=0x57` | `yfdiv.vv yd, ys2, ys1, vm`   | `Floating-point divide, tensor-tensor`                       |
-  | `yfmul.vv`   | `31..26=0x24 vm ys2 ys1 14..12=0x1 yd 6..0=0x57` | `yfmul.vv yd, ys2, ys1, vm`   | `Floating-point multiply, tensor-tensor`                     |
+  | `yfdiv.vv`   | `31..26=0x20 vm ys2 ys1 14..12=0x1 yd 6..0=0x57` | `yfdiv.vv yd, ys2, ys1, vm`   | `Floating-Point divide, tensor-tensor`                       |
+  | `yfmul.vv`   | `31..26=0x24 vm ys2 ys1 14..12=0x1 yd 6..0=0x57` | `yfmul.vv yd, ys2, ys1, vm`   | `Floating-Point multiply, tensor-tensor`                     |
   | `yfmadd.vv`  | `31..26=0x28 vm ys2 ys1 14..12=0x1 yd 6..0=0x57` | `yfmadd.vv yd, ys1, ys2, vm`  | `yd[i][j][k] = +(ys1[i][j][k] * yd[i][j][k]) + ys2[i][j][k]` |
   | `yfnmadd.vv` | `31..26=0x29 vm ys2 ys1 14..12=0x1 yd 6..0=0x57` | `yfnmadd.vv yd, ys1, ys2, vm` | `yd[i][j][k] = -(ys1[i][j][k] * yd[i][j][k]) - ys2[i][j][k]` |
   | `yfmsub.vv`  | `31..26=0x2a vm ys2 ys1 14..12=0x1 yd 6..0=0x57` | `yfmsub.vv yd, ys1, ys2, vm`  | `yd[i][j][k] = +(ys1[i][j][k] * yd[i][j][k]) - ys2[i][j][k]` |

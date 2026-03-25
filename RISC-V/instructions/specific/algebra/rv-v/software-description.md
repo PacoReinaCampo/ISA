@@ -145,8 +145,8 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
   |:------------------|:--------------------------------------------------------|:-----------------------------------|:-----------------------------------------------|
   | `vfadd.vf`        | `31..26=0x00 vm vs2 rs1 14..12=0x5 vd 6..0=0x57`        | `vfadd.vf vd, vs2, rs1, vm`        | `vd[i] = vs2[i] + f[rs1], vector-scalar`       |
   | `vfsub.vf`        | `31..26=0x02 vm vs2 rs1 14..12=0x5 vd 6..0=0x57`        | `vfsub.vf vd, vs2, rs1, vm`        | `vd[i] = vs2[i] - f[rs1], vector-scalar`       |
-  | `vfmin.vf`        | `31..26=0x04 vm vs2 rs1 14..12=0x5 vd 6..0=0x57`        | `vfmin.vf vd, vs2, rs1, vm`        | `Floating-point minimum, vector-scalar`        |
-  | `vfmax.vf`        | `31..26=0x06 vm vs2 rs1 14..12=0x5 vd 6..0=0x57`        | `vfmax.vf vd, vs2, rs1, vm`        | `Floating-point maximum, vector-scalar`        |
+  | `vfmin.vf`        | `31..26=0x04 vm vs2 rs1 14..12=0x5 vd 6..0=0x57`        | `vfmin.vf vd, vs2, rs1, vm`        | `Floating-Point minimum, vector-scalar`        |
+  | `vfmax.vf`        | `31..26=0x06 vm vs2 rs1 14..12=0x5 vd 6..0=0x57`        | `vfmax.vf vd, vs2, rs1, vm`        | `Floating-Point maximum, vector-scalar`        |
   | `vfsgnj.vf`       | `31..26=0x08 vm vs2 rs1 14..12=0x5 vd 6..0=0x57`        | `vfsgnj.vf vd, vs2, rs1, vm`       | `Floating-Point Sign-Injection, vector-scalar` |
   | `vfsgnjn.vf`      | `31..26=0x09 vm vs2 rs1 14..12=0x5 vd 6..0=0x57`        | `vfsgnjn.vf vd, vs2, rs1, vm`      | `Floating-Point Sign-Injection, vector-scalar` |
   | `vfsgnjx.vf`      | `31..26=0x0a vm vs2 rs1 14..12=0x5 vd 6..0=0x57`        | `vfsgnjx.vf vd, vs2, rs1, vm`      | `Floating-Point Sign-Injection, vector-scalar` |
@@ -171,9 +171,9 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
 
   | **Name**      | **Opcode / Argument**                            | **Format**                    | **Pseudo-Code**                          |
   |:--------------|:-------------------------------------------------|:------------------------------|:-----------------------------------------|
-  | `vfdiv.vf`    | `31..26=0x20 vm vs2 rs1 14..12=0x5 vd 6..0=0x57` | `vfdiv.vf vd, vs2, rs1, vm`   | `Floating-point divide, vector-scalar`   |
+  | `vfdiv.vf`    | `31..26=0x20 vm vs2 rs1 14..12=0x5 vd 6..0=0x57` | `vfdiv.vf vd, vs2, rs1, vm`   | `Floating-Point divide, vector-scalar`   |
   | `vfrdiv.vf`   | `31..26=0x21 vm vs2 rs1 14..12=0x5 vd 6..0=0x57` | `vfrdiv.vf vd, vs2, rs1, vm`  | `scalar-vector, vd[i] = f[rs1]/vs2[i]`   |
-  | `vfmul.vf`    | `31..26=0x24 vm vs2 rs1 14..12=0x5 vd 6..0=0x57` | `vfmul.vf vd, vs2, rs1, vm`   | `Floating-point multiply, vector-scalar` |
+  | `vfmul.vf`    | `31..26=0x24 vm vs2 rs1 14..12=0x5 vd 6..0=0x57` | `vfmul.vf vd, vs2, rs1, vm`   | `Floating-Point multiply, vector-scalar` |
   | `vfrsub.vf`   | `31..26=0x27 vm vs2 rs1 14..12=0x5 vd 6..0=0x57` | `vfrsub.vf vd, vs2, rs1, vm`  | `Scalar-vector vd[i] = f[rs1] - vs2[i]`  |
   | `vfmadd.vf`   | `31..26=0x28 vm vs2 rs1 14..12=0x5 vd 6..0=0x57` | `vfmadd.vf vd, rs1, vs2, vm`  | `vd[i] = +(f[rs1] * vd[i]) + vs2[i]`     |
   | `vfnmadd.vf`  | `31..26=0x29 vm vs2 rs1 14..12=0x5 vd 6..0=0x57` | `vfnmadd.vf vd, rs1, vs2, vm` | `vd[i] = -(f[rs1] * vd[i]) - vs2[i]`     |
@@ -208,9 +208,9 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
   | `vfredusum.vs` | `31..26=0x01 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfredusum.vs vd, vs2, vs1, vm` | `Unordered sum`                                |
   | `vfsub.vv`     | `31..26=0x02 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfsub.vv vd, vs2, vs1, vm`     | `vd[i] = vs1[i] - vs2[i], vector-vector`       |
   | `vfredosum.vs` | `31..26=0x03 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfredosum.vs vd, vs2, vs1, vm` | `Ordered sum`                                  |
-  | `vfmin.vv`     | `31..26=0x04 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfmin.vv vd, vs2, vs1, vm`     | `Floating-point minimum, vector-vector`        |
+  | `vfmin.vv`     | `31..26=0x04 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfmin.vv vd, vs2, vs1, vm`     | `Floating-Point minimum, vector-vector`        |
   | `vfredmin.vs`  | `31..26=0x05 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfredmin.vs  vd, vs2, vs1, vm` | `Minimum value`                                |
-  | `vfmax.vv`     | `31..26=0x06 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfmax.vv vd, vs2, vs1, vm`     | `Floating-point maximum, vector-vector`        |
+  | `vfmax.vv`     | `31..26=0x06 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfmax.vv vd, vs2, vs1, vm`     | `Floating-Point maximum, vector-vector`        |
   | `vfredmax.vs`  | `31..26=0x07 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfredmax.vs  vd, vs2, vs1, vm` | `Maximum value`                                |
   | `vfsgnj.vv`    | `31..26=0x08 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfsgnj.vv vd, vs2, vs1, vm`    | `Floating-Point Sign-Injection, vector-vector` |
   | `vfsgnjn.vv`   | `31..26=0x09 vm vs2 vs1 14..12=0x1 vd 6..0=0x57`        | `vfsgnjn.vv vd, vs2, vs1, vm`   | `Floating-Point Sign-Injection, vector-vector` |
@@ -230,8 +230,8 @@ hi..lo=value or bit=value or arg=value (e.g. 6..2=0x45 10=1 rd=0)
 
   | **Name**     | **Opcode / Argument**                            | **Format**                    | **Pseudo-Code**                          |
   |:-------------|:-------------------------------------------------|:------------------------------|:-----------------------------------------|
-  | `vfdiv.vv`   | `31..26=0x20 vm vs2 vs1 14..12=0x1 vd 6..0=0x57` | `vfdiv.vv vd, vs2, vs1, vm`   | `Floating-point divide, vector-vector`   |
-  | `vfmul.vv`   | `31..26=0x24 vm vs2 vs1 14..12=0x1 vd 6..0=0x57` | `vfmul.vv vd, vs2, vs1, vm`   | `Floating-point multiply, vector-vector` |
+  | `vfdiv.vv`   | `31..26=0x20 vm vs2 vs1 14..12=0x1 vd 6..0=0x57` | `vfdiv.vv vd, vs2, vs1, vm`   | `Floating-Point divide, vector-vector`   |
+  | `vfmul.vv`   | `31..26=0x24 vm vs2 vs1 14..12=0x1 vd 6..0=0x57` | `vfmul.vv vd, vs2, vs1, vm`   | `Floating-Point multiply, vector-vector` |
   | `vfmadd.vv`  | `31..26=0x28 vm vs2 vs1 14..12=0x1 vd 6..0=0x57` | `vfmadd.vv vd, vs1, vs2, vm`  | `vd[i] = +(vs1[i] * vd[i]) + vs2[i]`     |
   | `vfnmadd.vv` | `31..26=0x29 vm vs2 vs1 14..12=0x1 vd 6..0=0x57` | `vfnmadd.vv vd, vs1, vs2, vm` | `vd[i] = -(vs1[i] * vd[i]) - vs2[i]`     |
   | `vfmsub.vv`  | `31..26=0x2a vm vs2 vs1 14..12=0x1 vd 6..0=0x57` | `vfmsub.vv vd, vs1, vs2, vm`  | `vd[i] = +(vs1[i] * vd[i]) - vs2[i]`     |

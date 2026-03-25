@@ -27,7 +27,7 @@
 * RISC-V / OpenRISC Instructions
   - Class
   - Description
-  - Fullname
+  - Full-Name
   - Pseudocode-HDL
   - Pseudocode-PL
   - Opcode
