@@ -1,18 +1,18 @@
-# DESIGN OF ARCHITECTURE
+# INSTRUCTION SET ARCHITECTURE
 
-RISC-V (Reduced Instruction Set Computer Five) is an open-source instruction set architecture (ISA) designed with a focus on simplicity and modularity. It supports a wide range of implementations from small embedded devices to large-scale datacenter servers. RISC-V is characterized by its fixed instruction length (32 bits or 64 bits) and a small set of core instructions, aiming to provide a foundation for a variety of computing needs.
+| `Item`           | `Description`                                                                                                                                                                                                    |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `l.mnemonic`     | Identifies an ORBIS32/ORBIS64 instruction.                                                                                                                                                                       |
+| `lv.mnemonic`    | Identifies an ORVDX32/ORVDX64 instruction.                                                                                                                                                                       |
+| `lf.mnemonic`    | Identifies an ORFPX32/ORFPX64 or ORFPX64A32/ORFPX64A64 instruction                                                                                                                                               |
+| `0x`             | Indicates a hexadecimal number                                                                                                                                                                                   |
+| `rA`             | Instruction syntax used to identify a general purpose register                                                                                                                                                   |
+| `REG[FIELD]`     | Syntax used to identify specific bit(s) of a general or special purpose register. FIELD can be a name of one bit or a group of bits or a numerical range constructed from two values separated by a colon        |
+| `X`              | In certain contexts, this indicates a 'don't care'                                                                                                                                                               |
+| `N`              | In certain contexts, this indicates an undefined numerical value                                                                                                                                                 |
+| `Implementation` | An actual processor implementing the OpenRISC 1000 architecture                                                                                                                                                  |
+| `Unit`           | Sometimes referred to as a coprocessor. An implemented unit usually with some special registers and controlling instructions. It can be defined by the architecture or it may be custom                          |
+| `Exception`      | A vectored transfer of control to supervisor software through an exception vector table. A way in which a processor can request operating system assistance (division by zero, TLB miss, external interrupt etc) |
+| `Privileged`     | An instruction (or register) that can only be executed (or accessed) when the processor is in supervisor mode (when SR[SM]=1)                                                                                    |
 
-This directory contains MetaData for the RISC-V Instruction Set Architecture
-
-| File                           | Description                             |
-|--------------------------------|:----------------------------------------|
-| `constraint`                   | `Constraint Definitions`                |
-| `description`                  | `Descriptions`                          |
-| `enumerated`                   | `Enumerated Types`                      |
-| `extension`                    | `Instruction Set Extensions`            |
-| `notation`                     | `Notation`                              |
-| `operands`                     | `Operand Bit Encodings`                 |
-
-:Definition Directory
-
-This table outlines the definitions and explanations of key terms and concepts used throughout the RISC-V ISA specification.
+: Conventions
