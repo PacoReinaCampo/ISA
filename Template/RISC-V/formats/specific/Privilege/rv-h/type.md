@@ -26,21 +26,34 @@ Format of a line in the table:
 | `u`    | `Upper`                | `31:12[31:12]=imm                                           11:7=rd           6:0=opcode` |
 | `uj`   | `Jump`                 | `31:12[20\|10:1\|11\|19:12]=imm                             11:7=rd           6:0=opcode` |
 
-:Base Instruction Type
+:Base 32-Bit Instruction Type
+
+| type   | type name              | bit encoding                                                                                  |
+|--------|:-----------------------|:----------------------------------------------------------------------------------------------|
+| `64`   | `Base`                 | `63:52                      51:42     41:32     31:22         21:12              11:0`        |
+| `r`    | `Register`             | `63:54=funct10 53:52=funct2 51:42=rs2 41:32=rs1 31:22=funct10 21:12=rd           11:0=opcode` |
+| `r4`   | `Register`             | `63:54=rs3     53:52=funct2 51:42=rs2 41:32=rs1 31:22=funct10 21:12=rd           11:0=opcode` |
+| `i`    | `Immediate`            | `63:42[21:0]=imm                      41:32=rs1 31:22=funct10 21:12=rd           11:0=opcode` |
+| `s`    | `Store`                | `63:52[21:10]=imm           51:42=rs2 41:32=rs1 31:22=funct10 21:12[9:0]=imm     11:0=opcode` |
+| `sb`   | `Branch`               | `63:52[22\|20:10]=imm       51:42=rs2 41:32=rs1 31:22=funct10 21:12[9:1\|21]=imm 11:0=opcode` |
+| `u`    | `Upper`                | `63:22[63:22]=imm                                             21:12=rd           11:0=opcode` |
+| `uj`   | `Jump`                 | `63:22[42\|20:1\|21\|41:22]=imm                               21:12=rd           11:0=opcode` |
+
+:Base 64-Bit Instruction Type
 
 The base instruction type table categorizes and describes the fundamental instructions that constitute the core of the RISC-V ISA, covering essential operations such as arithmetic, logical, control flow, and memory access.
 
 | type   | type name              | bit encoding                                                                              |
 |--------|:-----------------------|:------------------------------------------------------------------------------------------|
 | `16`   | `Compressed`           | `15:13        12:10             9:7        6:5     4:2      1:0`                          |
-| `cr`   | `Register`             | `15:12=funct4           11:7=rd/rs1        6:2=rs2          1:0=op`                       |
-| `ci`   | `Immediate`            | `15:13=funct3 12=imm    11:7=rd/rs1        6:2=imm          1:0=op`                       |
-| `css`  | `Stack-relative Store` | `15:13=funct3 12:7=imm                     6:2=rs2          1:0=op`                       |
-| `ciw`  | `Wide Immediate`       | `15:13=funct3 12:5=imm                             4:2=rd'  1:0=op`                       |
-| `cl`   | `Load`                 | `15:13=funct3 12:10=imm         9:7=rs1'   6:5=imm 4:2=rd'  1:0=op`                       |
-| `cs`   | `Store`                | `15:13=funct3 12:10=imm         9:7=rs1'   6:5=imm 4:2=rs2' 1:0=op`                       |
-| `cb`   | `Branch`               | `15:13=funct3 12:10=imm         9:7=rs1'   6:2=imm          1:0=op`                       |
-| `cj`   | `Jump`                 | `15:13=funct3 12:2=imm                                      1:0=op`                       |
+| `cr`   | `Register`             | `15:12=funct4           11:7=rd/rs1        6:2=rs2          1:0=opcode`                   |
+| `ci`   | `Immediate`            | `15:13=funct3 12=imm    11:7=rd/rs1        6:2=imm          1:0=opcode`                   |
+| `css`  | `Stack-relative Store` | `15:13=funct3 12:7=imm                     6:2=rs2          1:0=opcode`                   |
+| `ciw`  | `Wide Immediate`       | `15:13=funct3 12:5=imm                             4:2=rd'  1:0=opcode`                   |
+| `cl`   | `Load`                 | `15:13=funct3 12:10=imm         9:7=rs1'   6:5=imm 4:2=rd'  1:0=opcode`                   |
+| `cs`   | `Store`                | `15:13=funct3 12:10=imm         9:7=rs1'   6:5=imm 4:2=rs2' 1:0=opcode`                   |
+| `cb`   | `Branch`               | `15:13=funct3 12:10=imm         9:7=rs1'   6:2=imm          1:0=opcode`                   |
+| `cj`   | `Jump`                 | `15:13=funct3 12:2=imm                                      1:0=opcode`                   |
 
 :Compressed Instruction Type
 
