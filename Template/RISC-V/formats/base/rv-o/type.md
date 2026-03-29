@@ -28,16 +28,16 @@ Format of a line in the table:
 
 :Base 32-Bit Instruction Type
 
-| type   | type name              | bit encoding                                                                                  |
-|--------|:-----------------------|:----------------------------------------------------------------------------------------------|
-| `64`   | `Base`                 | `63:52                      51:42     41:32     31:22         21:12              11:0`        |
-| `r`    | `Register`             | `63:54=funct10 53:52=funct2 51:42=rs2 41:32=rs1 31:22=funct10 21:12=rd           11:0=opcode` |
-| `r4`   | `Register`             | `63:54=rs3     53:52=funct2 51:42=rs2 41:32=rs1 31:22=funct10 21:12=rd           11:0=opcode` |
-| `i`    | `Immediate`            | `63:42[21:0]=imm                      41:32=rs1 31:22=funct10 21:12=rd           11:0=opcode` |
-| `s`    | `Store`                | `63:52[21:10]=imm           51:42=rs2 41:32=rs1 31:22=funct10 21:12[9:0]=imm     11:0=opcode` |
-| `sb`   | `Branch`               | `63:52[22\|20:10]=imm       51:42=rs2 41:32=rs1 31:22=funct10 21:12[9:1\|21]=imm 11:0=opcode` |
-| `u`    | `Upper`                | `63:22[63:22]=imm                                             21:12=rd           11:0=opcode` |
-| `uj`   | `Jump`                 | `63:22[42\|20:1\|21\|41:22]=imm                               21:12=rd           11:0=opcode` |
+| type   | type name              | bit encoding                                                                                 |
+|--------|:-----------------------|:---------------------------------------------------------------------------------------------|
+| `64`   | `Base`                 | `63:48                      47:38     37:28     27:22        21:12              11:0`        |
+| `r`    | `Register`             | `63:54=funct10 53:48=funct6 47:38=rs2 37:28=rs1 27:22=funct6 21:12=rd           11:0=opcode` |
+| `r4`   | `Register`             | `63:54=rs3     53:48=funct6 47:38=rs2 37:28=rs1 27:22=funct6 21:12=rd           11:0=opcode` |
+| `i`    | `Immediate`            | `63:38[21:0]=imm                      37:28=rs1 27:22=funct6 21:12=rd           11:0=opcode` |
+| `s`    | `Store`                | `63:48[21:10]=imm           47:38=rs2 37:28=rs1 27:22=funct6 21:12[9:0]=imm     11:0=opcode` |
+| `sb`   | `Branch`               | `63:48[22\|20:10]=imm       47:38=rs2 37:28=rs1 27:22=funct6 21:12[9:1\|21]=imm 11:0=opcode` |
+| `u`    | `Upper`                | `63:22[63:22]=imm                                            21:12=rd           11:0=opcode` |
+| `uj`   | `Jump`                 | `63:22[38\|20:1\|21\|37:22]=imm                              21:12=rd           11:0=opcode` |
 
 :Base 64-Bit Instruction Type
 
